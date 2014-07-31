@@ -11,7 +11,6 @@
 |
 */
 
-Route::get('/', function()
-{
-	return View::make('hello');
-});
+Route::get('/', array('before' => 'auth', 'uses' => 'DashboardController@getIndex'));
+
+Route::get('/', 'HomeController@getIndex');
