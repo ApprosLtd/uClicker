@@ -8,9 +8,36 @@
 
 class DashboardController extends BaseController {
 
+    public $layout = 'dashboard.layout';
+
     public function getIndex()
     {
-        return 'DASHBOARD';
+        //return 'DASHBOARD';
+    }
+
+    public function getSites()
+    {
+        //
+    }
+
+    public function getBalance()
+    {
+        //
+    }
+
+    public function getStatistics()
+    {
+        //
+    }
+
+    public function getHelp()
+    {
+        //
+    }
+
+    public function getSupport()
+    {
+        //
     }
 
 } 
