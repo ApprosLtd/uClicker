@@ -2,22 +2,54 @@
 
 class HomeController extends BaseController {
 
-	/*
-	|--------------------------------------------------------------------------
-	| Default Home Controller
-	|--------------------------------------------------------------------------
-	|
-	| You may wish to use controllers instead of, or in addition to, Closure
-	| based routes. That's great! Here is an example controller method to
-	| get you started. To route to this controller, just add the route:
-	|
-	|	Route::get('/', 'HomeController@showWelcome');
-	|
-	*/
+    public $layout = 'home.layout';
 
-	public function getIndex()
+    public function __construct()
+    {
+        $email    = Input::get('email');
+        $password = Input::get('password');
+
+        var_dump($email);
+        var_dump($password);
+
+        var_dump(Auth::attempt(array('email' => $email, 'password' => $password)));
+        return;
+
+        if ($email) {
+
+            $user = User::where('email', '=', $email)->first();
+
+            if ($user) { // Если пользователь есть, то пытаемся авторизоваться
+
+                if (Auth::attempt(array('email' => $email, 'password' => $password))) {
+                    return Redirect::to('/');
+                } else {
+                    echo 'Неверный логин или пароль - ' . Crypt::decrypt($user->password);;
+                }
+
+                return Redirect::to('/foo');
+
+            } else { // Если пользователя нет, то регистрируем нового пользователя
+
+                $user = new User();
+
+                $user->email = $email;
+                $user->password = Crypt::encrypt($password);
+
+                $user->save();
+
+                Auth::login($user);
+
+                return Redirect::to('/');
+
+            }
+
+        }
+    }
+
+	public function anyIndex()
 	{
-        return 'INDEX';
+        //
 	}
 
 }

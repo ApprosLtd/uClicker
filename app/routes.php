@@ -13,4 +13,4 @@
 
 Route::get('/', array('before' => 'auth', 'uses' => 'DashboardController@getIndex'));
 
-Route::get('/', 'DashboardController@getIndex');
+Route::any('/', 'HomeController@anyIndex');
