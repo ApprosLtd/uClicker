@@ -7,14 +7,8 @@ class HomeController extends BaseController {
     public function __construct()
     {
         $email    = Input::get('email');
-        $password = Input::get('password');
-
-        var_dump($email);
-        var_dump($password);
-
-        var_dump(Auth::attempt(array('email' => $email, 'password' => $password)));
-        return;
-
+        $password = Input::get('password');        
+return;
         if ($email) {
 
             $user = User::where('email', '=', $email)->first();
@@ -24,17 +18,15 @@ class HomeController extends BaseController {
                 if (Auth::attempt(array('email' => $email, 'password' => $password))) {
                     return Redirect::to('/');
                 } else {
-                    echo 'Неверный логин или пароль - ' . Crypt::decrypt($user->password);;
+                    echo 'Неверный логин или пароль - ' . Crypt::decrypt($user->password);
                 }
-
-                return Redirect::to('/foo');
 
             } else { // Если пользователя нет, то регистрируем нового пользователя
 
                 $user = new User();
 
                 $user->email = $email;
-                $user->password = Crypt::encrypt($password);
+                $user->password = Hash::make($password);
 
                 $user->save();
 
@@ -49,7 +41,11 @@ class HomeController extends BaseController {
 
 	public function anyIndex()
 	{
-        //
+        //$user = User::where('email', '=', 'serovvitaly@gmail.com')->first();
+        
+        //Auth::login($user);
+        
+        var_dump( Auth::check() );
 	}
 
 }
