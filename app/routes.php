@@ -11,6 +11,13 @@
 |
 */
 
-Route::get('/', array('before' => 'auth', 'uses' => 'DashboardController@getIndex'));
+Route::controller('auth', 'AuthController');
 
-Route::any('/', 'HomeController@anyIndex');
+
+if (Auth::guest()) {
+    Route::controller('/', 'HomeController');
+} else {
+    Route::controller('/', 'DashboardController');
+}
+
+//Route::any('/', array('before' => 'auth', 'uses' => 'DashboardController@getIndex'));

@@ -3,6 +3,8 @@
 <head>
     <meta charset="utf-8">
 
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
     <!-- Optional theme -->
@@ -16,7 +18,7 @@
 <div class="container theme-showcase" role="main">
 
 
-    <form role="form" style="width: 300px" method="post">
+    <form role="form" style="width: 300px" method="post" action="/auth/login">
         <div class="form-group">
             <label for="exampleInputEmail1">Email address</label>
             <input type="email" name="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email" value="{{ Input::get('email') }}">

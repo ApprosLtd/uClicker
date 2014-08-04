@@ -96,7 +96,7 @@ return array(
 	|
 	*/
 
-	'cookie' => 'uclicker_session',
+	'cookie' => 'laravel_session',
 
 	/*
 	|--------------------------------------------------------------------------
