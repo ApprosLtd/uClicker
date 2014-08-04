@@ -8,7 +8,7 @@ class HomeController extends BaseController {
     {
         $email    = Input::get('email');
         $password = Input::get('password');        
-return;
+
         if ($email) {
 
             $user = User::where('email', '=', $email)->first();
