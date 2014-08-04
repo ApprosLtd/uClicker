@@ -13,6 +13,8 @@
 
 Route::controller('auth', 'AuthController');
 
+Route::controller('site', 'Dashboard\\SiteController');
+
 
 if (Auth::guest()) {
     Route::controller('/', 'HomeController');

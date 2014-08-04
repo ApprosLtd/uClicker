@@ -21,7 +21,9 @@ class DashboardController extends BaseController {
     {
         $this->layout->title = 'Сайты';
 
-        $this->layout->content = View::make('dashboard.sites.index');
+        $this->layout->content = View::make('dashboard.sites.index', array(
+            'sites' => $this->user()->sites
+        ));
     }
 
     public function getBalance()

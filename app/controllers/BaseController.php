@@ -15,4 +15,10 @@ class BaseController extends Controller {
 		}
 	}
 
+
+    protected function user()
+    {
+        return Auth::user();
+    }
+
 }
