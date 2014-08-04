@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class SitesTable extends Migration {
+class CreateMerchantsTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,12 +12,12 @@ class SitesTable extends Migration {
 	 */
 	public function up()
 	{
-        Schema::create('sites', function($table)
+        Schema::create('merchants', function($table)
         {
             $table->increments('id');
             $table->integer('user_id');
-            $table->string('domain')->unique();
-            $table->string('comment');
+            $table->integer('site_id');
+            $table->string('vendor', 10);
             $table->timestamp('created_at');
             $table->timestamp('updated_at');
             $table->boolean('blocked')->default(0);
@@ -31,7 +31,7 @@ class SitesTable extends Migration {
 	 */
 	public function down()
 	{
-        Schema::dropIfExists('sites');
+        Schema::dropIfExists('merchants');
 	}
 
 }
