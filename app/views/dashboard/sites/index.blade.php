@@ -22,9 +22,9 @@
             <td>
                 <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#modalAddSite" onclick="formFilling(<?= $site->id ?>)">редактировать</button>
             <? if ($site->blocked) { ?>
-                <button type="button" class="btn btn-default btn-xs" onclick="siteUnblocking(<?= $site->id ?>)" title="разблокировать">разблок-вать</button>
+                <button type="button" class="btn btn-default btn-xs" onclick="$(this).button('loading'); siteUnblocking(<?= $site->id ?>)" data-loading-text="Loading..." title="разблокировать">разблок-вать</button>
             <? } else { ?>
-                <button type="button" class="btn btn-warning btn-xs" onclick="siteBlocking(<?= $site->id ?>)">блокировать</button>
+                <button type="button" class="btn btn-warning btn-xs" onclick="$(this).button('loading'); siteBlocking(<?= $site->id ?>)"   data-loading-text="Loading...">блокировать</button>
             <? } ?>
                 <button type="button" class="btn btn-danger btn-xs"  onclick="siteRemove(<?= $site->id ?>)">удалить</button>
             </td>
