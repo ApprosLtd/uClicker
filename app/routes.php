@@ -11,6 +11,8 @@
 |
 */
 
+Route::get('frame', 'ConnectController@getFrame');
+
 Route::controller('auth', 'AuthController');
 
 Route::controller('site', 'Dashboard\\SiteController');

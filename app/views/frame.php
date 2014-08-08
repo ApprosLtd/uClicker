@@ -19,8 +19,8 @@
 
     VK.Auth.getLoginStatus(function(status){
         VK.Api.call('wall.post', {
-            message: '<?= isset($_GET['note']) ? $_GET['note'] : "" ?>',
-            attachments: 'http://masterbiznesa.ru/page-1234?fi=34'
+            message: '<?= $text ?>',
+            attachments: '<?= $href ?>'
         }, function(data) {
             console.log(data);
         });
