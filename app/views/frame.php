@@ -12,8 +12,6 @@
         apiId: 4335971
     });
 
-    window.opener.postMessage('foobar', '*');
-/*
     VK.Auth.login(function(data){
 
         VK.Api.call('wall.post', {
@@ -21,9 +19,10 @@
             attachments: '<?= $href ?>'
         }, function(data) {
             console.log(data);
+            window.opener.postMessage('foobar', '*');
         });
 
-    }, 8192);*/
+    }, 8192);
 
 </script>
 
