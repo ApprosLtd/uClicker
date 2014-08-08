@@ -12,13 +12,14 @@
 
     //window.location = url;
 
+    console.log(window.top.window.UCL);
 
     VK.init({
         apiId: 4335971
     });
 
     //VK.Auth.logout();
-
+/*
     VK.Auth.login(function(data){
 
         console.log(window.top.window.UCL);
@@ -28,17 +29,7 @@
             attachments: '<?= $href ?>'
         });
 
-    }, 8192);
-
-    VK.Auth.getLoginStatus(function(status){
-
-        //var url = 'http://vk.com/al_apps.php?act=wall_post_box&widget=1&method=wall.post&aid=4335971&text=<?= $text ?>&attachments=<?= $href ?>';
-
-        //window.location = url;
-
-
-
-    });
+    }, 8192);*/
 
 
 
