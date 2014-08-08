@@ -21,7 +21,7 @@
             <td><?= $site->comment ?></td>
             <td>
                 <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#modalAddSite" onclick="formFilling(<?= $site->id ?>)">редактировать</button>
-            <? if ($site->blocked) { ?>
+            <? if ($site->user_blocked) { ?>
                 <button type="button" class="btn btn-default btn-xs" onclick="$(this).button('loading'); siteUnblocking(<?= $site->id ?>)" data-loading-text="Loading..." title="разблокировать">разблок-вать</button>
             <? } else { ?>
                 <button type="button" class="btn btn-warning btn-xs" onclick="$(this).button('loading'); siteBlocking(<?= $site->id ?>)"   data-loading-text="Loading...">блокировать</button>
