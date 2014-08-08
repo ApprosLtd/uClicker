@@ -57,48 +57,26 @@ class ConnectController extends BaseController {
 
     public function getSuccess()
     {
-        $http_referer = $_SERVER['HTTP_REFERER'];
-
-        $parse_url = parse_url($http_referer);
-
-        $host = null;
-
-        if (isset($parse_url['host']) and !empty($parse_url['host'])) {
-            $host = $parse_url['host'];
-        }
-
-        $site = Site::getSiteByHostName($host);
-
-        if (!$site) {
-            Log::error('Выполнен запрос с незарегистрированного домена 2233 ' . $host);
-            return \Illuminate\Support\Facades\Response::json(array('error' => '2233'));
-        }
-
-        $user = $site->user;
-
-        if (!$user) {
-            Log::error('Не найден пользователя для домена 2244', $site->toArray());
-            return \Illuminate\Support\Facades\Response::json(array('error' => '2244'));
-        }
-        
         $post_id     = Input::get('post_id');
         $visitor_id  = Input::get('visitor_id');
-        $quest_token = Input::get('quest_token');
+        $quest_token = Input::get('token');
         
-        if ($post_id > 0 and $visitor_id > 0 and !empty($quest_token)) {
-            
-            $user->questClose(array(
-                'post_id'    => $text,
-                'visitor_id' => $href,
-                'token'      => $quest_token,
-            ));
-            
-            $data = array(
-                'success' => true
-            );
-        } else {
-            //
+        if ($post_id < 1 or $visitor_id < 1 or empty($quest_token)) {
+            return \Illuminate\Support\Facades\Response::json(array('error' => 'Неверные параметры запроса'));
         }
+        
+        $quest = Quest::getQuestByToken($quest_token);
+        
+        if (!$quest) {
+            Log::error('Не найден пользователя для домена', $site->toArray());
+            return \Illuminate\Support\Facades\Response::json(array('error' => 'Неверные параметры запроса'));
+        }
+        
+        $quest->questClose($post_id, $visitor_id);
+        
+        $data = array(
+            'success' => true
+        );
 
         return \Illuminate\Support\Facades\Response::json($data);
     }

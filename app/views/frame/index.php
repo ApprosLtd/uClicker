@@ -43,7 +43,7 @@
                         data: {
                             post_id: post_id,
                             visitor_id: visitor_id,
-                            quest_token: '<?= $quest_token ?>'
+                            token: '<?= $quest_token ?>'
                         },
                         success: function(data){
                             alert('Скидка получена');

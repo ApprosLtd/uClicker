@@ -40,6 +40,12 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
     {
         return $this->hasMany('Visitor');
     }
+    
+    
+    public function balanceSheet()
+    {
+        return $this->hasMany('BalanceSheet');
+    }
 
 
     /**
@@ -98,6 +104,17 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
         return false;
     }
     
+    /**
+    * Обновляет баланс партнера
+    */
+    public function updateBalance()
+    {
+        //
+    }
+    
+    
+    
+    
     
     /**
     * Открывает "квест" (задание)
@@ -119,26 +136,4 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
         return $token;
     }
 
-    /**
-    * Закрывает "квест" (задание)
-    * 
-    * @param mixed $params
-    */
-    public function questClose(array $params)
-    {
-        $quest_obj = $this->quests('token', '=', $params['token'])->where()->first();
-        
-        if (!$quest_obj) {
-            Log::error('Не найден "квест" (задание) по токину', array(
-                'user'   => $this->toArray(),
-                'params' => $params
-            ));
-            return false;
-        }
-        
-        $quest_obj->post_id    = $params['post_id'];
-        
-        $quest_obj->visitor_id = 'VK-' . $params['visitor_id'];
-        
-    }
 }
