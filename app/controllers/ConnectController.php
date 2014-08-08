@@ -57,11 +57,26 @@ class ConnectController extends BaseController {
 
     public function getSuccess()
     {
-        $post_id = Input::get('post_id');
+        $post_id     = Input::get('post_id');
+        $visitor_id  = Input::get('visitor_id');
+        $quest_token = Input::get('quest_token');
+        
+        if ($post_id > 0 and $visitor_id > 0 and !empty($quest_token)) {
+            
+            $user->questClose(array(
+                'post_id'    => $text,
+                'visitor_id' => $href,
+                'token'      => $quest_token,
+            ));
+            
+            $data = array(
+                'success' => true
+            );
+        } else {
+            //
+        }
 
-        $data = array(
-            'success' => true
-        );
+        
 
         return \Illuminate\Support\Facades\Response::json($data);
     }

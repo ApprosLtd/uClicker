@@ -100,7 +100,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
     
     
     /**
-    * Открывает "квест" (задачу)
+    * Открывает "квест" (задание)
     * @param mixed $params
     */
     public function questOpen(array $params)
@@ -119,4 +119,26 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
         return $token;
     }
 
+    /**
+    * Закрывает "квест" (задание)
+    * 
+    * @param mixed $params
+    */
+    public function questClose(array $params)
+    {
+        $quest_obj = $this->quests('token', '=', $params['token'])->where()->first();
+        
+        if (!$quest_obj) {
+            Log::error('Не найден "квест" (задание) по токину', array(
+                'user'   => $this->toArray(),
+                'params' => $params
+            ));
+            return false;
+        }
+        
+        $quest_obj->post_id    = $params['post_id'];
+        
+        $quest_obj->visitor_id = 'VK-' . $params['visitor_id'];
+        
+    }
 }

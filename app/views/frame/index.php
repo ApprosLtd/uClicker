@@ -17,6 +17,12 @@
         VK.Auth.login(function(data){
             
             console.log(data);
+            
+            var visitor_id = 0;
+            
+            if (data.session && data.session.user && data.session.user.id) {
+                visitor_id = data.session.user.id;
+            }
 
             VK.Api.call('wall.post', {
                 message: '<?= $text ?>',
@@ -36,7 +42,8 @@
                         type: 'get',
                         data: {
                             post_id: post_id,
-                            //visitor_id: 
+                            visitor_id: visitor_id,
+                            quest_token: '<?= $quest_token ?>'
                         },
                         success: function(data){
                             alert('Скидка получена');
