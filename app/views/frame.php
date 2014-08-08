@@ -8,7 +8,7 @@
 <script src="//vk.com/js/api/openapi.js" type="text/javascript"></script>
 <script type="text/javascript">
 
-    var url = 'http://vk.com/al_apps.php?act=wall_post_box&widget=1&method=wall.post&aid=4335971&text=<?= $text ?>&attachments=<?= $href ?>';
+    //var url = 'http://vk.com/al_apps.php?act=wall_post_box&widget=1&method=wall.post&aid=4335971&text=<?= $text ?>&attachments=<?= $href ?>';
 
     //window.location = url;
 
@@ -25,9 +25,9 @@
 
     VK.Auth.getLoginStatus(function(status){
 
-        var url = 'http://vk.com/al_apps.php?act=wall_post_box&widget=1&method=wall.post&aid=4335971&text=<?= $text ?>&attachments=<?= $href ?>';
+        //var url = 'http://vk.com/al_apps.php?act=wall_post_box&widget=1&method=wall.post&aid=4335971&text=<?= $text ?>&attachments=<?= $href ?>';
 
-        window.location = url;
+        //window.location = url;
 
 
         VK.Api.call('wall.post', {
