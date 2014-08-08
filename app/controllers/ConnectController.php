@@ -23,11 +23,19 @@ class ConnectController extends BaseController {
 
         $user = $site->user;
 
+        if ($site->isBlocked) {
+            Log::error('Выполнен запрос с заблокированного домена ' . $host, array('user' => $user->toArray()));
+            return View::make('frame.lost-host');
+        }
+
         if (!$user->checkBalance()) {
             Log::info('Баланс партнера на нуле', $user->toArray());
             return View::make('frame.low-balance');
         }
 
+        $quest = new Quest();
+
+        $quest->
 
 
         $text = Input::get('text');

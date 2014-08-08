@@ -20,7 +20,8 @@ class SitesTable extends Migration {
             $table->string('comment');
             $table->timestamp('created_at');
             $table->timestamp('updated_at');
-            $table->boolean('blocked')->default(0);
+            $table->boolean('user_blocked')->default(0);
+            $table->boolean('admin_blocked')->default(0);
         });
 	}
 

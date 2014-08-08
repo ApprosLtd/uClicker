@@ -9,24 +9,24 @@ class Site extends Eloquent {
 
 
     /**
-     * Блокирование сайта
+     * Проверка, заблокирован ли сайт
+     * @return bool
      */
-    public function blocking()
+    public function isBlocked()
     {
-        $this->blocked = 1;
-        $this->save();
+        if ($this->user_blocked == 1 or $this->admin_blocked == 1) {
+            return true;
+        }
+
+        return false;
     }
 
 
     /**
-     * Разблокирование сайта
+     * Возвращает модель сайта по имени хоста
+     * @param $host_name
+     * @return mixed
      */
-    public function unblocking()
-    {
-        $this->blocked = 0;
-        $this->save();
-    }
-
     public static function getSiteByHostName($host_name)
     {
         return self::where('domain', '=', $host_name)->first();

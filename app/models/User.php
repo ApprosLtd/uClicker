@@ -37,6 +37,50 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 
 
     /**
+     * Блокирование сайта
+     * @param $site_id
+     */
+    public function blockingSites($site_id)
+    {
+        $site_obj = $this->sites()->find($site_id);
+
+        if ($site_obj) {
+            $site_obj->user_blocked = 1;
+            $site_obj->save();
+        }
+    }
+
+
+    /**
+     * Разблокирование сайта
+     * @param $site_id
+     */
+    public function unblockingSites($site_id)
+    {
+        $site_obj = $this->sites()->find($site_id);
+
+        if ($site_obj) {
+            $site_obj->user_blocked = 0;
+            $site_obj->save();
+        }
+    }
+
+
+    /**
+     * Удаление сайта
+     * @param $site_id
+     */
+    public function removeSites($site_id)
+    {
+        $site_obj = $this->sites()->find($site_id);
+
+        if ($site_obj) {
+            $site_obj->delete();
+        }
+    }
+
+
+    /**
      * Проверка баланса партнера
      */
     public function checkBalance()

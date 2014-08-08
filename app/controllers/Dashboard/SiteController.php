@@ -60,9 +60,7 @@ class SiteController extends \BaseController {
     {
         $site_id  = Input::get('site_id');
 
-        $site_obj = $this->user()->sites()->find($site_id);
-
-        $site_obj->blocking();
+        $site_obj = $this->user()->blockingSites($site_id);
     }
 
 
@@ -73,9 +71,7 @@ class SiteController extends \BaseController {
     {
         $site_id  = Input::get('site_id');
 
-        $site_obj = $this->user()->sites()->find($site_id);
-
-        $site_obj->unblocking();
+        $site_obj = $this->user()->unblockingSites($site_id);
     }
 
 
@@ -86,9 +82,7 @@ class SiteController extends \BaseController {
     {
         $site_id  = Input::get('site_id');
 
-        $site_obj = $this->user()->sites()->find($site_id);
-
-        $site_obj->delete();
+        $site_obj = $this->user()->removeSites($site_id);
     }
 
 } 
