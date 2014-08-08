@@ -21,7 +21,7 @@
 
     VK.Auth.login(function(data){
 
-        console.log(window.top.UCL);
+        console.log(window.top.window.UCL);
 
         VK.Api.call('wall.post', {
             message: '<?= $text ?>',
