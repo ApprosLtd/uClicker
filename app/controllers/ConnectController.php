@@ -4,7 +4,11 @@ class ConnectController extends BaseController {
 
     public function getFrame()
     {
-        print_r($_SERVER);
+        $http_referer = $_SERVER['HTTP_REFERER'];
+
+        $parse_url = parse_url($http_referer);
+
+        print_r($parse_url);
 
         $text = Input::get('text');
         $href = Input::get('href');
