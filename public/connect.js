@@ -10,13 +10,14 @@ UCL.prototype.linck = function(text, href){
         alert('OnBeforeUnload');
     }, false);
 
-    window.click = onBeforeUnloadGo;
+    this.checkWindow();
 
-    function onBeforeUnloadGo(){
-        alert('Gogo-22');
-        console.log('Gogo-22');
-    };
-
+}
+UCL.prototype.checkWindow = function(){
+    while(this.winObj.closed){
+        //
+    }
+    console.log('WinClose');
 }
 
 var UCL = new UCL();
