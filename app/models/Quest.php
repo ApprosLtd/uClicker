@@ -8,6 +8,16 @@ class Quest extends Eloquent
         return $this->belongsTo('User');
     }
     
+    /**
+     * Возвращает модель "квеста" (задания) по токену
+     * @param $host_name
+     * @return mixed
+     */
+    public static function getQuestByToken($quest_token)
+    {
+        return self::where('token', '=', $quest_token)->first();
+    }
+    
     
     /**
     * Закрывает "квест" (задание)
