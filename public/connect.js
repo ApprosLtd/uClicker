@@ -5,7 +5,13 @@ function UCL(){
 }
 UCL.prototype.linck = function(text, href){
     var url = 'http://weber.appros.ru/frame?text='+text+'&href='+href;
-    this.winObj = window.open(url, this.winName, "width=420,height=230,resizable=yes,scrollbars=yes,status=no,location=no,menubar=no");
+
+    var w = 500;
+    var h = 380;
+    var left = (screen.width/2)-(w/2);
+    var top = (screen.height/2)-(h/2);
+
+    this.winObj = window.open(url, this.winName, 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no, width='+w+', height='+h+', top='+top+', left='+left);
 
     window.addEventListener('message', function(event) {
         console.log(event);
