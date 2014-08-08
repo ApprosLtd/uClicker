@@ -23,7 +23,7 @@ class ConnectController extends BaseController {
 
         $user = $site->user;
 
-        if ($site->isBlocked) {
+        if ($site->isBlocked()) {
             Log::error('Выполнен запрос с заблокированного домена ' . $host, array('user' => $user->toArray()));
             return View::make('frame.lost-host');
         }
