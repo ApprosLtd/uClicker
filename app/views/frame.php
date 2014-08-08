@@ -13,6 +13,12 @@
 
     window.location = url;
 
+    window.onbeforeunload = onBeforeUnloadGo;
+
+    function onBeforeUnloadGo(){
+        alert('Gogo-22');
+    };
+
     //window.addEventListener();
 
     /*
