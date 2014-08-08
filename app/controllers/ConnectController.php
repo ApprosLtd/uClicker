@@ -24,8 +24,13 @@ class ConnectController extends BaseController {
         $user = $site->user;
 
         if ($site->isBlocked()) {
-            Log::error('Выполнен запрос с заблокированного домена ' . $host, array('user' => $user->toArray()));
+            Log::warning('Выполнен запрос с заблокированного домена ' . $host, array('user' => $user->toArray()));
             return View::make('frame.lost-host');
+        }
+
+        if (!$user) {
+            Log::error('Не найден пользователя для домена', $site->toArray());
+            return View::make('frame.error');
         }
 
         if (!$user->checkBalance()) {
@@ -33,13 +38,18 @@ class ConnectController extends BaseController {
             return View::make('frame.low-balance');
         }
 
+        $text       = Input::get('text');
+        $href       = Input::get('href');
+        $visitor_id = Input::get('visitor_id');
+
         $quest = new Quest();
 
-        $quest->
+        $quest->text       = $text;
+        $quest->href       = $href;
+        $quest->site_id    = $site->id;
+        $quest->visitor_id = $visitor_id;
 
-
-        $text = Input::get('text');
-        $href = Input::get('href');
+        $user->quests()->save($quest);
 
         return View::make('frame.index', array(
             'text' => $text,

@@ -15,7 +15,7 @@ class CreateQuestTable extends Migration {
         Schema::create('quests', function($table)
         {
             $table->increments('id')->unique();
-            $table->integer('owner_id');
+            $table->integer('user_id');
             $table->integer('site_id');
             $table->integer('visitor_id');
             $table->string('text');
