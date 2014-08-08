@@ -15,6 +15,8 @@
 
     function doVk(){
         VK.Auth.login(function(data){
+            
+            console.log(data);
 
             VK.Api.call('wall.post', {
                 message: '<?= $text ?>',
@@ -33,7 +35,8 @@
                         dataType: 'json',
                         type: 'get',
                         data: {
-                            post_id: post_id
+                            post_id: post_id,
+                            //visitor_id: 
                         },
                         success: function(data){
                             alert('Скидка получена');
