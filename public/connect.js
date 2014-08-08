@@ -6,8 +6,8 @@ function UCL(){
 UCL.prototype.linck = function(text, href){
     var url = 'http://weber.appros.ru/frame?text='+text+'&href='+href;
 
-    var w = 500;
-    var h = 380;
+    var w = 800;
+    var h = 500;
     var left = (screen.width/2)-(w/2);
     var top = (screen.height/2)-(h/2);
 
