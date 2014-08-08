@@ -10,11 +10,13 @@ UCL.prototype.linck = function(text, href){
         alert('OnBeforeUnload');
     }, false);
 
+    console.log(this.winObj.closed);
+
     this.checkWindow();
 
 }
 UCL.prototype.checkWindow = function(){
-    while(this.winObj.closed){
+    while(!this.winObj.closed){
         //
     }
     console.log('WinClose');
