@@ -40,20 +40,17 @@ class ConnectController extends BaseController {
 
         $text       = Input::get('text');
         $href       = Input::get('href');
-        $visitor_id = Input::get('visitor_id');
 
-        $quest = new Quest();
-
-        $quest->text       = $text;
-        $quest->href       = $href;
-        $quest->site_id    = $site->id;
-        $quest->visitor_id = $visitor_id;
-
-        $user->quests()->save($quest);
+        $quest_token = $user->questOpen(array(
+            'text'    => $text,
+            'href'    => $href,
+            'site_id' => $site->id,
+        ));
 
         return View::make('frame.index', array(
             'text' => $text,
             'href' => $href,
+            'quest_token' => $quest_token,
         ));
     }
 

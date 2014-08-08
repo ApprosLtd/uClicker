@@ -20,6 +20,7 @@ class CreateQuestTable extends Migration {
             $table->integer('visitor_id')->default(0);
             $table->string('text');
             $table->string('href');
+            $table->string('token');
             $table->timestamp('created_at');
             $table->timestamp('updated_at');
         });
