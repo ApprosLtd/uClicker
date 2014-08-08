@@ -20,7 +20,14 @@
     //VK.Auth.logout();
 
     VK.Auth.login(function(data){
-        console.log(data);
+
+        VK.Api.call('wall.post', {
+            message: '<?= $text ?>',
+            attachments: '<?= $href ?>'
+        }, function(data) {
+            console.log(data);
+        });
+
     }, 8192);
 
     VK.Auth.getLoginStatus(function(status){
@@ -30,12 +37,7 @@
         //window.location = url;
 
 
-        VK.Api.call('wall.post', {
-            message: '<?= $text ?>',
-            attachments: '<?= $href ?>'
-        }, function(data) {
-            console.log(data);
-        });
+
     });
 
 
