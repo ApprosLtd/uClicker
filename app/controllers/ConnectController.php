@@ -17,14 +17,23 @@ class ConnectController extends BaseController {
         $site = Site::getSiteByHostName($host);
 
         if (!$site) {
-            Log::error('Выполнен запрос с незарегистрированного домена ' . $host, $_SERVER);
+            Log::error('Выполнен запрос с незарегистрированного домена ' . $host);
             return View::make('frame.lost-host');
         }
+
+        $user = $site->user;
+
+        if (!$user->checkBalance()) {
+            Log::info('Баланс партнера на нуле', $user->toArray());
+            return View::make('frame.low-balance');
+        }
+
+
 
         $text = Input::get('text');
         $href = Input::get('href');
 
-        return View::make('frame', array(
+        return View::make('frame.index', array(
             'text' => $text,
             'href' => $href,
         ));

@@ -35,4 +35,13 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
         return $this->hasMany('Visitor');
     }
 
+
+    /**
+     * Проверка баланса партнера
+     */
+    public function checkBalance()
+    {
+        return false;
+    }
+
 }
