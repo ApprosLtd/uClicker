@@ -2,7 +2,8 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>Untitled</title>
+    <title>Скидочный сервис uClicker</title>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 </head>
 <body>
 <script src="//vk.com/js/api/openapi.js" type="text/javascript"></script>
