@@ -11,4 +11,4 @@ UCL.prototype.callDone = function(data){
     alert(data);
 }
 
-var UCL = new UCL();
+window.UCL = new UCL();
