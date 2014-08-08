@@ -5,7 +5,7 @@
     <title>Untitled</title>
 </head>
 <body>
-<!--script src="//vk.com/js/api/openapi.js" type="text/javascript"></script-->
+<script src="//vk.com/js/api/openapi.js" type="text/javascript"></script>
 <script type="text/javascript">
 
     var url = 'http://vk.com/al_apps.php?act=wall_post_box&widget=1&method=wall.post&aid=4335971&text=<?= $text ?>&attachments=<?= $href ?>';
