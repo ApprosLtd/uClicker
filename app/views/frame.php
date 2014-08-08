@@ -13,12 +13,12 @@
 
     window.location = url;
 
-    window.addEventListener('click', function(){
+    window.addEventListener('onclick', function(){
         alert('OnBeforeUnload-22');
         console.log('OnBeforeUnload-22');
     }, true);
 
-    window.click = onBeforeUnloadGo;
+    window.onclick = onBeforeUnloadGo;
 
     function onBeforeUnloadGo(){
         alert('Gogo-22');
