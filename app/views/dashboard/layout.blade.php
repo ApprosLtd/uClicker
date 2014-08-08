@@ -14,8 +14,21 @@
 
     <title>Админка / {{$title}}</title>
 
+    <style>
+        html, .yellow-bg{
+            background-color: #F1EDE1;
+        }
+        .base-container{
+            margin-top: 70px;
+            background: #FFF;
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.3);
+        }
+    </style>
+
 </head>
-<body role="document">
+<body role="document" class="yellow-bg">
 
 <?
 $user = Auth::user();
@@ -57,7 +70,7 @@ $user = Auth::user();
     </div>
 </div>
 
-<div class="container theme-showcase" role="main" style="margin-top: 70px">
+<div class="container theme-showcase base-container" role="main">
     {{ $content }}
 </div>
 </body>
