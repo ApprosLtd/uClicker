@@ -29,6 +29,6 @@ class Site extends Eloquent {
 
     public static function getSiteByHostName($host_name)
     {
-        return self::find('domain', '=', $host_name)->first();
+        return self::where('domain', '=', $host_name)->first();
     }
 } 
