@@ -10,7 +10,11 @@ UCL.prototype.linck = function(text, href){
         alert('OnBeforeUnload');
     }, false);
 
-    //
+    window.addEventListener('message', function(event) {
+
+        console.log(event);
+        
+    }, false);
 
 }
 UCL.prototype.checkWindow = function(){
