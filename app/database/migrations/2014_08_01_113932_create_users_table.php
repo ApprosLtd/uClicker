@@ -20,6 +20,7 @@ class CreateUsersTable extends Migration {
             $table->timestamp('created_at');
             $table->timestamp('updated_at');
             $table->string('remember_token');
+            $table->integer('balance')->default(0);
         });
 	}
 

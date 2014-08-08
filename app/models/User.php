@@ -41,6 +41,10 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
      */
     public function checkBalance()
     {
+        if ($this->balance > 0) {
+            return true;
+        }
+
         return false;
     }
 
