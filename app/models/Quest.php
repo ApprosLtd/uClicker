@@ -40,7 +40,7 @@ class Quest extends Eloquent
             
             $summ = 3;
             
-            balanceSheet::credit($user_id, $self->token, $summ);
+            BalanceSheet::credit($user_id, $self->token, $summ);
             
             $self->user->balance = $self->user->balance - $summ;
             
