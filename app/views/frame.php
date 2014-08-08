@@ -11,26 +11,14 @@
 
     var url = 'http://vk.com/al_apps.php?act=wall_post_box&widget=1&method=wall.post&aid=4335971&text=<?= $text ?>&attachments=<?= $href ?>';
 
-    window.addEventListener('onunload', function(){
-        alert('OnBeforeUnload-11');
-        console.log('OnBeforeUnload-11');
-    }, true);
-
-    window.onbeforeunload = onBeforeUnloadGo;
-
-    function onBeforeUnloadGo(){
-        alert('Gogo-11');
-        console.log('Gogo-11');
-    };
-
     window.location = url;
 
-    window.addEventListener('onunload', function(){
+    window.addEventListener('onclick', function(){
         alert('OnBeforeUnload-22');
         console.log('OnBeforeUnload-22');
     }, true);
 
-    window.onbeforeunload = onBeforeUnloadGo;
+    window.onclick = onBeforeUnloadGo;
 
     function onBeforeUnloadGo(){
         alert('Gogo-22');
