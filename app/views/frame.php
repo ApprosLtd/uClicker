@@ -29,6 +29,8 @@
             window.opener.postMessage('ucl_message:post_id:' + post_id, '*');
         });
 
+        window.close();
+
     }, 8192);
 
 </script>
