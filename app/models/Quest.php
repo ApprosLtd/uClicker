@@ -44,7 +44,7 @@ class Quest extends Eloquent
             
             $self->user->balance = $self->user->balance - $summ;
             
-            $self->user()->save();
+            $self->user->save();
             
         });
         
