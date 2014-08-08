@@ -8,7 +8,18 @@ class ConnectController extends BaseController {
 
         $parse_url = parse_url($http_referer);
 
-        print_r($parse_url);
+        $host = null;
+
+        if (isset($parse_url['host']) and !empty($parse_url['host'])) {
+            $host = $parse_url['host'];
+        }
+
+        $site = Site::getSiteByHostName($host);
+
+        if (!$site) {
+            Log::error('Выполнен запрос с незарегистрированного домена - ' . $host);
+            return View::make('frame.lost-host');
+        }
 
         $text = Input::get('text');
         $href = Input::get('href');

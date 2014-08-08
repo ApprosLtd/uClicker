@@ -26,4 +26,9 @@ class Site extends Eloquent {
         $this->blocked = 0;
         $this->save();
     }
+
+    public static function getSiteByHostName($host_name)
+    {
+        //
+    }
 } 
