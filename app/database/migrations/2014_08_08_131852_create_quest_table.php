@@ -17,7 +17,7 @@ class CreateQuestTable extends Migration {
             $table->increments('id')->unique();
             $table->integer('user_id');
             $table->integer('site_id');
-            $table->integer('visitor_id');
+            $table->integer('visitor_id')->default(0);
             $table->string('text');
             $table->string('href');
             $table->timestamp('created_at');
