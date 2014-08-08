@@ -13,7 +13,7 @@ UCL.prototype.linck = function(text, href){
     window.addEventListener('message', function(event) {
 
         console.log(event);
-        
+
     }, false);
 
 }

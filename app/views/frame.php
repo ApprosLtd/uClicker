@@ -8,31 +8,16 @@
 <!--script src="//vk.com/js/api/openapi.js" type="text/javascript"></script-->
 <script type="text/javascript">
 
-
     var url = 'http://vk.com/al_apps.php?act=wall_post_box&widget=1&method=wall.post&aid=4335971&text=<?= $text ?>&attachments=<?= $href ?>';
 
-    window.location = url;
+    //window.location = url;
 
-    window.addEventListener('onclick', function(){
-        alert('OnBeforeUnload-22');
-        console.log('OnBeforeUnload-22');
-    }, true);
 
-    window.onclick = onBeforeUnloadGo;
-
-    function onBeforeUnloadGo(){
-        alert('Gogo-22');
-        console.log('Gogo-22');
-    };
-
-    //window.addEventListener();
-
-    /*
     VK.init({
         apiId: 4335971
     });
 
-    VK.Auth.logout();
+    //VK.Auth.logout();
 
     VK.Auth.login(function(data){
         console.log(data);
@@ -53,7 +38,7 @@
         });
     });
 
-    */
+
 
 </script>
 
