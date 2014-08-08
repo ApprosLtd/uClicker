@@ -11,7 +11,7 @@
         apiId: 4335971
     });
 
-    VK.Auth.logout();
+    //VK.Auth.logout();
 
     VK.Auth.login(function(data){
         console.log(data);
