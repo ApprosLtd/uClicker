@@ -11,7 +11,7 @@
 |
 */
 
-Route::get('frame', 'ConnectController@getFrame');
+Route::controller('connect', 'ConnectController');
 
 Route::controller('auth', 'AuthController');
 

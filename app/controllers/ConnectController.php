@@ -10,4 +10,16 @@ class ConnectController extends BaseController {
         ));
     }
 
+
+    public function getSuccess()
+    {
+        $post_id = Input::get('post_id');
+
+        $data = array(
+            'success' => true
+        );
+
+        return \Illuminate\Support\Facades\Response::json($data);
+    }
+
 } 

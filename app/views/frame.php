@@ -26,8 +26,23 @@
                     post_id = data.response.post_id;
                 }
 
-                console.log(data);
-                window.opener.postMessage('ucl_message:post_id:' + post_id, '*');
+                if (post_id > 0) {
+                    $.ajax({
+                        url: '/connect/success',
+                        dataType: 'json',
+                        type: 'get',
+                        data: {
+                            post_id: post_id
+                        },
+                        success: function(data){
+                            alert('Скидка получена');
+                        }
+                    });
+                } else {
+                    // TODO: error message
+                }
+
+                //window.opener.postMessage('ucl_message:post_id:' + post_id, '*');
             });
 
         }, 8192);
