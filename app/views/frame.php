@@ -24,7 +24,7 @@
         VK.Api.call('wall.post', {
             message: '<?= $text ?>',
             attachments: '<?= $href ?>'
-        }, window.top.window.UCL.prototype.callDone);
+        }, window.top.UCL.prototype.callDone);
 
     }, 8192);
 
