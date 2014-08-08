@@ -9,7 +9,7 @@ UCL.prototype.linck = function(text, href){
     this.winObj.addEventListener('beforeunload', function(){
         alert('OnBeforeUnload');
     }, true);
-    console.log(this.winObj.external);
+    console.log(this.winObj);
 }
 
 var UCL = new UCL();
