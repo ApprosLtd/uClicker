@@ -17,7 +17,7 @@ class ConnectController extends BaseController {
         $site = Site::getSiteByHostName($host);
 
         if (!$site) {
-            Log::error('Выполнен запрос с незарегистрированного домена - ' . $host);
+            Log::error('Выполнен запрос с незарегистрированного домена', array('host' => $host));
             return View::make('frame.lost-host');
         }
 
