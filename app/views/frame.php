@@ -14,8 +14,6 @@
 
     VK.Auth.login(function(data){
 
-        var windowOpener = window.opener;
-
         VK.Api.call('wall.post', {
             message: '<?= $text ?>',
             attachments: '<?= $href ?>'
@@ -28,10 +26,8 @@
             }
 
             console.log(data);
-            windowOpener.postMessage('ucl_message:post_id:' + post_id, '*');
+            window.opener.postMessage('ucl_message:post_id:' + post_id, '*');
         });
-
-        window.close();
 
     }, 8192);
 
