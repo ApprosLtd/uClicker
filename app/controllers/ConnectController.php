@@ -62,14 +62,18 @@ class ConnectController extends BaseController {
         $quest_token = Input::get('token');
         
         if ($post_id < 1 or $visitor_id < 1 or empty($quest_token)) {
-            return \Illuminate\Support\Facades\Response::json(array('error' => 'Неверные параметры запроса'));
+            return \Illuminate\Support\Facades\Response::json(array('success' => false, 'error' => 'Неверные параметры запроса'));
         }
         
         $quest = Quest::getQuestByToken($quest_token);
         
         if (!$quest) {
             Log::error('Не найден пользователя для домена', $site->toArray());
-            return \Illuminate\Support\Facades\Response::json(array('error' => 'Неверные параметры запроса'));
+            return \Illuminate\Support\Facades\Response::json(array('success' => false, 'error' => 'Неверные параметры запроса'));
+        }
+        
+        if ($quest->post_id > 0) {
+            return \Illuminate\Support\Facades\Response::json(array('success' => false, 'info' => 'Данная задача уже закрыта'));
         }
         
         $quest->questClose($post_id, $visitor_id);
