@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateMerchantsTable extends Migration {
+class CreateQuestTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,15 +12,16 @@ class CreateMerchantsTable extends Migration {
 	 */
 	public function up()
 	{
-        Schema::create('merchants', function($table)
+        Schema::create('quests', function($table)
         {
-            $table->increments('id');
-            $table->integer('user_id');
+            $table->increments('id')->unique();
+            $table->integer('owner_id');
             $table->integer('site_id');
-            $table->string('vendor', 10);
+            $table->integer('visitor_id');
+            $table->string('text');
+            $table->string('href');
             $table->timestamp('created_at');
             $table->timestamp('updated_at');
-            $table->boolean('blocked')->default(0);
         });
 	}
 
@@ -31,7 +32,7 @@ class CreateMerchantsTable extends Migration {
 	 */
 	public function down()
 	{
-        Schema::dropIfExists('merchants');
+        Schema::dropIfExists('quests');
 	}
 
 }

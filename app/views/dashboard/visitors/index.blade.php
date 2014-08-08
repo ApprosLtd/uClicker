@@ -9,10 +9,10 @@
     </thead>
     <tbody>
     <?
-    foreach ($merchants as $merchant) {
+    foreach ($visitors as $visitor) {
         ?>
         <tr>
-            <td><a href="<?= $merchant->domain ?>" target="_blank"><?= $merchant->domain ?></a></td>
+            <td><a href="<?= $visitor->domain ?>" target="_blank"><?= $visitor->domain ?></a></td>
             <td><?= $site->id ?></td>
             <td><?= $site->comment ?></td>
             <td>

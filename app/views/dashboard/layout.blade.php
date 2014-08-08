@@ -50,7 +50,7 @@ $user = Auth::user();
             <ul class="nav navbar-nav">
                 <li<?= Request::is('/')          ? ' class="active"' : '' ?>><a href="/">Главная</a></li>
                 <li<?= Request::is('sites')      ? ' class="active"' : '' ?>><a href="/sites">Сайты</a></li>
-                <li<?= Request::is('merchants')  ? ' class="active"' : '' ?>><a href="/merchants">Пользователи</a></li>
+                <li<?= Request::is('visitors')   ? ' class="active"' : '' ?>><a href="/visitors">Посетители</a></li>
                 <li<?= Request::is('balance')    ? ' class="active"' : '' ?>><a href="/balance">Баланс</a></li>
                 <li<?= Request::is('statistics') ? ' class="active"' : '' ?>><a href="/statistics">Статистика</a></li>
                 <li<?= Request::is('help')       ? ' class="active"' : '' ?>><a href="/help">Справочник</a></li>

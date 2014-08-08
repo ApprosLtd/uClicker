@@ -4,9 +4,14 @@ class ConnectController extends BaseController {
 
     public function getFrame()
     {
+        print_r($_SERVER);
+
+        $text = Input::get('text');
+        $href = Input::get('href');
+
         return View::make('frame', array(
-            'text' => Input::get('text'),
-            'href' => Input::get('href'),
+            'text' => $text,
+            'href' => $href,
         ));
     }
 

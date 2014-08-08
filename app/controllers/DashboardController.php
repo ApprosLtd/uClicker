@@ -26,12 +26,12 @@ class DashboardController extends BaseController {
         ));
     }
 
-    public function getMerchants()
+    public function getVisitors()
     {
-        $this->layout->title = 'Пользователи';
+        $this->layout->title = 'Посетители';
 
-        $this->layout->content = View::make('dashboard.merchants.index', array(
-            'merchants' => $this->user()->merchants
+        $this->layout->content = View::make('dashboard.visitors.index', array(
+            'visitors' => $this->user()->visitors
         ));
     }
 
