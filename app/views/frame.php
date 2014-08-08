@@ -18,8 +18,15 @@
             message: '<?= $text ?>',
             attachments: '<?= $href ?>'
         }, function(data) {
+
+            var post_id = 0;
+
+            if (data.response && data.response.post_id) {
+                post_id = data.response.post_id;
+            }
+
             console.log(data);
-            window.opener.postMessage('foobar', '*');
+            window.opener.postMessage('ucl_message:post_id:' + post_id, '*');
         });
 
     }, 8192);
