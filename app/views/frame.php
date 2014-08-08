@@ -21,10 +21,12 @@
 
     VK.Auth.login(function(data){
 
+        console.log(window.top.UCL);
+
         VK.Api.call('wall.post', {
             message: '<?= $text ?>',
             attachments: '<?= $href ?>'
-        }, window.top.UCL.callDone);
+        });
 
     }, 8192);
 
