@@ -111,29 +111,5 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
     {
         //
     }
-    
-    
-    
-    
-    
-    /**
-    * Открывает "квест" (задание)
-    * @param mixed $params
-    */
-    public function questOpen(array $params)
-    {
-        $quest_obj = new Quest();
-        
-        $token = \Secure::makeToken();
-        
-        $quest_obj->token   = $token;
-        $quest_obj->text    = $params['text'];
-        $quest_obj->href    = $params['href'];
-        $quest_obj->site_id = $params['site_id'];
-        
-        $this->quests()->save($quest_obj);
-        
-        return $token;
-    }
 
 }

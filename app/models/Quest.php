@@ -8,14 +8,25 @@ class Quest extends Eloquent
         return $this->belongsTo('User');
     }
     
+    
     /**
-     * Возвращает модель "квеста" (задания) по токену
-     * @param $host_name
-     * @return mixed
-     */
-    public static function getQuestByToken($quest_token)
+    * Открывает "квест" (задание)
+    * @param mixed $params
+    */
+    public static function open(array $params)
     {
-        return self::where('token', '=', $quest_token)->first();
+        $quest_obj = new Quest();
+        
+        $token = \SecureHelper::makeToken();
+        
+        $quest_obj->token   = $token;
+        $quest_obj->text    = $params['text'];
+        $quest_obj->href    = $params['href'];
+        $quest_obj->site_id = $params['site_id'];
+        
+        $this->quests()->save($quest_obj);
+        
+        return $token;
     }
     
     
@@ -24,7 +35,7 @@ class Quest extends Eloquent
     * 
     * @param mixed $params
     */
-    public function questClose($post_id, $visitor_id)
+    public function close($visitor_id, $post_id)
     {        
         $this->post_id    = $post_id;
         

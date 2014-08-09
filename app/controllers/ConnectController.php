@@ -41,7 +41,7 @@ class ConnectController extends BaseController {
         $text       = Input::get('text');
         $href       = Input::get('href');
 
-        $quest_token = $user->questOpen(array(
+        $quest_token = \Quest::open(array(
             'text'    => $text,
             'href'    => $href,
             'site_id' => $site->id,
@@ -65,7 +65,7 @@ class ConnectController extends BaseController {
             return \Illuminate\Support\Facades\Response::json(array('success' => false, 'error' => 'Неверные параметры запроса'));
         }
         
-        $quest = Quest::getQuestByToken($quest_token);
+        $quest = \QuestHelper::getQuestByToken($quest_token);
         
         if (!$quest) {
             Log::error('Не найден пользователя для домена', $site->toArray());
@@ -76,7 +76,12 @@ class ConnectController extends BaseController {
             return \Illuminate\Support\Facades\Response::json(array('success' => false, 'info' => 'Данная задача уже закрыта'));
         }
         
-        $quest->questClose($post_id, $visitor_id);
+        if ( ! \QuestHelper::checkPost($visitor_id, $post_id) ) {
+            Log::error('Попытка закрыть квест для неопубликованного поста', array('visitor_id' => $visitor_id, 'post_id' => $post_id));
+            return \Illuminate\Support\Facades\Response::json(array('success' => false, 'error' => 'Пост не опубликован'));
+        }
+        
+        $quest->close($visitor_id, $post_id);
         
         $data = array(
             'success' => true

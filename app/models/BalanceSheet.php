@@ -38,6 +38,32 @@ class BalanceSheet extends Eloquent
     */
     public static function debet($user_id, $summ)
     {
-        //
+        
+        $accounting_operation = new self;
+        
+        $accounting_operation_id = DB::transaction(function() use ($user_id, $summ, $accounting_operation){
+            
+            $user = User::find($user_id);
+            
+            if (!$user) {
+                Log::error('Попытка пополнить баланс несуществующего пользователя - ' . $user);
+                return false;
+            }
+            
+            $user->balance = $user->balance + $summ;
+            
+            $accounting_operation->user_id = $user_id;
+            
+            $accounting_operation->debet   = $summ;
+            
+            $accounting_operation->save();
+            
+            $user->save();
+            
+            return $accounting_operation->id;
+            
+        });
+        
+        return $accounting_operation_id;
     }
 }

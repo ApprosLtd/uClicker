@@ -1,6 +1,6 @@
 <?php
 
-class Secure
+class SecureHelper
 {
     
     public static function makeToken()
