@@ -1,8 +1,46 @@
-<p>
-    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modalAddSite">Пополнить баланс</button>
-</p>
+<div class="row" style="background: #F7F6F5; padding: 20px 0; margin-top: -15px; border-radius: 5px 5px 0 0; border-bottom: 1px solid #E6E6E6;">
+  <div class="col-md-6">
+      <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modalAddSite">Пополнить баланс</button>
+  </div>
+  <div class="col-md-3" style="text-align: right; padding-top: 6px; color:#646464"><h3 style="margin: 0;">Доступно средств:</h3></div>
+  <div class="col-md-3" style="padding-top: 6px;"><h3 style="margin: 0;"><?= number_format(2000.67, 2) ?> <sup>руб.</sup></h3></div>
+</div>
 
 <h3>Расход средств</h3>
+
+<div style="margin: 5px 0 15px; float: right;">
+
+<div class="btn-group btn-group-xs">
+  <button type="button" class="btn btn-default">12.07.2014 - 15.12.2014</button>
+</div>
+
+<div class="btn-group btn-group-xs">
+  <button type="button" class="btn btn-default">Сегодня</button>
+  <button type="button" class="btn btn-default">Вчера</button>
+  <button type="button" class="btn btn-default">Неделя</button>
+  <button type="button" class="btn btn-default">Месяц</button>
+  <button type="button" class="btn btn-default">Квартал</button>
+  <button type="button" class="btn btn-default">Год</button>
+</div>
+
+<span style="font-size: 13px; padding-left: 20px;">Группировать по:</span>
+
+<div class="btn-group btn-group-xs">
+  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+      Дням
+      <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu dropdown-menu-right" role="menu">
+      <li><a href="#">Дням</a></li>
+      <li><a href="#">Неделям</a></li>
+      <li><a href="#">Месяцам</a></li>
+    </ul>
+  
+</div>
+
+</div>
+
+
 
 
 <div class="modal fade" id="modalAddSite" tabindex="-1" role="dialog" aria-hidden="true">
