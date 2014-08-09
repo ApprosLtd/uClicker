@@ -14,7 +14,7 @@ class HomeController extends BaseController {
         return Redirect::to('/');
     }
 
-    public function getMerchants()
+    public function getVisitors()
     {
         return Redirect::to('/');
     }
