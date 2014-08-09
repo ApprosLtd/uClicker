@@ -3,42 +3,133 @@
       <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modalAddSite">Пополнить баланс</button>
   </div>
   <div class="col-md-3" style="text-align: right; padding-top: 6px; color:#646464"><h3 style="margin: 0;">Доступно средств:</h3></div>
-  <div class="col-md-3" style="padding-top: 6px;"><h3 style="margin: 0;"><?= number_format(2000.67, 2) ?> <sup>руб.</sup></h3></div>
+  <div class="col-md-3" style="padding-top: 6px;"><h3 style="margin: 0;"><?= number_format($balance, 2) ?> <sup>руб.</sup></h3></div>
 </div>
 
-<h3>Расход средств</h3>
+<div style="height: 20px;"></div>
 
-<div style="margin: 5px 0 15px; float: right;">
+<div class="row" style="margin: 15px 0 15px;">
 
-<div class="btn-group btn-group-xs">
-  <button type="button" class="btn btn-default">12.07.2014 - 15.12.2014</button>
-</div>
+  <div class="col-md-3">
+    <h3 style="margin: 0;">Пополнение счета</h3>
+  </div>
 
-<div class="btn-group btn-group-xs">
-  <button type="button" class="btn btn-default">Сегодня</button>
-  <button type="button" class="btn btn-default">Вчера</button>
-  <button type="button" class="btn btn-default">Неделя</button>
-  <button type="button" class="btn btn-default">Месяц</button>
-  <button type="button" class="btn btn-default">Квартал</button>
-  <button type="button" class="btn btn-default">Год</button>
-</div>
+  <div class="col-md-9">
 
-<span style="font-size: 13px; padding-left: 20px;">Группировать по:</span>
+    <div class="btn-group btn-group-xs">
+      <button type="button" class="btn btn-default">12.07.2014 - 15.12.2014</button>
+    </div>
 
-<div class="btn-group btn-group-xs">
-  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-      Дням
-      <span class="caret"></span>
-    </button>
-    <ul class="dropdown-menu dropdown-menu-right" role="menu">
-      <li><a href="#">Дням</a></li>
-      <li><a href="#">Неделям</a></li>
-      <li><a href="#">Месяцам</a></li>
-    </ul>
-  
-</div>
+    <span style="font-size: 13px; padding: 0 5px;">или</span>
+
+    <div class="btn-group btn-group-xs">
+      <button type="button" class="btn btn-default">Сегодня</button>
+      <button type="button" class="btn btn-default">Вчера</button>
+      <button type="button" class="btn btn-default">Неделя</button>
+      <button type="button" class="btn btn-default">Месяц</button>
+      <button type="button" class="btn btn-default">Квартал</button>
+      <button type="button" class="btn btn-default">Год</button>
+    </div>
+
+  </div>
 
 </div>
+
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Описание</th>
+      <th>Сумма</th>
+      <th>Дата/Время</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Mark</td>
+      <td>Mark</td>
+      <td>Otto</td>
+      <td>@TwBootstrap</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>3</td>
+      <td>Larry the Bird</td>
+      <td>@twitter</td>
+    </tr>
+  </tbody>
+</table>
+
+<div style="height: 50px;"></div>
+
+<div class="row" style="margin: 15px 0 15px;">
+
+<div class="col-md-3">
+    <h3 style="margin: 0;">Расход средств</h3>
+</div>
+
+<div class="col-md-9">
+
+    <div class="btn-group btn-group-xs">
+      <button type="button" class="btn btn-default">12.07.2014 - 15.12.2014</button>
+    </div>
+
+    <span style="font-size: 13px; padding: 0 5px;">или</span>
+
+    <div class="btn-group btn-group-xs">
+      <button type="button" class="btn btn-default">Сегодня</button>
+      <button type="button" class="btn btn-default">Вчера</button>
+      <button type="button" class="btn btn-default">Неделя</button>
+      <button type="button" class="btn btn-default">Месяц</button>
+      <button type="button" class="btn btn-default">Квартал</button>
+      <button type="button" class="btn btn-default">Год</button>
+    </div>
+
+    <span style="font-size: 13px; padding-left: 20px;">Группировать по:</span>
+
+    <div class="btn-group btn-group-xs">
+      <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+          Дням
+          <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu dropdown-menu-right" role="menu">
+          <li><a href="#">Дням</a></li>
+          <li><a href="#">Неделям</a></li>
+          <li><a href="#">Месяцам</a></li>
+        </ul>
+      
+    </div>
+
+</div>
+
+</div>
+
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Описание</th>
+      <th>Сумма</th>
+      <th>Дата/Время</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Mark</td>
+      <td>Mark</td>
+      <td>Otto</td>
+      <td>@TwBootstrap</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>3</td>
+      <td>Larry the Bird</td>
+      <td>@twitter</td>
+    </tr>
+  </tbody>
+</table>
+
+
 
 
 
@@ -83,82 +174,3 @@
         </div>
     </div>
 </div>
-
-<script src="/packages/chartjs/Chart.min.js"></script>
-
-<canvas id="myChart" width="1140" height="400"></canvas>
-
-<script>
-    var ctx = document.getElementById("myChart").getContext("2d");
-
-
-    var data = {
-        labels: ["January", "February", "March", "April", "May", "June", "July", "February", "March", "April", "May", "June", "July", "February", "March", "April", "May", "June", "July"],
-        datasets: [
-            {
-                label: "My First dataset",
-                fillColor: "rgba(220,220,220,0.2)",
-                strokeColor: "rgba(220,220,220,1)",
-                pointColor: "rgba(220,220,220,1)",
-                pointStrokeColor: "#fff",
-                pointHighlightFill: "#fff",
-                pointHighlightStroke: "rgba(220,220,220,1)",
-                data: [65, 59, 80, 81, 56, 55, 40, 59, 80, 81, 56, 55, 40, 59, 80, 81, 56, 55, 40]
-            },
-            {
-                label: "My Second dataset",
-                fillColor: "rgba(151,187,205,0.2)",
-                strokeColor: "rgba(151,187,205,1)",
-                pointColor: "rgba(151,187,205,1)",
-                pointStrokeColor: "#fff",
-                pointHighlightFill: "#fff",
-                pointHighlightStroke: "rgba(151,187,205,1)",
-                data: [28, 48, 40, 19, 86, 27, 90, 48, 40, 19, 86, 27, 90, 48, 40, 19, 86, 27, 90]
-            }
-        ]
-    };
-
-
-    var myLineChart = new Chart(ctx).Line(data, {
-
-        ///Boolean - Whether grid lines are shown across the chart
-        scaleShowGridLines : true,
-
-        //String - Colour of the grid lines
-        scaleGridLineColor : "rgba(0,0,0,.05)",
-
-        //Number - Width of the grid lines
-        scaleGridLineWidth : 1,
-
-        //Boolean - Whether the line is curved between points
-        bezierCurve : true,
-
-        //Number - Tension of the bezier curve between points
-        bezierCurveTension : 0.4,
-
-        //Boolean - Whether to show a dot for each point
-        pointDot : true,
-
-        //Number - Radius of each point dot in pixels
-        pointDotRadius : 4,
-
-        //Number - Pixel width of point dot stroke
-        pointDotStrokeWidth : 1,
-
-        //Number - amount extra to add to the radius to cater for hit detection outside the drawn point
-        pointHitDetectionRadius : 20,
-
-        //Boolean - Whether to show a stroke for datasets
-        datasetStroke : true,
-
-        //Number - Pixel width of dataset stroke
-        datasetStrokeWidth : 2,
-
-        //Boolean - Whether to fill the dataset with a colour
-        datasetFill : true,
-
-        //String - A legend template
-        legendTemplate : ""
-
-    });
-</script>

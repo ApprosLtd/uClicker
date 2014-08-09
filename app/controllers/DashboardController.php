@@ -39,7 +39,9 @@ class DashboardController extends BaseController {
     {
         $this->layout->title = 'Баланс';
 
-        $this->layout->content = View::make('dashboard.balance.index');
+        $this->layout->content = View::make('dashboard.balance.index', array(
+            'balance' => $this->user()->balance
+        ));
     }
 
     public function getStatistics()
