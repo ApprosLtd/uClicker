@@ -76,5 +76,10 @@ $user = Auth::user();
 <div class="container theme-showcase base-container" role="main">
     {{ $content }}
 </div>
+
+<div style="width: 400px; margin: 10px auto; font-size:12px; text-align: center; color: #726D5F">
+    Все права защищены
+</div>
+
 </body>
 </html>

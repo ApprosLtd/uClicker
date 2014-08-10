@@ -17,6 +17,8 @@ Route::controller('auth', 'AuthController');
 
 Route::controller('site', 'Dashboard\\SiteController');
 
+Route::controller('balance', 'Dashboard\\BalanceController');
+
 
 if (Auth::guest()) {
     Route::controller('/', 'HomeController');

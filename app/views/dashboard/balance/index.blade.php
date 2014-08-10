@@ -1,6 +1,7 @@
 <div class="row" style="background: #F7F6F5; padding: 20px 0; margin-top: -15px; border-radius: 5px 5px 0 0; border-bottom: 1px solid #E6E6E6;">
   <div class="col-md-6">
       <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modalAddSite">Пополнить баланс</button>
+      <a class="btn btn-danger" href="/balance/replenishment?summ=100">+ 100р.</a>
   </div>
   <div class="col-md-3" style="text-align: right; padding-top: 6px; color:#646464"><h3 style="margin: 0;">Доступно средств:</h3></div>
   <div class="col-md-3" style="padding-top: 6px;"><h3 style="margin: 0;"><?= number_format($balance, 2) ?> <sup>руб.</sup></h3></div>
@@ -48,18 +49,18 @@
     </tr>
   </thead>
   <tbody>
+  <?
+      foreach ($balance_sheet as $balance_operation) {
+          ?>
     <tr>
-      <td>Mark</td>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@TwBootstrap</td>
+      <td><?= $balance_operation->id ?></td>
+      <td><?= $balance_operation->comment ?></td>
+      <td><?= $balance_operation->debet ?></td>
+      <td><?= $balance_operation->created_at ?></td>
     </tr>
-    <tr>
-      <td>3</td>
-      <td>3</td>
-      <td>Larry the Bird</td>
-      <td>@twitter</td>
-    </tr>
+          <?
+      }
+  ?>
   </tbody>
 </table>
 
@@ -145,37 +146,12 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Закрыть</span></button>
-                <h4 class="modal-title">Новый сайт</h4>
+                <h4 class="modal-title">Пополнение баланса</h4>
             </div>
             <div class="modal-body">
 
-                <form class="form-horizontal" role="form">
-                    <input type="hidden" id="site-id" value="0">
-                    <div class="form-group">
-                        <div class="col-sm-12">
-                            <div class="input-group">
-                                <div class="input-group-btn">
-                                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">HTTP:// <span class="caret"></span></button>
-                                    <ul class="dropdown-menu" role="menu">
-                                        <li><a href="#">HTTP://</a></li>
-                                        <li><a href="#">HTTPS://</a></li>
-                                    </ul>
-                                </div><!-- /btn-group -->
-                                <input type="text" class="form-control" placeholder="Домен" id="site-domain">
-                            </div><!-- /input-group -->
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-sm-12">
-                            <textarea class="form-control" rows="3" placeholder="Комментарий" id="site-comment"></textarea>
-                        </div>
-                    </div>
-                </form>
+                <iframe src="https://www.avangard.ru/iacq/faces/facelet-pages/pay.xhtml" style="width: 598px; margin: -15px; border: none; height: 510px;"></iframe>
 
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary" onclick="siteSave()" disabled="disabled" id="site-button-save">Сохранить</button>
-                <button type="button" class="btn btn-default" data-dismiss="modal" onclick="formClear()">Отмена</button>
             </div>
         </div>
     </div>

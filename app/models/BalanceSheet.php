@@ -36,12 +36,12 @@ class BalanceSheet extends Eloquent
     * @param mixed $user_id
     * @param mixed $summ
     */
-    public static function debet($user_id, $summ)
+    public static function debet($user_id, $summ, $comment = '')
     {
         
         $accounting_operation = new self;
         
-        $accounting_operation_id = DB::transaction(function() use ($user_id, $summ, $accounting_operation){
+        $accounting_operation_id = DB::transaction(function() use ($user_id, $summ, $comment, $accounting_operation){
             
             $user = User::find($user_id);
             
@@ -55,6 +55,8 @@ class BalanceSheet extends Eloquent
             $accounting_operation->user_id = $user_id;
             
             $accounting_operation->debet   = $summ;
+            
+            $accounting_operation->comment = $comment;
             
             $accounting_operation->save();
             
