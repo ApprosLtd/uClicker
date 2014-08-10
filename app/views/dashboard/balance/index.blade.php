@@ -72,9 +72,9 @@
 
     <div class="btn-group btn-group-xs">
       от 
-      <input type="text" id="discharge-funds-from" class="datepicker" valuse="">
+      <input type="text" id="discharge-funds-from" class="datepicker" style="width: 80px" valuse="">
       до
-      <input type="text" id="discharge-funds-to" class="datepicker" valuse="">
+      <input type="text" id="discharge-funds-to" class="datepicker" style="width: 80px" valuse="">
     </div>
 
     <span style="padding: 0 5px;">или</span>
