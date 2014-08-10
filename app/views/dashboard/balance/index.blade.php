@@ -114,25 +114,23 @@
 <table class="table table-bordered">
   <thead>
     <tr>
-      <th>#</th>
-      <th>Описание</th>
+      <th>Сайт</th>
+      <th>Постов</th>
       <th>Сумма, руб.</th>
-      <th>Дата/Время</th>
     </tr>
   </thead>
   <tbody>
+  <?
+      foreach ($balance_sheet_credit as $balance_operation) {
+          ?>
     <tr>
-      <td>Mark</td>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@TwBootstrap</td>
+      <td><?= $balance_operation->domain ?></td>
+      <td><?= $balance_operation->posts ?></td>
+      <td><?= $balance_operation->summa ?></td>
     </tr>
-    <tr>
-      <td>3</td>
-      <td>3</td>
-      <td>Larry the Bird</td>
-      <td>@twitter</td>
-    </tr>
+          <?
+      }
+  ?>
   </tbody>
 </table>
 
