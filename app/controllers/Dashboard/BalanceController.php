@@ -13,7 +13,7 @@ class BalanceController extends \BaseController
 
         $this->layout->content = \View::make('dashboard.balance.index', array(
             'balance' => $this->user()->balance,
-            'balance_sheet' => $this->user()->balanceSheet
+            'balance_sheet' => $this->user()->balanceSheet()->where('debet', '>', 0)->get()
         ));
     }
 
