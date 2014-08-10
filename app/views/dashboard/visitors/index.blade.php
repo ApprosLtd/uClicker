@@ -2,6 +2,7 @@
     <thead>
     <tr>
         <th>Посетитель</th>
+        <th style="width: 200px">Постов</th>
         <th style="width: 200px">Соц.сеть</th>
         <th style="width: 270px"></th>
     </tr>
@@ -12,6 +13,7 @@
         ?>
         <tr>
             <td><a href="http://vk.com/id<?= $visitor->uid ?>" target="_blank"><?= $visitor->first_name . ' ' . $visitor->last_name ?></a></td>
+            <td><?= $visitor->quests ?></td>
             <td><?= $visitor->vendor ?></td>
             <td>
                 <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#visitorInformation" onclick="visitorInfo(<?= $visitor->id ?>)">подробнее</button>
