@@ -19,13 +19,16 @@ Route::controller('auth', 'AuthController');
 
 
 if (Auth::guest()) {
+    
     Route::controller('/', 'HomeController');
+    
 } else {
-    Route::controller('/', 'DashboardController');
     
     Route::controller('site', 'Dashboard\\SiteController');
 
     Route::controller('balance', 'Dashboard\\BalanceController');
+    
+    Route::controller('/', 'DashboardController');
 }
 
 //Route::any('/', array('before' => 'auth', 'uses' => 'DashboardController@getIndex'));
