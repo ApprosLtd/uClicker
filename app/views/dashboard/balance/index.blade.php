@@ -17,7 +17,10 @@
   <div class="col-md-9">
 
     <div class="btn-group btn-group-xs">
-      <button type="button" class="btn btn-default">12.07.2014 - 15.12.2014</button>
+      от 
+      <input type="text" id="account-replenishment-from" class="datepicker" style="width: 80px" valuse="">
+      до
+      <input type="text" id="account-replenishment-to" class="datepicker" style="width: 80px" valuse="">
     </div>
 
     <span style="font-size: 13px; padding: 0 5px;">или</span>
