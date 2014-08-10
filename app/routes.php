@@ -15,15 +15,17 @@ Route::controller('connect', 'ConnectController');
 
 Route::controller('auth', 'AuthController');
 
-Route::controller('site', 'Dashboard\\SiteController');
 
-Route::controller('balance', 'Dashboard\\BalanceController');
 
 
 if (Auth::guest()) {
     Route::controller('/', 'HomeController');
 } else {
     Route::controller('/', 'DashboardController');
+    
+    Route::controller('site', 'Dashboard\\SiteController');
+
+    Route::controller('balance', 'Dashboard\\BalanceController');
 }
 
 //Route::any('/', array('before' => 'auth', 'uses' => 'DashboardController@getIndex'));
