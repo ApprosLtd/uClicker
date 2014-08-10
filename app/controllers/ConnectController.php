@@ -48,6 +48,7 @@ class ConnectController extends BaseController {
             'text'    => $text,
             'href'    => $href,
             'site_id' => $site->id,
+            'user_id' => $user->id,
         ));
 
         return View::make('frame.index', array(

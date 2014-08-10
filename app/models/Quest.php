@@ -24,7 +24,14 @@ class Quest extends Eloquent
         $quest_obj->href    = $params['href'];
         $quest_obj->site_id = $params['site_id'];
         
-        $this->quests()->save($quest_obj);
+        $user_obj = \User::find($params['user_id']);
+        
+        if (!$user_obj) {
+            Log::error('Не найден пользователя для домена', array('user_id' => $params['user_id'], 'site_id' => $params['site_id']));
+            return false;
+        }
+        
+        $user_obj->quests()->save($quest_obj);
         
         return $token;
     }
