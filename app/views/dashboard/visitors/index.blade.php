@@ -1,9 +1,8 @@
 <table class="table table-hover">
     <thead>
     <tr>
-        <th>Домен</th>
-        <th style="width: 200px">UID</th>
-        <th>Комментарий</th>
+        <th>Посетитель</th>
+        <th style="width: 200px">Соц.сеть</th>
         <th style="width: 270px"></th>
     </tr>
     </thead>
@@ -12,17 +11,15 @@
     foreach ($visitors as $visitor) {
         ?>
         <tr>
-            <td><a href="<?= $visitor->domain ?>" target="_blank"><?= $visitor->domain ?></a></td>
-            <td><?= $site->id ?></td>
-            <td><?= $site->comment ?></td>
+            <td><a href="http://vk.com/id<?= $visitor->uid ?>" target="_blank"><?= $visitor->first_name . ' ' . $visitor->last_name ?></a></td>
+            <td><?= $visitor->vendor ?></td>
             <td>
-                <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#modalAddSite" onclick="formFilling(<?= $site->id ?>)">редактировать</button>
-                <? if ($site->blocked) { ?>
-                    <button type="button" class="btn btn-default btn-xs" onclick="siteUnblocking(<?= $site->id ?>)" title="разблокировать">разблок-вать</button>
+                <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#visitorInformation" onclick="visitorInfo(<?= $site->id ?>)">подробнее</button>
+                <? if ($visitor->blocked) { ?>
+                    <button type="button" class="btn btn-default btn-xs" onclick="visitorUnblocking(<?= $visitor->id ?>)" title="разблокировать">разблок-вать</button>
                 <? } else { ?>
-                    <button type="button" class="btn btn-warning btn-xs" onclick="siteBlocking(<?= $site->id ?>)">блокировать</button>
+                    <button type="button" class="btn btn-warning btn-xs" onclick="visitorBlocking(<?= $visitor->id ?>)">блокировать</button>
                 <? } ?>
-                <button type="button" class="btn btn-danger btn-xs"  onclick="siteRemove(<?= $site->id ?>)">удалить</button>
             </td>
         </tr>
     <?
