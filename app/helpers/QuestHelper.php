@@ -22,7 +22,13 @@ class QuestHelper
         
         $response_mix  = json_decode($response_json);
         
-        if (isset($response_mix->response) and isset($response_mix->response->id) and $response_mix->response->id == $post_id) {
+        if (!isset($response_mix->response) or !is_array($response_mix->response) or !isset($response_mix->response[0])) {
+            return false;
+        }
+        
+        $response = $response_mix->response[0];
+        
+        if (isset($response->id) and $response->id == $post_id) {
             return true;
         }
         

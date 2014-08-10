@@ -24,11 +24,17 @@ class VisitorHelper
         
             $response_mix  = json_decode($response_json);
             
-            $visitor_obj->first_name = $response_mix['response']->first_name;
+            if (!isset($response_mix->response) or !is_array($response_mix->response) or !isset($response_mix->response[0])) {
+                return false;
+            }
             
-            $visitor_obj->last_name  = $response_mix['response']->last_name;
+            $response = $response_mix->response[0];
             
-            $visitor_obj->sex        = $response_mix['response']->sex;
+            $visitor_obj->first_name = $response->first_name;
+            
+            $visitor_obj->last_name  = $response->last_name;
+            
+            $visitor_obj->sex        = $response->sex;
             
             $visitor_obj->birthday   = '';
             
