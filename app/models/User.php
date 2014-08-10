@@ -37,8 +37,12 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 
 
     public function visitors()
-    {
-        return $this->hasMany('Visitor');
+    {        
+        $sql = "select * from quests as q join visitors as v on q.visitor_id = v.id where q.user_id = ?";
+        
+        $visitors_obj_arr = DB::select($sql, array($this->id));
+        
+        return $visitors_obj_arr;
     }
     
     

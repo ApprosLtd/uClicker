@@ -2,6 +2,9 @@
 
 class ConnectController extends BaseController {
 
+    /**
+    * Начало процесса размещения поста
+    */
     public function getFrame()
     {
         $http_referer = $_SERVER['HTTP_REFERER'];
@@ -55,13 +58,16 @@ class ConnectController extends BaseController {
     }
 
 
+    /**
+    * Завершает процесс размещения поста
+    */
     public function getSuccess()
     {
         $post_id     = Input::get('post_id');
-        $visitor_id  = Input::get('visitor_id');
+        $visitor_uid = Input::get('visitor_uid');
         $quest_token = Input::get('token');
         
-        if ($post_id < 1 or $visitor_id < 1 or empty($quest_token)) {
+        if ($post_id < 1 or $visitor_uid < 1 or empty($quest_token)) {
             return \Illuminate\Support\Facades\Response::json(array('success' => false, 'error' => 'Неверные параметры запроса'));
         }
         
@@ -76,12 +82,19 @@ class ConnectController extends BaseController {
             return \Illuminate\Support\Facades\Response::json(array('success' => false, 'info' => 'Данная задача уже закрыта'));
         }
         
-        if ( ! \QuestHelper::checkPost($visitor_id, $post_id) ) {
-            Log::error('Попытка закрыть квест для неопубликованного поста', array('visitor_id' => $visitor_id, 'post_id' => $post_id));
+        if ( ! \QuestHelper::checkPost($visitor_uid, $post_id) ) {
+            Log::error('Попытка закрыть квест для неопубликованного поста', array('visitor_id' => $visitor_uid, 'post_id' => $post_id));
             return \Illuminate\Support\Facades\Response::json(array('success' => false, 'error' => 'Пост не опубликован'));
         }
         
-        $quest->close($visitor_id, $post_id);
+        $visitor_obj = \VisitorHelper::getVisitorByUid($visitor_uid); 
+        
+        if (!$visitor_obj) {
+            Log::error('Ошибка идентификации визитёра', array('visitor_id' => $visitor_uid));
+            return \Illuminate\Support\Facades\Response::json(array('success' => false, 'error' => 'Ошибка идентификации визитёра'));
+        }       
+        
+        $quest->close($visitor_obj->id, $post_id);
         
         $data = array(
             'success' => true

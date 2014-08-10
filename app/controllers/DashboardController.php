@@ -31,7 +31,7 @@ class DashboardController extends BaseController {
         $this->layout->title = 'Посетители';
 
         $this->layout->content = View::make('dashboard.visitors.index', array(
-            'visitors' => $this->user()->visitors
+            'visitors' => $this->user()->visitors()
         ));
     }
 
