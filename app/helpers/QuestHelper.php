@@ -10,7 +10,7 @@ class QuestHelper
      */
     public static function getQuestByToken($quest_token)
     {
-        return self::where('token', '=', $quest_token)->first();
+        return \Quest::where('token', '=', $quest_token)->first();
     }
     
     
