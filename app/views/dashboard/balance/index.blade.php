@@ -185,6 +185,9 @@
   $('.datepicker').datepicker({
     dateFormat: 'dd.mm.yy',
     changeMonth: true,
-    changeYear: true
+    changeYear: true,
+    onSelect: function(){
+      //
+    }
   });
 </script>
