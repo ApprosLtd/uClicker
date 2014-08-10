@@ -71,12 +71,13 @@
 <div class="col-md-9">
 
     <div class="btn-group btn-group-xs">
-      <button type="button" class="btn btn-default" onclick="$('#discharge-funds-from').datepicker('show');">12.07.2014 - 15.12.2014</button>
-      <input type="hidden" id="discharge-funds-from" valuse="">
-      <input type="hidden" id="discharge-funds-to" valuse="">
+      от 
+      <input type="text" id="discharge-funds-from" class="datepicker" valuse="">
+      до
+      <input type="text" id="discharge-funds-to" class="datepicker" valuse="">
     </div>
 
-    <span style="font-size: 13px; padding: 0 5px;">или</span>
+    <span style="padding: 0 5px;">или</span>
 
     <div class="btn-group btn-group-xs">
       <button type="button" class="btn btn-default">Сегодня</button>
@@ -87,7 +88,7 @@
       <button type="button" class="btn btn-default">Год</button>
     </div>
 
-    <span style="font-size: 13px; padding-left: 20px;">Группировать по:</span>
+    <span style="padding-left: 20px;">Группировать по:</span>
 
     <div class="btn-group btn-group-xs">
       <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
@@ -178,5 +179,5 @@
 </div>
 
 <script type="text/javascript">
-  $('#discharge-funds-from').datepicker();
+  $('.datepicker').datepicker();
 </script>
