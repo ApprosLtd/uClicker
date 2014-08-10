@@ -18,10 +18,10 @@
             
             console.log(data);
             
-            var visitor_id = 0;
+            var visitor_uid = 0;
             
             if (data.session && data.session.user && data.session.user.id) {
-                visitor_id = data.session.user.id;
+                visitor_uid = data.session.user.id;
             }
 
             VK.Api.call('wall.post', {
@@ -42,7 +42,7 @@
                         type: 'get',
                         data: {
                             post_id: post_id,
-                            visitor_id: visitor_id,
+                            visitor_uid: visitor_uid,
                             token: '<?= $quest_token ?>'
                         },
                         success: function(data){
