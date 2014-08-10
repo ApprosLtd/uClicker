@@ -72,8 +72,8 @@
 
     <div class="btn-group btn-group-xs">
       <button type="button" class="btn btn-default" onclick="$('#discharge-funds-from').datepicker('show');">12.07.2014 - 15.12.2014</button>
-      <input type="text" id="discharge-funds-from" valuse="">
-      <input type="text" id="discharge-funds-to" valuse="">
+      <input type="hidden" id="discharge-funds-from" valuse="">
+      <input type="hidden" id="discharge-funds-to" valuse="">
     </div>
 
     <span style="font-size: 13px; padding: 0 5px;">или</span>
