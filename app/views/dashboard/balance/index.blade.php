@@ -19,20 +19,20 @@
 
     <div class="btn-group btn-group-xs">
       от 
-      <input type="text" id="account-replenishment-from" class="datepicker" style="width: 80px" valuse="">
+      <input type="text" data-target="BalanceSheet-from" class="datepicker" style="width: 80px" valuse="">
       до
-      <input type="text" id="account-replenishment-to" class="datepicker" style="width: 80px" valuse="">
+      <input type="text" data-target="BalanceSheet-to" class="datepicker" style="width: 80px" valuse="">
     </div>
 
     <span style="font-size: 13px; padding: 0 5px;">или</span>
 
     <div class="btn-group btn-group-xs">
-      <button type="button" class="btn btn-default">Сегодня</button>
-      <button type="button" class="btn btn-default">Вчера</button>
-      <button type="button" class="btn btn-default">Неделя</button>
-      <button type="button" class="btn btn-default">Месяц</button>
-      <button type="button" class="btn btn-default">Квартал</button>
-      <button type="button" class="btn btn-default">Год</button>
+      <button type="button" class="btn btn-default" data-target="BalanceSheet" data-period="today">Сегодня</button>
+      <button type="button" class="btn btn-default" data-target="BalanceSheet" data-period="yesterday">Вчера</button>
+      <button type="button" class="btn btn-default" data-target="BalanceSheet" data-period="week">Неделя</button>
+      <button type="button" class="btn btn-default" data-target="BalanceSheet" data-period="month">Месяц</button>
+      <button type="button" class="btn btn-default" data-target="BalanceSheet" data-period="quarter">Квартал</button>
+      <button type="button" class="btn btn-default" data-target="BalanceSheet" data-period="year">Год</button>
     </div>
 
   </div>
@@ -160,8 +160,75 @@
     dateFormat: 'dd.mm.yy',
     changeMonth: true,
     changeYear: true,
-    onSelect: function(){
-      //
+    onSelect: function(dateText, inst){
+        var target = $(inst.input[0]).data('target');
+        var fromDateStr, toDateStr;
+        target = target.split('-');
+        var dr = target[1];
+        target = target[0];
+        if (dr=='from') {
+            fromDateStr = dateText;
+            toDateStr   = $('input[data-target="'+target+'-to"]').val();
+        } else if (dr=='to') {
+            fromDateStr = $('input[data-target="'+target+'-from"]').val();
+            toDateStr   = dateText;
+        }
+        loadData(fromDateStr, toDateStr, target);
     }
   });
+
+  $('[data-period]').on('click', function(){
+      var target   = $(this).data('target');
+      var currentDate = new Date();
+
+      var fromDate = new Date();
+
+      switch ($(this).data('period')) {
+          case 'today':
+              fromDate = new Date();
+              break;
+          case 'yesterday':
+              fromDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate()-1);
+              break;
+          case 'week':
+              fromDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate()-7);
+              break;
+          case 'month':
+              fromDate = new Date(currentDate.getFullYear(), currentDate.getMonth()-1, currentDate.getDate());
+              break;
+          case 'quarter':
+              fromDate = new Date(currentDate.getFullYear(), currentDate.getMonth()-3, currentDate.getDate());
+              break;
+          case 'year':
+              fromDate = new Date(currentDate.getFullYear()-1, currentDate.getMonth(), currentDate.getDate());
+              break;
+      }
+
+      var fromDateStr = fromDate.getDate()+'.'+(fromDate.getMonth()+1)+'.'+fromDate.getFullYear();
+      var toDateStr   = currentDate.getDate()+'.'+(currentDate.getMonth()+1)+'.'+currentDate.getFullYear();
+
+      $('[data-target="'+target+'-from"]').datepicker('setDate', fromDateStr);
+      $('[data-target="'+target+'-to"]').datepicker('setDate', toDateStr);
+
+      loadData(fromDateStr, toDateStr, target);
+  });
+
+  function loadData(from, to, target, page){
+      if (!page) page = 1;
+      $.ajax({
+          url: '/data',
+          dataType: 'json',
+          type: 'post',
+          data: {
+              from_date: from,
+              to_date: to,
+              target: target,
+              page: page
+          },
+          success: function(data){
+              //
+          }
+      });
+  }
+
 </script>

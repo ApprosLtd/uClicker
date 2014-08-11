@@ -63,4 +63,20 @@ class DashboardController extends BaseController {
         $this->layout->content = View::make('dashboard.profile.index');
     }
 
+    public function postData()
+    {
+        $from_date = Input::get('from_date');
+        $to_date   = Input::get('to_date');
+        $target    = Input::get('target');
+        $page      = Input::get('page', 1);
+
+        $model = ucfirst($target);
+
+        $rows = $model::where('created_at', '>=', $from_date)->where('created_at', '<=', $to_date)->get();
+
+        //$rows = array();
+
+        return \Response::json($rows->toArray());
+    }
+
 } 
