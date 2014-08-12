@@ -53,7 +53,7 @@
                 <li><a href="#">Portfolio</a></li>
                 <li><a href="#">News</a></li>
                 <li><a href="#">Contact</a></li>
-                <li class="sign-up"><a href="#"><span class="white">Вход/Регистрация</span></a></li>
+                <li class="sign-up"><a href="#" data-toggle="modal" data-target="#loginForm"><span class="white">Вход/Регистрация</span></a></li>
             </ul>
         </div><!--/.navbar-collapse -->
     </div>
@@ -68,40 +68,27 @@
             <div class="col-md-12">
 
                 <!--BxSlider-->
-                <div class="bx-wrapper" style="max-width: 100%;">
-                    <div class="bx-viewport" style="width: 100%; overflow: hidden; position: relative; height: 560px;">
-                        <ul class="bxslider" style="width: auto; position: relative;">
-                            <li style="float: none; list-style: none; position: absolute; width: 1140px; z-index: 0; display: none;">
-                                <img src="/packages/skin2/img/header1.png" alt="Title">
-                                <div class="row text-center">
-                                    <div class="col-sm-10 col-sm-offset-1">
-                                        <h1>Welcome to Sharkfin, an incredibly unique web and mobile experience for your users.</h1><br>
-                                        <a class="btn-main" href=#">Learn More</a>
-                                    </div>
-                                </div>
-                            </li>
-
-                            <li style="float: none; list-style: none; position: absolute; width: 1140px; z-index: 50; display: list-item;">
-                                <img src="/packages/skin2/img/header2.png" alt="Title">
-                                <div class="row text-center">
-                                    <div class="col-sm-10 col-sm-offset-1">
-                                        <h1>Built to look good on all devices. Resize your browser to take a look for yourself.</h1><br>
-                                        <a class="btn-main" href="#">Learn More</a>
-                                    </div>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="bx-controls bx-has-pager bx-has-controls-direction">
-                        <div class="bx-pager bx-default-pager">
-                            <div class="bx-pager-item">
-                                <a href="" data-slide-index="0" class="bx-pager-link">1</a>
-                            </div>
-                            <div class="bx-pager-item">
-                                <a href="" data-slide-index="1" class="bx-pager-link active">2</a>
+                <ul class="bxslider">
+                    <li>
+                        <img src="/packages/skin2/img/header1.png" alt="Title" />
+                        <div class="row text-center">
+                            <div class="col-sm-10 col-sm-offset-1">
+                                <h1>Welcome to Sharkfin, an incredibly unique web and mobile experience for your users.</h1><br />
+                                <a class="btn-main" href="about.html">Learn More</a>
                             </div>
                         </div>
-                        <div class="bx-controls-direction"><a class="bx-prev" href="">Prev</a><a class="bx-next" href="">Next</a></div></div></div>
+                    </li>
+
+                    <li>
+                        <img src="/packages/skin2/img/header2.png" alt="Title" />
+                        <div class="row text-center">
+                            <div class="col-sm-10 col-sm-offset-1">
+                                <h1>Built to look good on all devices. Resize your browser to take a look for yourself.</h1><br />
+                                <a class="btn-main" href="about.html">Learn More</a>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
 
             </div><!--End Span12-->
         </div>
@@ -271,6 +258,57 @@
     </div>
 </section>
 
+<!--Modals-->
+<div class="modal fade" id="loginForm" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+                <section id="blue-container" style="padding: 0">
+                    <div class="container-fluid">
+                        <div class="row">
+
+                            <div class="col-sm-12 text-center form-container">
+
+                                <h2>Вход/Регистрация</h2>
+
+                                <hr>
+
+                                <form class="form-horizontal" method="post" action="/auth/login">
+                                    <div class="control-group">
+                                        <div class="controls">
+                                            <div class="row">
+                                                <input type="text" class="input-xlarge col-xs-8 col-xs-offset-2" name="email" placeholder="Email">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="control-group">
+                                        <div class="controls">
+                                            <div class="row">
+                                                <input type="password" class="input-xlarge col-xs-8 col-xs-offset-2" name="password" placeholder="Пароль">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="control-group">
+                                        <div class="controls">
+                                            <button type="submit" class="btn-main">Поехали</button>
+                                        </div>
+                                        <a class="small-message" href="#"><small>Забыли пароль?</small></a>
+                                    </div>
+
+                                </form>
+
+                            </div><!--End Span6-->
+
+                        </div><!--End Row-->
+                    </div><!--End Container-->
+                </section>
+
+
+        </div>
+    </div>
+</div>
 
 <!-- Javascript
 ================================================== -->
