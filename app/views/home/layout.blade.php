@@ -6,6 +6,8 @@
     <title>Sharkfin | Designed By Theme Armada</title>
     <meta name="viewport" content="width=device-width">
 
+    <link href='http://fonts.googleapis.com/css?family=Lobster&subset=latin,cyrillic,latin-ext' rel='stylesheet' type='text/css'>
+
     <!-- Styles -->
     <link rel="stylesheet" href="/packages/skin2/css/jquery.bxslider.css">
     <link rel="stylesheet" href="/packages/skin2/css/font-awesome.min.css">
@@ -22,6 +24,27 @@
 
     <!-- Fav and touch icons -->
     <link rel="shortcut icon" href="http://themearmada.com/favicon.png">
+
+    <style>
+    .logoHead{
+        text-transform: none;
+        font-family: 'Lobster', cursive;
+        color: #FFF !important;
+        font-size: 39px;
+    }
+    .logoHead span{
+        color: #38C8E0 !important;
+    }
+    h1, h2, h3{
+        font-family: 'Lobster', cursive;
+        font-weight: normal;
+        letter-spacing: 0px;
+    }
+    a {
+        font-weight: normal;
+    }
+    </style>
+
 </head>
 
 <body data-ember-extension="1">
@@ -34,7 +57,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/"><img src="/packages/skin2/img/logo.png" alt="Logo"></a>
+            <a class="navbar-brand logoHead" href="/"><span>u</span>Clicker</a>
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
@@ -105,7 +128,7 @@
             <a href="#">
                 <div class="col-sm-4 text-center home-box">
                     <i class="fa fa-mobile-phone fa-3x"></i>
-                    <h3>Mobile Responsive</h3>
+                    <h2>100% эффективность</h2>
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean a mauris dui. Nam eu risus neque, sed blandit ante. Integer eget massa.</p>
                 </div>
             </a>
@@ -114,8 +137,8 @@
             <a href="#">
                 <div class="col-sm-4 text-center home-box">
                     <i class="fa fa-thumbs-up fa-3x"></i>
-                    <h3>Built With Bootstrap</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean a mauris dui. Nam eu risus neque, sed blandit ante. Integer eget massa.</p>
+                    <h2>Оплата по факту</h2>
+                    <p>Списание средств за размещение поста производится лишь после проверки постинга в соцсетях.</p>
                 </div>
             </a>
 
@@ -123,7 +146,7 @@
             <a href="#">
                 <div class="col-sm-4 text-center home-box">
                     <i class="fa fa-flag fa-3x"></i>
-                    <h3>Over 249 Icons</h3>
+                    <h2>Полный контроль</h2>
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean a mauris dui. Nam eu risus neque, sed blandit ante. Integer eget massa.</p>
                 </div>
             </a>
@@ -138,16 +161,21 @@
     <div class="container">
         <div class="row margin-50">
             <div class="col-md-12 text-center">
-                <ul class="list-inline home-icons">
-                    <li><a href="#"><i class="fa fa-rocket fa-4x blue"></i></a></li>
-                    <li><a href="#"><i class="fa fa-heart fa-4x blue"></i></a></li>
-                    <li><a href="#"><i class="fa fa-truck fa-4x blue"></i></a></li>
-                    <li><a href="#"><i class="fa fa-cogs fa-4x blue"></i></a></li>
-                    <li><a href="#"><i class="fa fa-lock fa-4x blue"></i></a></li>
-                    <li><a href="#"><i class="fa fa-check fa-4x blue"></i></a></li>
-                </ul>
+                <h1 style="color:#38C8E0">Что это за сервис?</h1>
             </div>
         </div>
+
+        <div class="row margin-50">
+            <div class="col-md-12 text-center">
+                <h1 style="color:#38C8E0">Как это работает?</h1>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <img style="width: 100%" src="/packages/skin2/img/home-concept.png">
+            </div>
+        </div><!--End Row-->
 
         <div class="row margin-30">
             <div class="col-md-8 col-md-offset-2 text-center">
