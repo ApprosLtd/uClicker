@@ -45,8 +45,21 @@ class DashboardController extends BaseController {
     public function getHelp()
     {
         $this->layout->title = 'Справочник';
+        
+        $markdown = Markdown::make('hello');
+        
+        $menu = array(
+            array('text' => 'Введение', 'href' => 'intro'),
+            array('text' => 'Принцип работы', 'href' => ''),
+            array('text' => 'Подключение скриптов', 'href' => ''),
+            array('text' => 'Контроль объявлений', 'href' => ''),
+        );
 
-        $this->layout->content = View::make('dashboard.help.index');
+        $this->layout->content = View::make('dashboard.help.index', array(
+            'markdown' => $markdown,
+            'menu'     => $menu,
+            'current'  => 'intro'
+        ));
     }
 
     public function getSupport()
