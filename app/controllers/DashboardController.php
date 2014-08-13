@@ -70,13 +70,51 @@ class DashboardController extends BaseController {
         $target    = Input::get('target');
         $page      = Input::get('page', 1);
 
-        $model = ucfirst($target);
+        if ($from_date > 0) {
+            $from_date = date('Y-m-d 00:00:00', strtotime($from_date));
+        }
 
-        $rows = $model::where('created_at', '>=', $from_date)->where('created_at', '<=', $to_date)->get();
+        if ($to_date > 0) {
+            $to_date = date('Y-m-d 23:59:59', strtotime($to_date));
+        }
 
-        //$rows = array();
+        $limit  = 20;
+        $offset = ($page - 1) * $limit;
 
-        return \Response::json($rows->toArray());
+        $output = array(
+            'count'  => 0,
+            'page'   => $page,
+            'limit'  => $limit,
+            'offset' => $offset,
+            'rows'   => array()
+        );
+
+        switch ($target) {
+            case 'balance_sheet':
+                $rows_obj = $this->user()->balanceSheet()->where('debit', '>', 0);
+                if ($from_date > 0) {
+                    $rows_obj = $rows_obj->where('created_at', '>=', $from_date);
+                }
+                if ($to_date > 0) {
+                    $rows_obj = $rows_obj->where('created_at', '<=', $to_date);
+                }
+                $output['count'] = $rows_obj->count();
+                $output['rows']  = $rows_obj->offset($offset)->limit($limit)->get();
+                break;
+            case 'balance_sheet_credit':
+                $sql = "select q.site_id, s.domain, sum(b.credit) as summa, count(q.id) as posts from quests as q join balance_sheet as b join sites as s on q.token = b.quest_token where s.id = q.site_id and q.user_id = b.user_id and q.user_id = ? group by q.site_id";
+
+                $output['rows'] = \DB::select($sql, array($this->user()->id));
+
+                break;
+            case '':
+                //
+                break;
+        }
+
+        //$output['sqls'] = DB::getQueryLog();
+
+        return \Response::json($output);
     }
 
 } 

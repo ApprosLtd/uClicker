@@ -17,18 +17,23 @@ class BalanceController extends \BaseController
 
         $this->layout->content = \View::make('dashboard.balance.index', array(
             'balance' => $this->user()->balance,
-            'balance_sheet' => $this->user()->balanceSheet()->where('debet', '>', 0)->get(),
+            'balance_sheet' => $this->user()->balanceSheet()->where('debit', '>', 0)->get(),
             'balance_sheet_credit' => $balance_sheet_credit
         ));
     }
 
-	public function getReplenishment()
+
+    /**
+     * Пополнение баланса из браузера
+     * @return mixed
+     */
+    public function getReplenishment()
 	{
 		$summ = \Input::get('summ');
 
 		$user_id = $this->user()->id;
 
-		\BalanceSheet::debet($user_id, $summ, 'Пополнение через терминал');
+		\BalanceSheet::debit($user_id, $summ, 'Пополнение через терминал');
 
 		return \Redirect::to('/balance');
 	}
