@@ -16,7 +16,7 @@ $(document).ready(function(){
                 fromDateStr = $('input[data-target="'+target+'-from"]').val();
                 toDateStr   = dateText;
             }
-            loadData(fromDateStr, toDateStr, target);
+            loadGridData(fromDateStr, toDateStr, target);
         }
     });
 
@@ -31,7 +31,7 @@ $(document).ready(function(){
         var fromDatepicker = $('[data-target="'+target+'-from"]');
         var toDatepicker   = $('[data-target="'+target+'-to"]');
 
-        loadData(fromDatepicker.val(), toDatepicker.val(), target, $(this).text());
+        loadGridData(fromDatepicker.val(), toDatepicker.val(), target, $(this).text());
 
         return false;
     });
@@ -77,11 +77,11 @@ $(document).ready(function(){
         fromDatepicker.datepicker('setDate', fromDateStr);
         toDatepicker.datepicker('setDate', toDateStr);
 
-        loadData(fromDatepicker.val(), toDatepicker.val(), target);
+        loadGridData(fromDatepicker.val(), toDatepicker.val(), target);
     });
 });
 
-function loadData(from, to, target, page){
+function loadGridData(from, to, target, page){
     var grid = $('table[data-target="'+target+'"]');
     var columns = grid.data('columns').split(',');
     var emptyRow = grid.find('tbody td.empty-row em');

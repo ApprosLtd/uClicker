@@ -25,7 +25,7 @@ echo \Widget\Grid::render(array(
 ));
 ?>
 <script>
-    loadData(0, 0, 'balance_sheet', 1);
+    loadGridData(0, 0, 'balance_sheet', 1);
 </script>
 
 <div style="height: 50px;"></div>
@@ -43,7 +43,7 @@ echo \Widget\Grid::render(array(
 ));
 ?>
 <script>
-    loadData(0, 0, 'balance_sheet_credit', 1);
+    loadGridData(0, 0, 'balance_sheet_credit', 1);
 </script>
 
 <div class="modal fade" id="modalAddSite" tabindex="-1" role="dialog" aria-hidden="true">
