@@ -49,16 +49,7 @@
                     <input type="hidden" id="site-id" value="0">
                     <div class="form-group">
                         <div class="col-sm-12">
-                            <div class="input-group">
-                                <div class="input-group-btn">
-                                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">HTTP:// <span class="caret"></span></button>
-                                    <ul class="dropdown-menu" role="menu">
-                                        <li><a href="#">HTTP://</a></li>
-                                        <li><a href="#">HTTPS://</a></li>
-                                    </ul>
-                                </div><!-- /btn-group -->
-                                <input type="text" class="form-control" placeholder="Домен" id="site-domain">
-                            </div><!-- /input-group -->
+                            <input type="text" class="form-control" placeholder="Домен" id="site-domain">
                         </div>
                     </div>
                     <div class="form-group">

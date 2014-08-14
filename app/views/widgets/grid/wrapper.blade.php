@@ -49,7 +49,8 @@
 
 </div>
 
-<table class="table table-bordered" data-target="{{ $target }}" data-columns="{{ implode(',', array_keys($columns)) }}">
+<? if (isset($columns)) { ?>
+<table class="table table-bordered" data-target="{{ $target }}" data-columns="{{ implode(',', array_keys($columns)) }}"<?= isset($column_renderer) ? ' data-columnrenderer="'.$column_renderer.'"' : '' ?>>
     <thead>
     <tr>
     <? foreach ($columns as $column) { ?>
@@ -68,6 +69,11 @@
         <tr><td class="empty-row text-center" colspan="<?= count($columns) ?>"><em>Нет данных для отображения</em></td></tr>
     <? } ?>
     </tbody>
+<? } else { ?>
+<table class="table table-bordered" data-target="{{ $target }}">
+    <tbody>
+    </tbody>
+<? } ?>
 </table>
 <div style="text-align: center; margin-top: -30px;" class="grid-pagination" data-target="{{ $target }}">
 </div>

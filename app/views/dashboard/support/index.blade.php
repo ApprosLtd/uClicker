@@ -1,1 +1,150 @@
-САЙТЫ
+<? if (!isset($is_empty) or $is_empty == false) { ?>
+    
+<div class="row" style="padding: 50px 0; text-align: center;">
+  <div class="col-md-12">
+      <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#modalAddTicket">Создать тикет</button>
+  </div>
+</div>
+    
+<? } else { ?>
+<script src="/packages/widget/grid.js"></script>
+
+<div class="row" style="padding: 20px 0; margin-top: -15px; border-radius: 5px 5px 0 0; border-bottom: 1px solid #E6E6E6;">
+  <div class="col-md-6">
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalAddTicket">Создать тикет</button>
+  </div>
+</div>
+
+<div style="height: 20px;"></div>
+
+<?
+echo \Widget\Grid::render(array(
+    'title'   => 'Список тикетов',
+    'target'  => 'tickets',
+    'column_renderer' => 'columnRenderer'
+));
+?>
+<script>
+function columnRenderer(data){
+    return '<h1>'+data.title+'</h1>';
+}
+loadGridData(0, 0, 'tickets', 1, columnRenderer);
+</script>
+<? } ?>
+
+<div class="modal fade" id="modalAddTicket" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Закрыть</span></button>
+                <h4 class="modal-title">Новый тикет</h4>
+            </div>
+            <div class="modal-body">
+
+                <form class="form-horizontal" role="form">
+                    <input type="hidden" id="site-id" value="0">
+                    <div class="form-group">
+                        <div class="col-sm-12">
+                            <input type="text" class="form-control" placeholder="Заголовок" id="ticket-title">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <div class="col-sm-12">
+                            <span style="padding-right: 5px;">Приоритет:</span>
+                            <input type="hidden" id="ticket-priority">
+                            <div class="btn-group" data-toggle="buttons">
+                                <label class="btn btn-default btn-sm" name="ticket-priority">
+                                    <input type="radio" value="10">Низкий
+                                </label>
+                                <label class="btn btn-info btn-sm" name="ticket-priority">
+                                    <input type="radio" value="20">Нормальный
+                                </label>
+                                <label class="btn btn-warning btn-sm" name="ticket-priority">
+                                    <input type="radio" value="30">Высокий
+                                </label>
+                                <label class="btn btn-danger btn-sm" name="ticket-priority">
+                                    <input type="radio" value="40">Критический
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <div class="col-sm-12">
+                            <span style="padding-right: 5px;">Категория:</span>
+                            <select id="ticket-category">
+                                <option>- - -</option> 
+                            @foreach (\TicketCategory::all() as $category)
+                                <option value="{{ $category->id }}">{{ $category->title }}</option>                            
+                            @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <div class="col-sm-12">
+                            <textarea class="form-control" rows="5" placeholder="Сообщение" id="ticket-content"></textarea>
+                        </div>
+                    </div>
+                    <p><em>Все поля обязательны для заполнения</em></p>
+                </form>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" onclick="ticketSave()" id="site-button-save">Сохранить</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal" onclick="formClear()">Отмена</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+$(document).ready(function(){
+    $('[name="ticket-priority"]').on('click', function(){
+        $('#ticket-priority').val( $(this).find('input').val() );
+    });
+});
+function ticketSave(){
+    var title    = $('#ticket-title').val(),
+        priority = $('#ticket-priority').val(),
+        category = $('#ticket-category').val(),
+        content  = $('#ticket-content').val();
+        
+    var error = false;
+        
+    if (title == '') {
+        //
+        error = true;
+    }    
+    if (priority <= 0) {
+        //
+        error = true;
+    }    
+    if (category <= 0) {
+        //
+        error = true;
+    }    
+    if (content == '') {
+        //
+        error = true;
+    }
+    
+    if (error) return;
+    
+    $.ajax({
+        url: '/support/add-ticket',
+        dataType: 'json',
+        type: 'post',
+        data: {
+            title:    title,
+            priority: priority,
+            category: category,
+            content:  content,
+        },
+        success: function(data) {
+            window.location = window.location;
+        }
+    });
+}
+</script>

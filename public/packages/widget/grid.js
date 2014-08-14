@@ -81,9 +81,10 @@ $(document).ready(function(){
     });
 });
 
-function loadGridData(from, to, target, page){
+function loadGridData(from, to, target, page, columnRenderer){
     var grid = $('table[data-target="'+target+'"]');
-    var columns = grid.data('columns').split(',');
+    var columns = grid.data('columns');
+    if (columns) columns = columns.split(',');
     var emptyRow = grid.find('tbody td.empty-row em');
     emptyRow.text('Загрузка данных...');
     if (!page) page = 1;
@@ -100,13 +101,24 @@ function loadGridData(from, to, target, page){
         success: function(data){
             if (data.rows && data.rows.length > 0) {
                 var trOutput = '';
-                for (var rid = 0; rid < data.rows.length; rid++) {
-                    trOutput += '<tr>';
-                    for (var cid = 0; cid < columns.length; cid++) {
-                        trOutput += '<td>'+data.rows[rid][columns[cid]]+'</td>';
+                if (columns) {
+                    for (var rid = 0; rid < data.rows.length; rid++) {
+                        trOutput += '<tr>';
+                        for (var cid = 0; cid < columns.length; cid++) {
+                            trOutput += '<td>'+data.rows[rid][columns[cid]]+'</td>';
+                        }
+                        trOutput += '</tr>';
                     }
-                    trOutput += '</tr>';
-                }
+                } else {
+                    
+                    if (!columnRenderer) columnRenderer = grid.data('columnrenderer');
+                    
+                    if (columnRenderer) {
+                        for (var rid = 0; rid < data.rows.length; rid++) {
+                            trOutput += '<tr><td>'+columnRenderer(data.rows[rid])+'</td></tr>';
+                        }
+                    }                    
+                }                
                 grid.find('tbody').html(trOutput);
 
                 var gridPagination = $('.grid-pagination[data-target="'+target+'"]');
