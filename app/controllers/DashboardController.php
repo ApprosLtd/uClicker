@@ -81,7 +81,7 @@ class DashboardController extends BaseController {
         $from_date = Input::get('from_date');
         $to_date   = Input::get('to_date');
         $target    = Input::get('target');
-        $page      = Input::get('page', 1);
+        $page      = intval(Input::get('page', 1));
 
         if ($from_date > 0) {
             $from_date = date('Y-m-d 00:00:00', strtotime($from_date));
@@ -120,7 +120,7 @@ class DashboardController extends BaseController {
                 $rows_obj_arr = $rows_obj->offset($offset)->limit($limit)->get()->toArray();
                 $output['rows']  = $rows_obj_arr;
 
-                $output['pagination_html'] = (string) Paginator::make($rows_obj_arr, $limit, $page)->links();
+                $output['pagination_html'] = (string) Paginator::make($rows_obj_arr, $total_items, $limit)->links();
 
                 break;
             case 'balance_sheet_credit':
