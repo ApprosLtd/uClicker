@@ -28,6 +28,7 @@
 
         </div>
 
+        <? if (isset($group_box) and $group_box == true) { ?>
         <span style="padding-left: 20px;">Группировать по:</span>
 
         <div class="btn-group btn-group-xs">
@@ -42,6 +43,7 @@
             </ul>
 
         </div>
+        <? } ?>
 
     </div>
 
@@ -67,12 +69,5 @@
     <? } ?>
     </tbody>
 </table>
-<div style="text-align: center; display: block;">
-    <ul class="pagination pagination-sm" style="margin-top: -10px;" data-target="{{ $target }}">
-        <li><a href="#">«</a></li>
-        <li><a href="#">1</a></li>
-        <li class="active"><a href="#">2</a></li>
-        <li><a href="#">3</a></li>
-        <li><a href="#">»</a></li>
-    </ul>
+<div style="text-align: center; margin-top: -30px;" class="grid-pagination" data-target="{{ $target }}">
 </div>

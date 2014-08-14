@@ -98,17 +98,39 @@ function loadGridData(from, to, target, page){
             page: page
         },
         success: function(data){
-            var trOutput = '';
             if (data.rows && data.rows.length > 0) {
-                trOutput = '';
-                for (var rid; rid < data.rows.length; rid++) {
+                var trOutput = '';
+                for (var rid = 0; rid < data.rows.length; rid++) {
                     trOutput += '<tr>';
-                    for (var cid; cid < columns.length; cid++) {
+                    for (var cid = 0; cid < columns.length; cid++) {
                         trOutput += '<td>'+data.rows[rid][columns[cid]]+'</td>';
                     }
                     trOutput += '</tr>';
                 }
                 grid.find('tbody').html(trOutput);
+
+                var gridPagination = $('.grid-pagination[data-target="'+target+'"]');
+                gridPagination.find('li').removeClass('active');
+                gridPagination.find('li[data-page="'+page+'"]').addClass('active');
+
+                gridPagination.html(data.pagination_html);
+                gridPagination.find('li a').on('click', function(){
+                    var parent = $(this).parents('.grid-pagination');
+                    if (parent.length < 1) return false;
+
+                    parent = $(parent[0]);
+
+                    var target = parent.data('target');
+                    var fromDatepicker = $('[data-target="'+target+'-from"]');
+                    var toDatepicker   = $('[data-target="'+target+'-to"]');
+
+                    var newPage = $(this).attr('href').split('=')[1];
+
+                    loadGridData(fromDatepicker.val(), toDatepicker.val(), target, newPage);
+
+                    return false;
+                });
+
             } else {
                 emptyRow.text('Нет данных для отображения');
             }

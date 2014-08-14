@@ -91,14 +91,15 @@ class DashboardController extends BaseController {
             $to_date = date('Y-m-d 23:59:59', strtotime($to_date));
         }
 
-        $limit  = 20;
+        $limit  = 3;
         $offset = ($page - 1) * $limit;
 
         $output = array(
-            'count'  => 0,
+            'total'  => 0,
             'page'   => $page,
             'limit'  => $limit,
             'offset' => $offset,
+            'pagination_html' => '',
             'rows'   => array()
         );
 
@@ -111,11 +112,19 @@ class DashboardController extends BaseController {
                 if ($to_date > 0) {
                     $rows_obj = $rows_obj->where('created_at', '<=', $to_date);
                 }
-                $output['count'] = $rows_obj->count();
-                $output['rows']  = $rows_obj->offset($offset)->limit($limit)->get();
+
+
+                $total_items = $rows_obj->count();
+                $output['total'] = $total_items;
+
+                $rows_obj_arr = $rows_obj->offset($offset)->limit($limit)->get()->toArray();
+                $output['rows']  = $rows_obj_arr;
+
+                $output['pagination_html'] = (string) Paginator::make($rows_obj_arr, $limit, $page)->links();
+
                 break;
             case 'balance_sheet_credit':
-                $sql = "select q.site_id, s.domain, sum(b.credit) as summa, count(q.id) as posts from quests as q join balance_sheet as b join sites as s on q.token = b.quest_token where s.id = q.site_id and q.user_id = b.user_id and q.user_id = ? group by q.site_id";
+                $sql = "SELECT q.site_id, s.domain, SUM(b.credit) AS summa, COUNT(q.id) AS posts FROM quests AS q JOIN balance_sheet AS b JOIN sites AS s ON q.token = b.quest_token WHERE s.id = q.site_id AND q.user_id = b.user_id AND q.user_id = ? GROUP BY q.site_id";
 
                 $output['rows'] = \DB::select($sql, array($this->user()->id));
 

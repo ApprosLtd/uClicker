@@ -34,6 +34,7 @@ echo \Widget\Grid::render(array(
 echo \Widget\Grid::render(array(
     'title'   => 'Расход средств',
     'target'  => 'balance_sheet_credit',
+    'group_box' => true,
     //'rows'    => $balance_sheet_credit,
     'columns' => array(
         'domain' => 'Сайт',
