@@ -28,12 +28,28 @@
             border-radius: 5px;
             box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.3);
         }
+        blockquote{
+            font-size: 13px;
+            padding-right: 300px;
+        }
+        blockquote.blockquote-reverse{
+            padding-left: 300px;
+        }
     </style>
 
 </head>
 <body role="document" class="yellow-bg">
 
 <?
+
+if (!isset($current_page)) $current_page = null;
+
+$ifActivePage = function ($alias) use ($current_page) {
+    if ($alias == $current_page) return true;
+    if (Request::is($alias)) return true;
+    return false;
+};
+
 $user = Auth::user();
 ?>
 
@@ -51,13 +67,13 @@ $user = Auth::user();
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li<?= Request::is('/')          ? ' class="active"' : '' ?>><a href="/">Главная</a></li>
-                <li<?= Request::is('sites')      ? ' class="active"' : '' ?>><a href="/sites">Сайты</a></li>
-                <li<?= Request::is('visitors')   ? ' class="active"' : '' ?>><a href="/visitors">Посетители</a></li>
-                <li<?= Request::is('balance')    ? ' class="active"' : '' ?>><a href="/balance">Баланс</a></li>
-                <li<?= Request::is('statistics') ? ' class="active"' : '' ?>><a href="/statistics">Статистика</a></li>
-                <li<?= Request::is('help')       ? ' class="active"' : '' ?>><a href="/help">Справочник</a></li>
-                <li<?= Request::is('support')    ? ' class="active"' : '' ?>><a href="/support">Тех. поддержка</a></li>
+                <li<?= $ifActivePage('/')          ? ' class="active"' : '' ?>><a href="/">Главная</a></li>
+                <li<?= $ifActivePage('sites')      ? ' class="active"' : '' ?>><a href="/sites">Сайты</a></li>
+                <li<?= $ifActivePage('visitors')   ? ' class="active"' : '' ?>><a href="/visitors">Посетители</a></li>
+                <li<?= $ifActivePage('balance')    ? ' class="active"' : '' ?>><a href="/balance">Баланс</a></li>
+                <li<?= $ifActivePage('statistics') ? ' class="active"' : '' ?>><a href="/statistics">Статистика</a></li>
+                <li<?= $ifActivePage('help')       ? ' class="active"' : '' ?>><a href="/help">Справочник</a></li>
+                <li<?= $ifActivePage('support')    ? ' class="active"' : '' ?>><a href="/support">Тех. поддержка</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">

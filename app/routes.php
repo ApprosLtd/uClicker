@@ -28,8 +28,10 @@ if (Auth::guest()) {
 
     Route::controller('balance', 'Dashboard\\BalanceController');
     
+    Route::get('help/{markdown?}', 'Dashboard\\HelpController@getMarkdown');
+
     Route::controller('support', 'Dashboard\\SupportController');
-    
+
     Route::controller('/', 'DashboardController');
 }
 

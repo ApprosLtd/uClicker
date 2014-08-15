@@ -11,4 +11,9 @@ class Ticket extends Eloquent
     {
         return $this->belongsTo('TicketPriority');
     }
+
+    public function messages()
+    {
+        return $this->hasMany('TicketMessage');
+    }
 }

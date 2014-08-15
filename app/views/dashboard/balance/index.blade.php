@@ -30,7 +30,7 @@ echo \Widget\Grid::render(array(
         to: 0,
         target: 'balance_sheet',
         page: 1,
-        container: $('table[data-target="balance_sheet"]')
+        container: 'table[data-target="balance_sheet"]'
     });
 </script>
 
@@ -55,7 +55,7 @@ echo \Widget\Grid::render(array(
         to: 0,
         target: 'balance_sheet_credit',
         page: 1,
-        container: $('table[data-target="balance_sheet_credit"]')
+        container: 'table[data-target="balance_sheet_credit"]'
     });
 </script>
 

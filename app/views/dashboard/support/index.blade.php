@@ -20,6 +20,7 @@
 <?
 echo \Widget\Grid::controls(array(
     'target'    => 'tickets',
+    'container' => "#tickets-list-container"
 ));
 ?>
     </div>
@@ -30,11 +31,11 @@ echo \Widget\Grid::controls(array(
 <script>
 function hookColumnRendererTickets(data){
 
-    var output  = '<div class="row" style="margin-bottom: 20px; border-bottom: 1px solid #DFDFDF; padding-bottom: 10px;">';
+    var output  = '<div class="row" style="margin-bottom: 20px; border-bottom: 1px solid #DFDFDF;">';
         output += '  <div class="col-md-12"><a href="#"><h4 style="margin: 0 0 10px">'+data.title+'</h4></a></div>';
-        output += '  <div class="col-md-2">'+data.created_at+'</div><div class="col-md-2"><span class="label label-success" style="background-color: '+data.priority_color+'">'+data.priority_title+'</span></div><div class="col-md-6"><strong>'+data.category_title+'</strong></div><div class="col-md-2">'+data.status+'</div>';
-        output += '  <div class="col-md-12" style="padding-top: 20px;"><p>'+data.content+'</p></div>';
-        output += '  <div class="col-md-12" style="padding-top: 10px;"><p>'+data.content+'</p></div>';
+        output += '  <div class="col-md-5"><strong>'+data.category_title+'</strong></div><div class="col-md-2">'+data.status+'</div><div class="col-md-2"><span class="label label-success" style="background-color: '+data.priority_color+'">'+data.priority_title+'</span></div>';
+        output += '  <div class="col-md-12" style="padding-top: 20px;"><blockquote><p>'+data.content+'</p><footer>'+data.created_at+'</footer></blockquote></div>';
+        output += '  <div class="col-md-12"><blockquote class="blockquote-reverse"><p>'+data.content+'</p><footer>'+data.created_at+'</footer></blockquote></div>';
         output += '</div>';
 
     return output;
@@ -44,7 +45,7 @@ loadGridData({
     to: 0,
     target: 'tickets',
     page: 1,
-    container: $('#tickets-list-container')
+    container: '#tickets-list-container'
 });
 </script>
 <? } ?>
@@ -71,18 +72,11 @@ loadGridData({
                             <span style="padding-right: 5px;">Приоритет:</span>
                             <input type="hidden" id="ticket-priority">
                             <div class="btn-group" data-toggle="buttons">
-                                <label class="btn btn-default btn-sm" name="ticket-priority">
-                                    <input type="radio" value="10">Низкий
+                            @foreach ( \TicketPriority::all() as $ticket_priority )
+                                <label class="btn btn-default btn-sm" name="ticket-priority" style="background-color: {{ $ticket_priority->color }}">
+                                    <input type="radio" value="{{ $ticket_priority->id }}">{{ $ticket_priority->title }}
                                 </label>
-                                <label class="btn btn-info btn-sm" name="ticket-priority">
-                                    <input type="radio" value="20">Нормальный
-                                </label>
-                                <label class="btn btn-warning btn-sm" name="ticket-priority">
-                                    <input type="radio" value="30">Высокий
-                                </label>
-                                <label class="btn btn-danger btn-sm" name="ticket-priority">
-                                    <input type="radio" value="40">Критический
-                                </label>
+                            @endforeach
                             </div>
                         </div>
                     </div>

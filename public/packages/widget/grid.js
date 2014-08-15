@@ -19,7 +19,8 @@ $(document).ready(function(){
             loadGridData({
                 from:   fromDateStr,
                 to:     toDateStr,
-                target: target
+                target: target,
+                container: ''
             });
         }
     });
@@ -39,7 +40,8 @@ $(document).ready(function(){
             from:   fromDatepicker.val(),
             to:     toDatepicker.val(),
             target: target,
-            page:   $(this).text()
+            page:   $(this).text(),
+            container: parent.data('container')
         });
 
         return false;
@@ -89,13 +91,14 @@ $(document).ready(function(){
         loadGridData({
             from: fromDatepicker.val(),
             to: toDatepicker.val(),
-            target: target
+            target: target,
+            container: $(this).data('container')
         });
     });
 });
 
 function loadGridData(params){
-    var container = params.container;
+    var container = $(params.container);
     var columns = container.data('columns');
       if (columns) columns = columns.split(',');
     var emptyRow = container.find('tbody td.empty-row em');
