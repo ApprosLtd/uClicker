@@ -28,6 +28,8 @@ if (Auth::guest()) {
 
     Route::controller('balance', 'Dashboard\\BalanceController');
     
+    Route::controller('support', 'Dashboard\\SupportController');
+    
     Route::controller('/', 'DashboardController');
 }
 

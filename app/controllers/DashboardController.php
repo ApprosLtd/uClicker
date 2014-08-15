@@ -123,12 +123,38 @@ class DashboardController extends BaseController {
                 $output['pagination_html'] = (string) Paginator::make($rows_obj_arr, $total_items, $limit)->links();
 
                 break;
+                
+                
             case 'balance_sheet_credit':
                 $sql = "SELECT q.site_id, s.domain, SUM(b.credit) AS summa, COUNT(q.id) AS posts FROM quests AS q JOIN balance_sheet AS b JOIN sites AS s ON q.token = b.quest_token WHERE s.id = q.site_id AND q.user_id = b.user_id AND q.user_id = ? GROUP BY q.site_id";
 
                 $output['rows'] = \DB::select($sql, array($this->user()->id));
 
                 break;
+                
+                
+            case 'tickets':
+                
+                $rows_obj = $this->user()->tickets()->where('priority', '>', 0);
+                if ($from_date > 0) {
+                    $rows_obj = $rows_obj->where('created_at', '>=', $from_date);
+                }
+                if ($to_date > 0) {
+                    $rows_obj = $rows_obj->where('created_at', '<=', $to_date);
+                }
+
+
+                $total_items = $rows_obj->count();
+                $output['total'] = $total_items;
+
+                $rows_obj_arr = $rows_obj->offset($offset)->limit($limit)->get()->toArray();
+                $output['rows']  = $rows_obj_arr;
+
+                $output['pagination_html'] = (string) Paginator::make($rows_obj_arr, $total_items, $limit)->links();
+                
+                break;
+                
+                
             case '':
                 //
                 break;
