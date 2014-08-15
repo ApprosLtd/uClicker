@@ -16,7 +16,11 @@ $(document).ready(function(){
                 fromDateStr = $('input[data-target="'+target+'-from"]').val();
                 toDateStr   = dateText;
             }
-            loadGridData(fromDateStr, toDateStr, target);
+            loadGridData({
+                from:   fromDateStr,
+                to:     toDateStr,
+                target: target
+            });
         }
     });
 
@@ -31,7 +35,12 @@ $(document).ready(function(){
         var fromDatepicker = $('[data-target="'+target+'-from"]');
         var toDatepicker   = $('[data-target="'+target+'-to"]');
 
-        loadGridData(fromDatepicker.val(), toDatepicker.val(), target, $(this).text());
+        loadGridData({
+            from:   fromDatepicker.val(),
+            to:     toDatepicker.val(),
+            target: target,
+            page:   $(this).text()
+        });
 
         return false;
     });
@@ -77,26 +86,30 @@ $(document).ready(function(){
         fromDatepicker.datepicker('setDate', fromDateStr);
         toDatepicker.datepicker('setDate', toDateStr);
 
-        loadGridData(fromDatepicker.val(), toDatepicker.val(), target);
+        loadGridData({
+            from: fromDatepicker.val(),
+            to: toDatepicker.val(),
+            target: target
+        });
     });
 });
 
-function loadGridData(from, to, target, page, columnRenderer){
-    var grid = $('table[data-target="'+target+'"]');
-    var columns = grid.data('columns');
-    if (columns) columns = columns.split(',');
-    var emptyRow = grid.find('tbody td.empty-row em');
-    emptyRow.text('Загрузка данных...');
-    if (!page) page = 1;
+function loadGridData(params){
+    var container = params.container;
+    var columns = container.data('columns');
+      if (columns) columns = columns.split(',');
+    var emptyRow = container.find('tbody td.empty-row em');
+      if (emptyRow.length > 0) emptyRow.text('Загрузка данных...');
+    if (!params.page) params.page = 1;
     $.ajax({
         url: '/data',
         dataType: 'json',
         type: 'post',
         data: {
-            from_date: from,
-            to_date: to,
-            target: target,
-            page: page
+            from_date: params.from,
+            to_date: params.to,
+            target: params.target,
+            page: params.page
         },
         success: function(data){
             if (data.rows && data.rows.length > 0) {
@@ -110,20 +123,23 @@ function loadGridData(from, to, target, page, columnRenderer){
                         trOutput += '</tr>';
                     }
                 } else {
-                    
-                    if (!columnRenderer) columnRenderer = grid.data('columnrenderer');
-                    
-                    if (columnRenderer) {
+                    var hookName = 'hookColumnRendererTickets';
+                    if (window[hookName]) {
                         for (var rid = 0; rid < data.rows.length; rid++) {
-                            trOutput += '<tr><td>'+columnRenderer(data.rows[rid])+'</td></tr>';
+                            trOutput += window[hookName](data.rows[rid]);
                         }
                     }                    
                 }                
-                grid.find('tbody').html(trOutput);
+                var containerTbody = container.find('tbody');
+                if (containerTbody.length > 0) {
+                    containerTbody.html(trOutput);
+                } else {
+                    container.html(trOutput);
+                }
 
-                var gridPagination = $('.grid-pagination[data-target="'+target+'"]');
+                var gridPagination = $('.grid-pagination[data-target="'+params.target+'"]');
                 gridPagination.find('li').removeClass('active');
-                gridPagination.find('li[data-page="'+page+'"]').addClass('active');
+                gridPagination.find('li[data-page="'+params.page+'"]').addClass('active');
 
                 gridPagination.html(data.pagination_html);
                 gridPagination.find('li a').on('click', function(){

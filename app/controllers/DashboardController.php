@@ -135,7 +135,7 @@ class DashboardController extends BaseController {
                 
             case 'tickets':
                 
-                $rows_obj = $this->user()->tickets()->where('priority', '>', 0);
+                $rows_obj = $this->user()->tickets()->where('priority_id', '>', 0);
                 if ($from_date > 0) {
                     $rows_obj = $rows_obj->where('created_at', '>=', $from_date);
                 }
@@ -147,10 +147,23 @@ class DashboardController extends BaseController {
                 $total_items = $rows_obj->count();
                 $output['total'] = $total_items;
 
-                $rows_obj_arr = $rows_obj->offset($offset)->limit($limit)->get()->toArray();
-                $output['rows']  = $rows_obj_arr;
+                $rows_obj_arr = $rows_obj->offset($offset)->limit($limit)->get();
+                $rows = array();
+                foreach ($rows_obj_arr as $row_obj) {
+                    $rows[] = array(
+                        'id'         => $row_obj->id,
+                        'title'      => $row_obj->title,
+                        'created_at' => $row_obj->created_at,
+                        'category'   => $row_obj->category->title,
+                        'content'    => $row_obj->content,
+                        'priority_title' => $row_obj->priority->title,
+                        'priority_color' => $row_obj->priority->color,
+                        'status'     => 'В работе',
+                    );
+                }
+                $output['rows']  = $rows;
 
-                $output['pagination_html'] = (string) Paginator::make($rows_obj_arr, $total_items, $limit)->links();
+                $output['pagination_html'] = (string) Paginator::make($rows_obj_arr->toArray(), $total_items, $limit)->links();
                 
                 break;
                 

@@ -18,17 +18,32 @@
 <div style="height: 20px;"></div>
 
 <?
-echo \Widget\Grid::render(array(
-    'title'   => 'Список тикетов',
-    'target'  => 'tickets',
-    'column_renderer' => 'columnRenderer'
+echo \Widget\Grid::controls(array(
+    'target'    => 'tickets',
 ));
 ?>
+
+<div id="tickets-list-container"></div>
+
 <script>
-function columnRenderer(data){
-    return '<h1>'+data.title+'</h1>';
+function hookColumnRendererTickets(data){
+
+    var output  = '<div class="row" style="margin-bottom: 10px;">';
+        output += '  <div class="col-md-12"><h4>'+data.title+'</h4></div>';
+        output += '  <div class="col-md-3">'+data.created_at+'</div><div class="col-md-3"><span class="label label-success" style="background-color: '+data.priority_color+'">'+data.priority_title+'</span></div><div class="col-md-3">'+data.category+'</div><div class="col-md-3">'+data.status+'</div>';
+        output += '  <div class="col-md-12">'+data.content+'</div>';
+        output += '  <div class="col-md-12">'+data.content+'</div>';
+        output += '</div>';
+
+    return output;
 }
-loadGridData(0, 0, 'tickets', 1, columnRenderer);
+loadGridData({
+    from: 0,
+    to: 0,
+    target: 'tickets',
+    page: 1,
+    container: $('#tickets-list-container')
+});
 </script>
 <? } ?>
 

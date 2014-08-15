@@ -25,7 +25,13 @@ echo \Widget\Grid::render(array(
 ));
 ?>
 <script>
-    loadGridData(0, 0, 'balance_sheet', 1);
+    loadGridData({
+        from: 0,
+        to: 0,
+        target: 'balance_sheet',
+        page: 1,
+        container: $('table[data-target="balance_sheet"]')
+    });
 </script>
 
 <div style="height: 50px;"></div>
@@ -44,7 +50,13 @@ echo \Widget\Grid::render(array(
 ));
 ?>
 <script>
-    loadGridData(0, 0, 'balance_sheet_credit', 1);
+    loadGridData({
+        from: 0,
+        to: 0,
+        target: 'balance_sheet_credit',
+        page: 1,
+        container: $('table[data-target="balance_sheet_credit"]')
+    });
 </script>
 
 <div class="modal fade" id="modalAddSite" tabindex="-1" role="dialog" aria-hidden="true">
