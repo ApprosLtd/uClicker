@@ -91,7 +91,7 @@ class DashboardController extends BaseController {
             $to_date = date('Y-m-d 23:59:59', strtotime($to_date));
         }
 
-        $limit  = 3;
+        $limit  = 20;
         $offset = ($page - 1) * $limit;
 
         $output = array(
