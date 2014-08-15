@@ -39,7 +39,7 @@
             </div>
             <div class="modal-body">
 
-                <a href="http://vk.com/id<?= $visitor->uid ?>" target="_blank">Посетитель</a>
+                <a href="http://vk.com/id" target="_blank">Посетитель</a>
 
             </div>
         </div>
