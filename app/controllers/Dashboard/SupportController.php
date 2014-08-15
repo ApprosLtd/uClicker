@@ -28,7 +28,7 @@ class SupportController extends \BaseController
         $ticket_obj = new \Ticket();
         
         $ticket_obj->title       = $title;
-        $ticket_obj->priority    = $priority;
+        $ticket_obj->priority_id = $priority;
         $ticket_obj->category_id = $category;
         $ticket_obj->content     = $content;
         

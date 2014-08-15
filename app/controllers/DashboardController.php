@@ -147,19 +147,35 @@ class DashboardController extends BaseController {
                 $total_items = $rows_obj->count();
                 $output['total'] = $total_items;
 
-                $rows_obj_arr = $rows_obj->offset($offset)->limit($limit)->get();
+                $rows_obj_arr = $rows_obj->offset($offset)->limit($limit)->orderBy('created_at', 'DESC')->get();
                 $rows = array();
                 foreach ($rows_obj_arr as $row_obj) {
-                    $rows[] = array(
-                        'id'         => $row_obj->id,
-                        'title'      => $row_obj->title,
-                        'created_at' => $row_obj->created_at,
-                        'category'   => $row_obj->category->title,
-                        'content'    => $row_obj->content,
-                        'priority_title' => $row_obj->priority->title,
-                        'priority_color' => $row_obj->priority->color,
-                        'status'     => 'В работе',
+
+                    $created_at = date('d.m.Y в H:i', strtotime($row_obj->created_at));
+
+                    $current_mix = array(
+                        'id'             => $row_obj->id,
+                        'title'          => $row_obj->title,
+                        'created_at'     => $created_at,
+                        'category_title' => '',
+                        'content'        => $row_obj->content,
+                        'priority_title' => '',
+                        'priority_color' => '',
+                        'status'         => 'В работе',
                     );
+
+                    $category = $row_obj->category;
+                    if ($category) {
+                        $current_mix['category_title'] = $category->title;
+                    }
+
+                    $priority = $row_obj->priority;
+                    if ($priority) {
+                        $current_mix['priority_title'] = $priority->title;
+                        $current_mix['priority_color'] = $priority->color;
+                    }
+
+                    $rows[] = $current_mix;
                 }
                 $output['rows']  = $rows;
 

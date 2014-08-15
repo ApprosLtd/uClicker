@@ -15,24 +15,26 @@
   </div>
 </div>
 
-<div style="height: 20px;"></div>
-
+<div class="row" style="border-bottom: 1px solid #DFDFDF; margin-bottom: 20px; padding: 20px 0; background: #F5F5F5">
+    <div class="col-md-12">
 <?
 echo \Widget\Grid::controls(array(
     'target'    => 'tickets',
 ));
 ?>
+    </div>
+</div>
 
 <div id="tickets-list-container"></div>
 
 <script>
 function hookColumnRendererTickets(data){
 
-    var output  = '<div class="row" style="margin-bottom: 10px;">';
-        output += '  <div class="col-md-12"><h4>'+data.title+'</h4></div>';
-        output += '  <div class="col-md-3">'+data.created_at+'</div><div class="col-md-3"><span class="label label-success" style="background-color: '+data.priority_color+'">'+data.priority_title+'</span></div><div class="col-md-3">'+data.category+'</div><div class="col-md-3">'+data.status+'</div>';
-        output += '  <div class="col-md-12">'+data.content+'</div>';
-        output += '  <div class="col-md-12">'+data.content+'</div>';
+    var output  = '<div class="row" style="margin-bottom: 20px; border-bottom: 1px solid #DFDFDF; padding-bottom: 10px;">';
+        output += '  <div class="col-md-12"><a href="#"><h4 style="margin: 0 0 10px">'+data.title+'</h4></a></div>';
+        output += '  <div class="col-md-2">'+data.created_at+'</div><div class="col-md-2"><span class="label label-success" style="background-color: '+data.priority_color+'">'+data.priority_title+'</span></div><div class="col-md-6"><strong>'+data.category_title+'</strong></div><div class="col-md-2">'+data.status+'</div>';
+        output += '  <div class="col-md-12" style="padding-top: 20px;"><p>'+data.content+'</p></div>';
+        output += '  <div class="col-md-12" style="padding-top: 10px;"><p>'+data.content+'</p></div>';
         output += '</div>';
 
     return output;
