@@ -17,10 +17,15 @@ Route::controller('auth', 'AuthController');
 
 
 
-
 if (Auth::guest()) {
     
     Route::controller('/', 'HomeController');
+    
+} elseif (Auth::user()->isAdmin()) {
+    
+    Route::resource('/admin/rest/tickets', 'Admin\\Rest\\TicketsController');
+    
+    Route::controller('/', 'Admin\\IndexController');
     
 } else {
     

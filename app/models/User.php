@@ -6,6 +6,8 @@ use Illuminate\Auth\Reminders\RemindableTrait;
 use Illuminate\Auth\Reminders\RemindableInterface;
 
 class User extends Eloquent implements UserInterface, RemindableInterface {
+    
+    const ADMIN_ROLE_NAME = 'admin';
 
 	use UserTrait, RemindableTrait;
 
@@ -82,7 +84,10 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
         $this->roles()->attach($assigned_roles);
     }
     
-    
+    public function isAdmin()
+    {
+        return $this->hasRole(self::ADMIN_ROLE_NAME);
+    }
 
     public function sites()
     {
