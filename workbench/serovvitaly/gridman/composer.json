@@ -1,0 +1,23 @@
+{
+    "name": "serovvitaly/gridman",
+    "description": "",
+    "authors": [
+        {
+            "name": "Vitaly Serov",
+            "email": "serovvitaly@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0",
+        "illuminate/support": "4.2.*"
+    },
+    "autoload": {
+        "classmap": [
+            "src/migrations"
+        ],
+        "psr-0": {
+            "Serovvitaly\\Gridman\\": "src/"
+        }
+    },
+    "minimum-stability": "stable"
+}
