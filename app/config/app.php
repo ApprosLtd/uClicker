@@ -122,6 +122,7 @@ return array(
 		'Illuminate\View\ViewServiceProvider',
 		'Illuminate\Workbench\WorkbenchServiceProvider',
         'VTalbot\Markdown\MarkdownServiceProvider',
+        'Serovvitaly\Gridman\GridmanServiceProvider',
 
 	),
 

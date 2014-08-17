@@ -1,6 +1,7 @@
 <?php
 
-class TicketCategory extends Eloquent
+class TicketCategory extends CrudModel
 {
     public $table = 'tickets_categories';
+    
 }

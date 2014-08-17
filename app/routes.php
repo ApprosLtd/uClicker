@@ -25,6 +25,8 @@ if (Auth::guest()) {
     
     Route::resource('/admin/rest/tickets', 'Admin\\Rest\\TicketsController');
     
+    Route::controller('collections', 'Admin\\CollectionsController');
+    
     Route::controller('/', 'Admin\\IndexController');
     
 } else {

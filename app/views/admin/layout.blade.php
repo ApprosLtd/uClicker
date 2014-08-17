@@ -15,7 +15,7 @@
     <!-- Latest compiled and minified JavaScript -->
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 
-    <title>Админка / {{$title}}</title>
+    <title>Админка / {{$title or ''}}</title>
 
     <style>
         html, .yellow-bg{
@@ -102,7 +102,7 @@ $user = Auth::user();
 </div>
 
 <div class="container theme-showcase base-container" role="main">
-    {{ $content }}
+    {{ $content or '' }}
 </div>
 
 <div style="width: 400px; margin: 10px auto; font-size:12px; text-align: center; color: #726D5F">
