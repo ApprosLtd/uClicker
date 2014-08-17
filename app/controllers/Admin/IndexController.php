@@ -28,6 +28,13 @@ class IndexController extends BaseController
         $this->layout->content = '';
     }
     
+    public function getCollections()
+    {
+        $this->layout->title = 'Справочники';
+        
+        $this->layout->content = \View::make('admin.collections.index');
+    }
+    
     public function getBalance()
     {
         $this->layout->title = 'Движение средств';

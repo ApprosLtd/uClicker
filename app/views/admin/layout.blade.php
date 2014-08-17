@@ -73,6 +73,7 @@ $user = Auth::user();
                         <li><a href="/merchants"><span class="glyphicon glyphicon-heart"></span> Партнеры</a></li>
                         <li><a href="/sites"><span class="glyphicon glyphicon-link"></span> Сайты</a></li>
                         <li><a href="/visitors"><span class="glyphicon glyphicon-user"></span> Посетители</a></li>
+                        <li><a href="/collections"><span class="glyphicon glyphicon-th-list"></span> Справочники</a></li>
                     </ul>
                 </li>
                 <li<?= $ifActivePage('balance')    ? ' class="active"' : '' ?>><a href="/balance">Движение средств</a></li>
