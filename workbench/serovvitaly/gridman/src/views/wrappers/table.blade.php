@@ -3,7 +3,7 @@
 <script type="text/javascript" src="/packages/gridman/jquery.gridman.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
-    $('.gridman-grid').gridman();
+    //$('.gridman-grid').gridman();
 });
 </script>
 @endif

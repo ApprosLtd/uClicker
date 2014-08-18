@@ -1,16 +1,23 @@
 (function( $ ){
 
-    function Gridman(element){
+    function Gridman(element, config){
 
         this.el = $(element);
+
+        this.cfg = $.extend({
+            autoLoad: true,
+            columns: []
+        }, config);
 
         this.body = this.el.find('tbody');
 
         this.data = [];
 
-        this.columns = this.el.data('columns').split(',');
+        //this.columns = this.el.data('columns').split(',');
 
         this.source_name = this.el.data('source');
+
+        this.prepareGrid();
 
         this.bodyUpdate();
 
@@ -20,14 +27,54 @@
             self.bodyUpdate();
         });
     }
+    Gridman.prototype.read = function(){
+        //
+    }
+    Gridman.prototype.write = function(){
+        //
+    }
+    Gridman.prototype.destroy = function(){
+        //
+    }
     Gridman.prototype.load = function(data, success){
-        $.ajax({
-            url: '/gridman',
-            type: 'post',
-            dataType: 'json',
+        this.ajax({
             data: data,
             success: success
         });
+    }
+    Gridman.prototype.ajax = function(data){
+        $.ajax($.extend({
+            url: this.cfg.controller,
+            type: 'get',
+            dataType: 'json'
+        }, data));
+    }
+    Gridman.prototype.prepareColumn = function(params){
+
+        return '<th>'+params.title+'</th>';
+    }
+    Gridman.prototype.prepareGrid = function(){
+        var columnsContent = '',
+            footerContent  = '';
+
+        if (this.cfg.columns.length > 0) {
+            for (var colIndex = 0; colIndex < this.cfg.columns.length; colIndex++) {
+                columnsContent += this.prepareColumn(this.cfg.columns[colIndex]);
+            }
+        }
+
+        this.el.append('<thead></thead>');
+        this.head = this.el.find('thead');
+        this.head.html('<tr>'+columnsContent+'</tr>');
+
+        this.el.append('<tbody></tbody>');
+        this.body = this.el.find('tbody');
+        //this.body.html('<tr><td></td></tr>');
+
+        this.el.append('<tfoot></tfoot>');
+        this.foot = this.el.find('tfoot');
+        this.foot.html('<tr><td>'+footerContent+'</td></tr>');
+
     }
     Gridman.prototype.showBodyPreloader = function(){
         this.setBodyInfo('<p class="gridman-ajax-loader">Загрузка данных</p>');
@@ -69,11 +116,8 @@
     }
 
     $.fn.gridman = function(config) {
-        this.cfg = $.extend({
-            auto_load: true
-        }, config);
         this.each(function() {
-            new Gridman(this);
+            new Gridman(this, config);
         });
     };
 })(jQuery);

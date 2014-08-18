@@ -23,8 +23,9 @@ if (Auth::guest()) {
     
 } elseif (Auth::user()->isAdmin()) {
     
-    Route::resource('/admin/rest/tickets', 'Admin\\Rest\\TicketsController');
-    
+    Route::resource('admin/rest/tickets', 'Admin\\Rest\\TicketsController');
+
+    Route::resource('admin/rest/collections', 'Admin\\Rest\\CollectionsController');
     Route::controller('collections', 'Admin\\CollectionsController');
     
     Route::controller('/', 'Admin\\IndexController');
