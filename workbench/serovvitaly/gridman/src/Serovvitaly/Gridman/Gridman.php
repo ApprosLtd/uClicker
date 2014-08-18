@@ -11,7 +11,9 @@ class Gridman
     protected $id    = null;
     
     protected $model = null;
-    
+
+    protected $source_name = null;
+
     protected $is_ajax = true;
     
     protected $columns = [];
@@ -23,6 +25,8 @@ class Gridman
         }
         
         $this->id = $params['id'];
+
+        $this->source_name = $params['source_name'];
     }
     
     public static function make(array $params)
@@ -44,7 +48,9 @@ class Gridman
         $data['id'] = $this->id;
         
         $data['attach_jquery_plugin'] = static::$first;
-        
+
+        $data['source_name'] = $this->source_name;
+
         try{
             $view = \View::make($this->wrapper_view_path, $data)->render();
             
@@ -53,7 +59,7 @@ class Gridman
             return $view;
         }
         catch (\Exception $e) {
-            return 'Gridman wrapper view not found';
+            return $e->getMessage();
         }
     }
     
@@ -65,6 +71,13 @@ class Gridman
     protected function prepareColumns()
     {
         return $this->columns;
+    }
+
+
+    public static function getModelNameBySourceName($source_name)
+    {
+        // TODO: перенести конфиг в /app/config
+        return \Config::get('gridman::sources.' . $source_name . '.model_name');
     }
     
     

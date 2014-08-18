@@ -65,23 +65,46 @@ class CollectionsController extends \Admin\BaseController
         
         $data['source']      = $this->getSourceTableName($source_name);
         $data['source_name'] = $source_name;
-        
-        
-        $data['grid'] = new \Gridman([
-            'id'         => 'grid-collection',
-            'is_ajax'    => true,
-            'model_name' => $this->getSourceModelName($source_name),
-            'columns'    => [
+
+
+        $grid1 = new \Gridman([
+            'id' => 'grid-collection',
+            'is_ajax' => true,
+            'source_name' => $source_name,
+            'columns' => [
                 [
-                    'key' => 'id',
+                    'key'   => 'id',
                     'title' => '#'
                 ],
                 [
-                    'key' => 'title',
+                    'key'   => 'title',
                     'title' => 'Наименование'
                 ]
             ],
         ]);
+
+        $grid2 = new \Gridman([
+            'id' => 'grid-collection',
+            'is_ajax' => true,
+            'source_name' => 'priorities',
+            'columns' => [
+                [
+                    'key'   => 'id',
+                    'title' => '#'
+                ],
+                [
+                    'key'   => 'title',
+                    'title' => 'Наименование'
+                ],
+                [
+                    'key'    => 'color',
+                    'title'  => 'Цвет',
+                    'widget' => 'color_view'
+                ]
+            ],
+        ]);
+
+        $data['grid'] = $grid1 . $grid2;
         
         $this->layout->content = \View::make('admin.collections.source', $data);
     }

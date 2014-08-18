@@ -1,4 +1,6 @@
-<?php namespace Serovvitaly\Gridman;
+<?php
+
+namespace Serovvitaly\Gridman;
 
 use Illuminate\Support\ServiceProvider;
 
@@ -19,6 +21,8 @@ class GridmanServiceProvider extends ServiceProvider {
 	public function boot()
 	{
 		$this->package('serovvitaly/gridman');
+
+        include __DIR__.'/../../routes.php';
 	}
 
 	/**

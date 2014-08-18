@@ -4,13 +4,15 @@ namespace Serovvitaly\Gridman;
 
 class GridmanColumn
 {
-    public $title = '';
-    
-    public $key = '';
-    
+    public $key    = '';
+    public $title  = '';
+    public $widget = null;
+
     public function __construct(array $params)
     {
-        $this->title = $params['title'];
-        $this->key   = $params['key'];
+        $this->key    = $params['key'];
+        $this->title  = $params['title'];
+        $this->widget = isset($params['widget']) ? $params['widget'] : null;
+
     }
 }
