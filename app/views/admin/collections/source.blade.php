@@ -11,6 +11,9 @@
 <table class="table" id="collection-data-table">
     <!-- grid -->
 </table>
+<table class="table" id="collection-data-table-2">
+    <!-- grid -->
+</table>
 
 <script>
 $('#collection-data-table').gridman({
@@ -26,8 +29,19 @@ $('#collection-data-table').gridman({
         title: 'Цвет',
         key: 'color',
         renderer: function(value, record){
-            return '<div style="height: 20px; width: 20px; color: '+value+'"></div>';
+            return '<div style="height: 20px; width: 20px; background-color: '+value+'"></div>';
         }
+    }]
+});
+$('#collection-data-table-2').gridman({
+    controller: '/admin/rest/collections',
+    model: 'categories',
+    columns: [{
+        title: 'ИД',
+        key: 'id'
+    },{
+        title: 'Наименование',
+        key: 'title'
     }]
 });
 </script>

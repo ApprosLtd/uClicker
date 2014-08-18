@@ -9,7 +9,32 @@ class CollectionsController extends \BaseController {
 	 */
 	public function index()
 	{
-		return [1,2];
+        $model  = \Input::get('model');
+        $limit  = \Input::get('limit');
+		$offset = \Input::get('offset');
+        
+        $models_collection = [
+            'categories' => 'TicketCategory',
+            'priorities' => 'TicketPriority',
+            'statuses'   => 'TicketStatus',
+        ];
+        
+        if (!array_key_exists($model, $models_collection)) {
+            return ['error' => ''];
+        }
+        
+        $model_name = '\\' . $models_collection[$model];
+        
+        $rows = $model_name::get();
+        
+        $output = [
+            'data'   => $rows->toArray(),
+            'total'  => $rows->count(),
+            'limit'  => $limit,
+            'offset' => $offset,
+        ];
+        
+        return $output;
 	}
 
 
