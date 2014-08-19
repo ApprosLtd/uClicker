@@ -2,6 +2,21 @@
 
 class CollectionsController extends \BaseController {
 
+    protected $models_collection = [
+        'categories' => 'TicketCategory',
+        'priorities' => 'TicketPriority',
+        'statuses'   => 'TicketStatus',
+    ];
+
+    protected function getModelNameByAlias($model_alias)
+    {
+        if (!array_key_exists($model_alias, $this->models_collection)) {
+            return null;
+        }
+
+        return '\\' . $this->models_collection[$model_alias];
+    }
+
 	/**
 	 * Display a listing of the resource.
 	 *
@@ -9,29 +24,26 @@ class CollectionsController extends \BaseController {
 	 */
 	public function index()
 	{
-        $model  = \Input::get('model');
-        $limit  = \Input::get('limit');
-		$offset = \Input::get('offset');
-        
-        $models_collection = [
-            'categories' => 'TicketCategory',
-            'priorities' => 'TicketPriority',
-            'statuses'   => 'TicketStatus',
-        ];
-        
-        if (!array_key_exists($model, $models_collection)) {
-            return ['error' => ''];
+        $model_alias = \Input::get('model');
+        $limit  = \Input::get('limit', 20);
+		$offset = \Input::get('offset', 0);
+
+        $model_alias = 'categories';
+
+        $model_name = $this->getModelNameByAlias($model_alias);
+
+        if (!$model_name) {
+            return ['error' => 'Model not found by alias'];
         }
         
-        $model_name = '\\' . $models_collection[$model];
-        
-        $rows = $model_name::get();
+        $rows = $model_name::take($limit)->skip($offset)->get();
         
         $output = [
             'data'   => $rows->toArray(),
-            'total'  => $rows->count(),
+            'total_count'  => $rows->count(),
             'limit'  => $limit,
             'offset' => $offset,
+            'success' => true
         ];
         
         return $output;
@@ -56,7 +68,20 @@ class CollectionsController extends \BaseController {
 	 */
 	public function store()
 	{
-        return [2,3];
+        $model_alias = \Input::get('model');
+        $fields = \Input::get('fields');
+
+        $model_name = $this->getModelNameByAlias($model_alias);
+
+        if (!$model_name) {
+            return ['error' => 'Model not found by alias'];
+        }
+
+        $model_obj = new $model_name($fields);
+        $model_obj->save();
+
+        return $model_obj->toArray();
+
 	}
 
 

@@ -14,25 +14,8 @@ class IndexController extends BaseController
     {
         $this->layout->title = 'Партнеры';
 
-        $grid = new \Gridman([
-            'id' => 'grid-collection',
-            'is_ajax' => true,
-            'source_name' => 'merchants',
-            'columns' => [
-                [
-                    'key'   => 'id',
-                    'title' => '#'
-                ],
-                [
-                    'key'   => 'email',
-                    'title' => 'Email'
-                ]
-            ],
-        ]);
-
-        $this->layout->content = \View::make('admin.gridman.index', array(
-            'title' => $this->layout->title,
-            'grid'  => $grid
+        $this->layout->content = \View::make('admin.merchants.index', array(
+            'title' => $this->layout->title
         ));
     }
     
@@ -40,33 +23,8 @@ class IndexController extends BaseController
     {
         $this->layout->title = 'Сайты';
 
-        $grid = new \Gridman([
-            'id' => 'grid-collection',
-            'is_ajax' => true,
-            'source_name' => 'sites',
-            'columns' => [
-                [
-                    'key'   => 'id',
-                    'title' => '#'
-                ],
-                [
-                    'key'   => 'domain',
-                    'title' => 'Домен'
-                ],
-                [
-                    'key'   => 'owner',
-                    'title' => 'Владалец'
-                ],
-                [
-                    'key'   => 'created_at',
-                    'title' => 'Добавлен'
-                ]
-            ],
-        ]);
-
-        $this->layout->content = \View::make('admin.gridman.index', array(
-            'title' => $this->layout->title,
-            'grid'  => $grid
+        $this->layout->content = \View::make('admin.sites.index', array(
+            'title' => $this->layout->title
         ));
     }
     
@@ -74,49 +32,8 @@ class IndexController extends BaseController
     {
         $this->layout->title = 'Посетители';
 
-        $grid = new \Gridman([
-            'id' => 'grid-collection',
-            'is_ajax' => true,
-            'source_name' => 'visitors',
-            'columns' => [
-                [
-                    'key'   => 'id',
-                    'title' => '#'
-                ],
-                [
-                    'key'   => 'first_name',
-                    'title' => 'Имя'
-                ],
-                [
-                    'key'   => 'last_name',
-                    'title' => 'Фамилия'
-                ],
-                [
-                    'key'   => 'vendor',
-                    'title' => 'Соц. сеть'
-                ],
-                [
-                    'key'   => 'uid',
-                    'title' => 'Соц. ИД'
-                ],
-                [
-                    'key'   => 'sex',
-                    'title' => 'Пол'
-                ],
-                [
-                    'key'   => 'created_at',
-                    'title' => 'Добавлен'
-                ],
-                [
-                    'key'   => 'blocked',
-                    'title' => 'Статус'
-                ]
-            ],
-        ]);
-
-        $this->layout->content = \View::make('admin.gridman.index', array(
-            'title' => $this->layout->title,
-            'grid'  => $grid
+        $this->layout->content = \View::make('admin.visitors.index', array(
+            'title' => $this->layout->title
         ));
     }
     

@@ -1,5 +1,4 @@
 (function( $ ){
-
     function Gridman(element, config){
 
         this.el = $(element);
@@ -9,27 +8,34 @@
             columns: []
         }, config);
 
-        this.body = this.el.find('tbody');
-        
-        this.columns = this.cfg.columns;
+        this.data = {
+            limit: 5,
+            offset: 0,
+            model: this.cfg.model
+        };
 
-        this.data = [];
+        this.body    = this.el.find('tbody');
+        this.columns = this.cfg.columns;
+        this.actions = [];
 
         this.prepareGrid();
-
         this.bodyUpdate();
-
-        var self = this;
-
-        this.el.find('.act-body-update').on('click', function(){
-            self.bodyUpdate();
-        });
+    }
+    Gridman.prototype.getData = function(){
+        return this.data;
     }
     Gridman.prototype.read = function(){
         //
     }
-    Gridman.prototype.write = function(){
-        //
+    Gridman.prototype.write = function(rec, success){
+        this.ajax({
+            type: 'post',
+            data: {
+                model: this.cfg.model,
+                fields: rec
+            },
+            success: success
+        });
     }
     Gridman.prototype.destroy = function(){
         //
@@ -42,6 +48,13 @@
     }
     Gridman.prototype.clearBoby = function(){
         this.body.html('');
+    }
+    Gridman.prototype.saveRecord = function(record, success){
+        var self = this;
+        this.write(record, function(response){
+            self.bodyUpdate();
+            if (success) success();
+        });
     }
     Gridman.prototype.addRecord = function(record){
         var rowsContent = '<tr>';
@@ -59,6 +72,10 @@
                 value = record[column.key];
             }
             rowsContent += '<td>'+value+'</td>';
+        }
+        var actionsButtons = this.getActionsButtons(record.id);
+        if (actionsButtons) {
+            rowsContent += '<td>'+actionsButtons+'</td>';
         }
         rowsContent += '</tr>';
         this.body.append(rowsContent);
@@ -92,14 +109,16 @@
         this.el.append('<thead></thead>');
         this.head = this.el.find('thead');
         this.head.html('<tr>'+columnsContent+'</tr>');
+        this.prepareActions();
 
         this.el.append('<tbody></tbody>');
         this.body = this.el.find('tbody');
-        //this.body.html('<tr><td></td></tr>');
 
         this.el.append('<tfoot></tfoot>');
         this.foot = this.el.find('tfoot');
         this.foot.html('<tr><td colspan="'+this.getColspan()+'">'+footerContent+'</td></tr>');
+        this.prepareFooterButtons();
+        this.attachFooterEvents();
 
     }
     Gridman.prototype.showBodyPreloader = function(){
@@ -116,13 +135,8 @@
     }
     Gridman.prototype.bodyUpdate = function(){
         var self = this;
-        self.data = {
-            limit: 20,
-            offset: 0,
-            model: this.cfg.model
-        };
         self.showBodyPreloader();
-        this.load(self.data, function(response){
+        this.load(self.getData(), function(response){
             if (response.data && response.data.length > 0) {
                 self.clearBoby();
                 self.addRecords(response.data);
@@ -131,37 +145,107 @@
             }
             if (response.total) {
                 self.el.find('.statusbar-total').html(response.total);
+                var data = self.getData();
+                var from = data.offset + 1;
+                var to   = data.offset + data.limit;
+                if (to > response.total) to = response.total;
+                self.el.find('.statusbar-from').html(from);
+                self.el.find('.statusbar-to').html(to);
             }
         });
     }
     Gridman.prototype.getFooterContent = function(){
+
         var content =  '<div class="row">'
                      + '  <div class="col-md-5">'
-                     + '    <button type="button" class="btn btn-sm btn-primary">Добавить</button>'
-                     + '    <button type="button" class="btn btn-sm btn-default act-body-update" title="Обновить"><span class="glyphicon glyphicon-retweet"></span></button>'
+                     + '    <button type="button" name="button-adding" class="btn btn-sm btn-primary">Добавить</button>'
+                     + '    <button type="button" name="button-reload" class="btn btn-sm btn-default act-body-update" title="Обновить"><span class="glyphicon glyphicon-refresh"></span></button>'
                      + '  </div>'
                      + '  <div class="col-md-2">'
                      + '    <div class="input-group input-group-sm">'
                      + '        <div class="input-group-btn">'
-                     + '            <button type="button" class="btn btn-default" disabled="disabled"><span class="glyphicon glyphicon-fast-backward"></span></button>'
-                     + '            <button type="button" class="btn btn-default" disabled="disabled"><span class="glyphicon glyphicon-chevron-left"></span></button>'
+                     + '            <button type="button" name="button-tofirst" class="btn btn-default" disabled="disabled"><span class="glyphicon glyphicon-fast-backward"></span></button>'
+                     + '            <button type="button" name="button-previous" class="btn btn-default" disabled="disabled"><span class="glyphicon glyphicon-chevron-left"></span></button>'
                      + '        </div>'
                      + '        <input type="text" class="form-control" style="text-align: center; font-weight: bold;" value="1" disabled="disabled">'
                      + '        <div class="input-group-btn">'
-                     + '            <button type="button" class="btn btn-default" disabled="disabled"><span class="glyphicon glyphicon-chevron-right"></span></button>'
-                     + '            <button type="button" class="btn btn-default" disabled="disabled"><span class="glyphicon glyphicon-fast-forward"></span></button>'
+                     + '            <button type="button" name="button-following" class="btn btn-default" disabled="disabled"><span class="glyphicon glyphicon-chevron-right"></span></button>'
+                     + '            <button type="button" name="button-tolast" class="btn btn-default" disabled="disabled"><span class="glyphicon glyphicon-fast-forward"></span></button>'
                      + '        </div>'
                      + '    </div>'
                      + '  </div>'
-                     + '  <div class="col-md-5" style="text-align: right">Загружено с 1 по 10 из <span class="statusbar-total"></span></div>'
+                     + '  <div class="col-md-5" style="text-align: right">Загружено с <span class="statusbar-from"></span> по <span class="statusbar-to"></span> из <span class="statusbar-total"></span></div>'
                      + '</div>';
         
         return content;
     }
+    Gridman.prototype.prepareFooterButtons = function(){
+        this.foot.buttons = {
+            adding: this.el.find('tfoot button[name="button-adding"]'),
+            reload: this.el.find('tfoot button[name="button-reload"]'),
+            toFirst: this.el.find('tfoot button[name="button-tofirst"]'),
+            previous: this.el.find('tfoot button[name="button-previous"]'),
+            following: this.el.find('tfoot button[name="button-following"]'),
+            toLast: this.el.find('tfoot button[name="button-tolast"]')
+        }
+    }
+    Gridman.prototype.attachFooterEvents = function(){
+        var self = this;
+        this.foot.buttons.adding.on('click', function(){
+            //self.cfg.events.onPressAddingBtn(self);
+            self.fireEvent('onPressAddingBtn');
+        });
+        this.foot.buttons.reload.on('click', function(){
+            self.fireEvent('beforeBodyUpdate');
+            self.bodyUpdate();
+            self.fireEvent('afterBodyUpdate');
+        });
+    }
+    Gridman.prototype.fireEvent = function(eventName){
+        if (!this.cfg.events) return;
+        if (!this.cfg.events[eventName]) return;
+        this.cfg.events[eventName](this);
+    }
+    Gridman.prototype.prepareActions = function(){
+        if (!this.cfg.actions) return;
+        this.actions = this.cfg.actions.split('|');
+        this.head.find('tr').append('<th>***</th>');
+    }
+    Gridman.prototype.getActionsButtons = function(index){
+        if (this.actions.length < 1) return null;
+        var actionsButtons = '';
+        for (var btnIndex = 0; btnIndex < this.actions.length; btnIndex++) {
+            var btn = null;
+            switch (this.actions[btnIndex]) {
+                case 'view':
+                    btn = $('<a href="#"><span class="glyphicon glyphicon-eye-open"></span></a>');
+                    btn.on('click', function(){
+                        alert('view-'+index);
+                    });
+                    break;
+                case 'edit':
+                    btn = $('<a href="#"><span class="glyphicon glyphicon-pencil"></span></a>');
+                    btn.on('click', function(){
+                        alert('edit-'+index);
+                    });
+                    break;
+                case 'delete':
+                    btn = $('<a href="#"><span class="glyphicon glyphicon-trash"></span></a>');
+                    btn.on('click', function(){
+                        alert('delete-'+index);
+                    });
+                    break;
+            }
+            if (btn) actionsButtons += btn.html();
+        }
+        return actionsButtons;
+    }
 
     $.fn.gridman = function(config) {
+        var gridman = null;
         this.each(function() {
-            new Gridman(this, config);
+            gridman = new Gridman(this, config);
         });
+        return gridman;
     };
 })(jQuery);

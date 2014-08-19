@@ -41,70 +41,38 @@ class CollectionsController extends \Admin\BaseController
             $this->layout->content = \View::make('admin.collections.index');
             return;
         }
-        
+
+        $modal_body_template = 'common-template-1';
+        $modal_title = '';
+
         switch ($source_name) {
             case 'categories':
                 $data = [
                     'title'  => 'Категории тикетов (тех. поддержка)',
                 ];
+                $modal_title = 'Новая категория';
                 break;
             case 'priorities':
                 $data = [
                     'title'  => 'Приоритеты тикетов (тех. поддержка)',
                 ];
+                $modal_title = 'Новый приоритет';
+                $modal_body_template = 'common-template-2';
                 break;
             case 'statuses':
                 $data = [
                     'title'  => 'Статусы тикетов (тех. поддержка)',
                 ];
+                $modal_title = 'Новый статус';
                 break;
             default:
                 $this->layout->content = "Ресурс {$source_name} не найден";
                 return;
         }
-        
-        $data['source']      = $this->getSourceTableName($source_name);
+
         $data['source_name'] = $source_name;
-
-
-        $grid1 = new \Gridman([
-            'id' => 'grid-collection',
-            'is_ajax' => true,
-            'source_name' => $source_name,
-            'columns' => [
-                [
-                    'key'   => 'id',
-                    'title' => '#'
-                ],
-                [
-                    'key'   => 'title',
-                    'title' => 'Наименование'
-                ]
-            ],
-        ]);
-
-        $grid2 = new \Gridman([
-            'id' => 'grid-collection',
-            'is_ajax' => true,
-            'source_name' => 'priorities',
-            'columns' => [
-                [
-                    'key'   => 'id',
-                    'title' => '#'
-                ],
-                [
-                    'key'   => 'title',
-                    'title' => 'Наименование'
-                ],
-                [
-                    'key'    => 'color',
-                    'title'  => 'Цвет',
-                    'widget' => 'color_view'
-                ]
-            ],
-        ]);
-
-        $data['grid'] = $grid1 . $grid2;
+        $data['modal_title'] = $modal_title;
+        $data['modal_body_template'] = $modal_body_template;
         
         $this->layout->content = \View::make('admin.collections.source', $data);
     }
