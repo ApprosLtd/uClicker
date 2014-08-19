@@ -136,6 +136,8 @@ class CollectionsController extends \BaseController {
         }
 
         $model_name::destroy($id);
+
+        return ['success' => true];
 	}
 
 
