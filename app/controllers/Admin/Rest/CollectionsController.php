@@ -127,7 +127,15 @@ class CollectionsController extends \BaseController {
 	 */
 	public function destroy($id)
 	{
-		//
+        $model_alias = \Input::get('model');
+
+        $model_name = $this->getModelNameByAlias($model_alias);
+
+        if (!$model_name) {
+            return ['error' => 'Model not found by alias'];
+        }
+
+        $model_name::destroy($id);
 	}
 
 

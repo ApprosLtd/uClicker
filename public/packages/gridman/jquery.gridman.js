@@ -22,7 +22,14 @@
         this.prepareGrid();
         this.bodyUpdate();
     }
-    Gridman.prototype.getData = function(){
+    Gridman.prototype.getData = function(field){
+        if (field) {
+            if (this.data[field]) {
+                return this.data[field]
+            } else {
+                return null;
+            }
+        }
         return this.data;
     }
     Gridman.prototype.read = function(){
@@ -42,6 +49,7 @@
         this.ajax({
             url: this.cfg.controller + '/' + index,
             type: 'DELETE',
+            data: {model: this.getData('model')},
             success: success
         });
     }
