@@ -111,9 +111,10 @@ $(document).ready(function(){
         <div class="btn-group btn-group-sm">
           <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">Быстрый переход <span class="caret"></span></button>
           <ul class="dropdown-menu dropdown-menu-right" role="menu">
-              <li><a href="/collections?source=categories">Категории тикетов (тех. поддержка)</a></li>
-              <li><a href="/collections?source=priorities">Приоритеты тикетов (тех. поддержка)</a></li>
-              <li><a href="/collections?source=statuses">Статусы тикетов (тех. поддержка)</a></li>
+              <li role="presentation" class="dropdown-header">ТЕХНИЧЕСКАЯ ПОДДЕРЖКА</li>
+              <li><a href="/collections?source=categories">Категории тикетов</a></li>
+              <li><a href="/collections?source=priorities">Приоритеты тикетов</a></li>
+              <li><a href="/collections?source=statuses">Статусы тикетов</a></li>
           </ul>
         </div>
         <!--a href="#" class="btn btn-primary btn-sm" onclick="onPressAddingBtn(gridman); return false;"><span class="glyphicon glyphicon-plus"></span> Добавить</a-->
