@@ -28,8 +28,6 @@ class CollectionsController extends \BaseController {
         $limit  = \Input::get('limit', 20);
 		$offset = \Input::get('offset', 0);
 
-        $model_alias = 'categories';
-
         $model_name = $this->getModelNameByAlias($model_alias);
 
         if (!$model_name) {
