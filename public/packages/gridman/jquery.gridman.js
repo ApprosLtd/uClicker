@@ -30,7 +30,7 @@
     }
     Gridman.prototype.write = function(rec, success){
         this.ajax({
-            type: 'post',
+            type: 'POST',
             data: {
                 model: this.cfg.model,
                 fields: rec
@@ -38,8 +38,12 @@
             success: success
         });
     }
-    Gridman.prototype.destroy = function(){
-        //
+    Gridman.prototype.destroy = function(index, success){
+        this.ajax({
+            url: this.cfg.controller + '/' + index,
+            type: 'DELETE',
+            success: success
+        });
     }
     Gridman.prototype.load = function(data, success){
         this.ajax({
@@ -92,7 +96,7 @@
     Gridman.prototype.ajax = function(data){
         $.ajax($.extend({
             url: this.cfg.controller,
-            type: 'get',
+            type: 'GET',
             dataType: 'json'
         }, data));
     }
@@ -207,10 +211,10 @@
             self.fireEvent('afterBodyUpdate');
         });
     }
-    Gridman.prototype.fireEvent = function(eventName){
+    Gridman.prototype.fireEvent = function(eventName, params){
         if (!this.cfg.events) return;
         if (!this.cfg.events[eventName]) return;
-        this.cfg.events[eventName](this);
+        this.cfg.events[eventName](this, params);
     }
     Gridman.prototype.prepareActions = function(){
         if (this.actions.length < 1) return;
@@ -218,6 +222,7 @@
     }
     Gridman.prototype.getActionsButtons = function(index){
         if (this.actions.length < 1) return null;
+        var self = this;
         var btnGroup = $('<div class="btn-group btn-group-xs"></div>');
         for (var btnIndex = 0; btnIndex < this.actions.length; btnIndex++) {
             var btn = null;
@@ -225,19 +230,21 @@
                 case 'view':
                     btn = $('<button type="button" class="btn btn-default"><span class="glyphicon glyphicon-eye-open"></span></button>');
                     btn.on('click', function(){
-                        alert('view-'+index);
+                        self.fireEvent('onPressRowButtonView', index);
                     });
                     break;
                 case 'edit':
                     btn = $('<button type="button" class="btn btn-default"><span class="glyphicon glyphicon-pencil"></span></button>');
                     btn.on('click', function(){
-                        alert('edit-'+index);
+                        self.fireEvent('onPressRowButtonEdit', index);
                     });
                     break;
                 case 'delete':
                     btn = $('<button type="button" class="btn btn-default"><span class="glyphicon glyphicon-trash"></span></button>');
                     btn.on('click', function(){
-                        alert('delete-'+index);
+                        self.destroy(index, function(){
+                            self.bodyUpdate();
+                        });
                     });
                     break;
             }

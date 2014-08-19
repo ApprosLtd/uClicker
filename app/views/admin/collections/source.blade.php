@@ -28,32 +28,54 @@
 @endif
 
 <script>
+function saveEditForm(grid){
+    var commonModal = $('#common-modal');
+    var parent = $(this).parents('.modal-content')[0];
+    var titleField  = $(parent).find('input[name="title"]');
+    var title = titleField.val();
+    var colorField  = $(parent).find('input[name="color"]');
+    var color = colorField.val();
+    var error = false;
+    if (title == '') {
+        titleField.parents('.form-group').addClass('has-error');
+        error = true;
+    }
+    if (color == '') {
+        colorField.parents('.form-group').addClass('has-error');
+        error = true;
+    }
+    if (error) return;
+    grid.saveRecord({
+        title: title,
+        color: color
+    }, function(){
+        commonModal.modal('hide');
+    });
+}
 function onPressAddingBtn(grid){
     var commonModal = $('#common-modal');
     var source = $('#{{ $modal_body_template }}').html();
     commonModal.find('div.modal-body').html(Handlebars.compile(source));
     commonModal.find('.modal-button-save').unbind('click').on('click', function(){
-        var parent = $(this).parents('.modal-content')[0];
-        var titleField  = $(parent).find('input[name="title"]');
-        var title = titleField.val();
-        var colorField  = $(parent).find('input[name="color"]');
-        var color = colorField.val();
-        var error = false;
-        if (title == '') {
-            titleField.parents('.form-group').addClass('has-error');
-            error = true;
-        }
-        if (color == '') {
-            colorField.parents('.form-group').addClass('has-error');
-            error = true;
-        }
-        if (error) return;
-        grid.saveRecord({
-            title: title,
-            color: color
-        }, function(){
-            commonModal.modal('hide');
+        saveEditForm(grid);
+    });
+    commonModal.modal('show');
+
+    var colorField = commonModal.find('input[name="color"]');
+    if (colorField.length > 0) {
+        colorField.minicolors({
+            opacity: false,
+            inline: false,
+            defaultValue: '#c92424'
         });
+    }
+}
+function onPressEditBtn(grid, index){
+    var commonModal = $('#common-modal');
+    var source = $('#{{ $modal_body_template }}').html();
+    commonModal.find('div.modal-body').html(Handlebars.compile(source));
+    commonModal.find('.modal-button-save').unbind('click').on('click', function(){
+        saveEditForm(grid);
     });
     commonModal.modal('show');
 
@@ -74,7 +96,8 @@ $(document).ready(function(){
         actions: 'edit|delete',
         columns: columns,
         events: {
-            onPressAddingBtn: onPressAddingBtn
+            onPressAddingBtn: onPressAddingBtn,
+            onPressRowButtonEdit: onPressEditBtn
         }
     });
 });
@@ -82,11 +105,20 @@ $(document).ready(function(){
 
 <!-- Content -->
 <div class="row">
-    <div class="col-md-3">
+    <div class="col-md-7"><h3 style="margin: 3px 0 0;">{{ $title or '' }}</h3></div>
+    <div class="col-md-5" style="text-align: right">
         <a href="/collections" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-th-list"></span> Список спарвочников</a>
-        <a href="#" class="btn btn-primary btn-sm" onclick="onPressAddingBtn(gridman); return false;"><span class="glyphicon glyphicon-plus"></span> Добавить</a>
+        <div class="btn-group btn-group-sm">
+          <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">Быстрый переход <span class="caret"></span></button>
+          <ul class="dropdown-menu dropdown-menu-right" role="menu">
+              <li><a href="/collections?source=categories">Категории тикетов (тех. поддержка)</a></li>
+              <li><a href="/collections?source=priorities">Приоритеты тикетов (тех. поддержка)</a></li>
+              <li><a href="/collections?source=statuses">Статусы тикетов (тех. поддержка)</a></li>
+          </ul>
+        </div>
+        <!--a href="#" class="btn btn-primary btn-sm" onclick="onPressAddingBtn(gridman); return false;"><span class="glyphicon glyphicon-plus"></span> Добавить</a-->
     </div>
-    <div class="col-md-9"><h3 style="margin: 3px 0 0;">{{ $title or '' }}</h3></div>
+
 </div>
 
 
