@@ -2,9 +2,8 @@
     <div class="col-md-9"><h3 style="margin: 3px 0 0;">{{ $title or '' }}</h3></div>
 </div>
 
-<link rel="stylesheet" href="/packages/dhtmlxGrid/sources/dhtmlxGrid/codebase/skins/dhtmlxgrid_dhx_web.css">
-<script src="/packages/dhtmlxGrid/sources/dhtmlxCommon/codebase/dhtmlxcommon.js"></script>
-<script src="/packages/dhtmlxGrid/sources/dhtmlxGrid/codebase/dhtmlxgrid.js"></script>
+<link  href="/packages/dhtmlxGrid/codebase/dhtmlxgrid.css" rel="stylesheet">
+<script src="/packages/dhtmlxGrid/codebase/dhtmlxgrid.js"></script>
 
 <table class="table" id="binding-example"></table>
 
