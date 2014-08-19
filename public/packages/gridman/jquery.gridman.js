@@ -5,9 +5,11 @@
 
         this.cfg = $.extend({
             autoLoad: true,
-            columns: []
+            columns: [],
+            actions: []
         }, config);
 
+        this.actions = this.cfg.actions.split('|');
         this.data = {
             limit: 5,
             offset: 0,
@@ -16,7 +18,6 @@
 
         this.body    = this.el.find('tbody');
         this.columns = this.cfg.columns;
-        this.actions = [];
 
         this.prepareGrid();
         this.bodyUpdate();
@@ -57,7 +58,7 @@
         });
     }
     Gridman.prototype.addRecord = function(record){
-        var rowsContent = '<tr>';
+        var rowContent = $('<tr></tr>');
         for (var columnIndex = 0; columnIndex < this.columns.length; columnIndex++) {
             var columnKey = this.columns[columnIndex].key;
             var column = this.columns[columnIndex];
@@ -71,14 +72,17 @@
             } else if (column.key) {
                 value = record[column.key];
             }
-            rowsContent += '<td>'+value+'</td>';
+            var vtd = $('<td></td>');
+            vtd.append(value);
+            rowContent.append(vtd);
         }
         var actionsButtons = this.getActionsButtons(record.id);
         if (actionsButtons) {
-            rowsContent += '<td>'+actionsButtons+'</td>';
+            var atd = $('<td style="text-align: right;"></td>');
+            atd.append(actionsButtons);
+            rowContent.append(atd);
         }
-        rowsContent += '</tr>';
-        this.body.append(rowsContent);
+        this.body.append(rowContent);
     }
     Gridman.prototype.addRecords = function(recordsArr){
         for (var recIndex = 0; recIndex < recordsArr.length; recIndex++) {
@@ -131,7 +135,9 @@
         this.body.html('<tr><td colspan="'+this.getColspan()+'">'+message+'</td></tr>');
     }
     Gridman.prototype.getColspan = function(){
-        return this.columns.length;
+        var colspan = this.columns.length;
+        if (this.actions.length > 0) colspan++;
+        return colspan;
     }
     Gridman.prototype.bodyUpdate = function(){
         var self = this;
@@ -207,38 +213,37 @@
         this.cfg.events[eventName](this);
     }
     Gridman.prototype.prepareActions = function(){
-        if (!this.cfg.actions) return;
-        this.actions = this.cfg.actions.split('|');
-        this.head.find('tr').append('<th>***</th>');
+        if (this.actions.length < 1) return;
+        this.head.find('tr').append('<th style="width: '+(this.actions.length*40)+'px"></th>');
     }
     Gridman.prototype.getActionsButtons = function(index){
         if (this.actions.length < 1) return null;
-        var actionsButtons = '';
+        var btnGroup = $('<div class="btn-group btn-group-xs"></div>');
         for (var btnIndex = 0; btnIndex < this.actions.length; btnIndex++) {
             var btn = null;
             switch (this.actions[btnIndex]) {
                 case 'view':
-                    btn = $('<a href="#"><span class="glyphicon glyphicon-eye-open"></span></a>');
+                    btn = $('<button type="button" class="btn btn-default"><span class="glyphicon glyphicon-eye-open"></span></button>');
                     btn.on('click', function(){
                         alert('view-'+index);
                     });
                     break;
                 case 'edit':
-                    btn = $('<a href="#"><span class="glyphicon glyphicon-pencil"></span></a>');
+                    btn = $('<button type="button" class="btn btn-default"><span class="glyphicon glyphicon-pencil"></span></button>');
                     btn.on('click', function(){
                         alert('edit-'+index);
                     });
                     break;
                 case 'delete':
-                    btn = $('<a href="#"><span class="glyphicon glyphicon-trash"></span></a>');
+                    btn = $('<button type="button" class="btn btn-default"><span class="glyphicon glyphicon-trash"></span></button>');
                     btn.on('click', function(){
                         alert('delete-'+index);
                     });
                     break;
             }
-            if (btn) actionsButtons += btn.html();
+            if (btn) btn.appendTo(btnGroup);
         }
-        return actionsButtons;
+        return btnGroup;
     }
 
     $.fn.gridman = function(config) {
