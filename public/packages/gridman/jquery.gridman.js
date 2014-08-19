@@ -252,9 +252,7 @@
                 case 'delete':
                     btn = $('<button type="button" class="btn btn-default"><span class="glyphicon glyphicon-trash"></span></button>');
                     btn.on('click', function(){
-                        self.destroy(index, function(){
-                            self.bodyUpdate();
-                        });
+                        self.destroy(index);
                     });
                     break;
             }
