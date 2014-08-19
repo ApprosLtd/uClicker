@@ -46,6 +46,7 @@
         });
     }
     Gridman.prototype.destroy = function(index, success){
+        var self = this;
         this.ajax({
             url: this.cfg.controller + '/' + index,
             type: 'DELETE',
@@ -212,7 +213,6 @@
     Gridman.prototype.attachFooterEvents = function(){
         var self = this;
         this.foot.buttons.adding.on('click', function(){
-            //self.cfg.events.onPressAddingBtn(self);
             self.fireEvent('onPressAddingBtn');
         });
         this.foot.buttons.reload.on('click', function(){
