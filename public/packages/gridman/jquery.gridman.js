@@ -50,7 +50,9 @@
             url: this.cfg.controller + '/' + index,
             type: 'DELETE',
             data: {model: this.getData('model')},
-            success: success
+            success: function(){
+                self.bodyUpdate();
+            }
         });
     }
     Gridman.prototype.load = function(data, success){
