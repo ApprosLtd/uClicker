@@ -1,3 +1,11 @@
+<script type="text/javascript" src="/packages/handlebars/handlebars-v1.3.0.js"></script>
+
+<link rel="stylesheet" href="/packages/minicolors/jquery.minicolors.css">
+<script type="text/javascript" src="/packages/minicolors/jquery.minicolors.min.js"></script>
+
+<link rel="stylesheet" href="/packages/gridman/gridman.css">
+<script type="text/javascript" src="/packages/gridman/jquery.gridman.js"></script>
+
 @if ( $source_name == 'priorities' )
 <script>
     var columns = [{
@@ -121,15 +129,6 @@ $(document).ready(function(){
     </div>
 
 </div>
-
-
-<script type="text/javascript" src="/packages/handlebars/handlebars-v1.3.0.js"></script>
-
-<link rel="stylesheet" href="/packages/minicolors/jquery.minicolors.css">
-<script type="text/javascript" src="/packages/minicolors/jquery.minicolors.min.js"></script>
-
-<link rel="stylesheet" href="/packages/gridman/gridman.css">
-<script type="text/javascript" src="/packages/gridman/jquery.gridman.js"></script>
 
 <div style="height: 30px"></div>
 

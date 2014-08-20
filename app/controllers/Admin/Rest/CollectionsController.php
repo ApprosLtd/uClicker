@@ -1,6 +1,8 @@
-<?php namespace Admin\Rest;
+<?php
 
-class CollectionsController extends \BaseController {
+namespace Admin\Rest;
+
+class CollectionsController extends \Admin\BaseController {
 
     protected $models_collection = [
         'categories' => 'TicketCategory',

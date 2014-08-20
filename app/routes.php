@@ -25,6 +25,12 @@ if (Auth::guest()) {
     
     Route::resource('admin/rest/tickets', 'Admin\\Rest\\TicketsController');
 
+    Route::resource('admin/rest/merchants', 'Admin\\Rest\\MerchantsController');
+
+    Route::resource('admin/rest/sites', 'Admin\\Rest\\SitesController');
+
+    Route::resource('admin/rest/visitors', 'Admin\\Rest\\VisitorsController');
+
     Route::resource('admin/rest/collections', 'Admin\\Rest\\CollectionsController');
     Route::controller('collections', 'Admin\\CollectionsController');
     
