@@ -164,7 +164,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
      * Удаление сайта
      * @param $site_id
      */
-    public function removeSites($site_id)
+    public function removeSite($site_id)
     {
         $site_obj = $this->sites()->find($site_id);
 

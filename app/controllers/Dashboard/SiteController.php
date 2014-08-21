@@ -82,7 +82,7 @@ class SiteController extends \BaseController {
     {
         $site_id  = Input::get('site_id');
 
-        $site_obj = $this->user()->removeSites($site_id);
+        $site_obj = $this->user()->removeSite($site_id);
     }
 
 } 

@@ -1,3 +1,16 @@
+@if (count($sites) < 1)
+
+<div style="text-align: center; margin: 20px 0 30px">
+    <span class="glyphicon glyphicon-globe" style="font-size: 40px"></span>
+    <div style="padding-top: 20px">У вас не добавлено еще ни одного сайта</div>
+</div>
+
+<p style="text-align: center">
+    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#modalAddSite" onclick="formFilling(0)">Добавить сайт</button>
+</p>
+
+@else
+
 <p>
     <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modalAddSite" onclick="formFilling(0)">Добавить сайт</button>
 </p>
@@ -34,6 +47,8 @@
     ?>
     </tbody>
 </table>
+
+@endif
 
 
 <div class="modal fade" id="modalAddSite" tabindex="-1" role="dialog" aria-hidden="true">

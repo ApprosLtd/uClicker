@@ -94,7 +94,7 @@ $user = Auth::user();
 </div>
 
 <div style="width: 400px; margin: 10px auto; font-size:12px; text-align: center; color: #726D5F">
-    Все права защищены
+    © 2013 - <?= date('Y') ?>. ООО "Центр инновационных технологий"
 </div>
 
 </body>
