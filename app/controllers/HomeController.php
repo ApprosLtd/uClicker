@@ -44,4 +44,9 @@ class HomeController extends BaseController {
         return Redirect::to('/');
     }
 
+    public function getCollections()
+    {
+        return Redirect::to('/');
+    }
+
 }
