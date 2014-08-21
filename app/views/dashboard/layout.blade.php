@@ -63,17 +63,17 @@ $user = Auth::user();
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/">uClicker</a>
+            <a class="navbar-brand" href="/sites">uClicker</a>
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li<?= $ifActivePage('/')          ? ' class="active"' : '' ?>><a href="/">Главная</a></li>
+                <!--li<?= $ifActivePage('/')          ? ' class="active"' : '' ?>><a href="/">Главная</a></li-->
                 <li<?= $ifActivePage('sites')      ? ' class="active"' : '' ?>><a href="/sites">Сайты</a></li>
                 <li<?= $ifActivePage('visitors')   ? ' class="active"' : '' ?>><a href="/visitors">Посетители</a></li>
                 <li<?= $ifActivePage('balance')    ? ' class="active"' : '' ?>><a href="/balance">Баланс</a></li>
                 <li<?= $ifActivePage('statistics') ? ' class="active"' : '' ?>><a href="/statistics">Статистика</a></li>
                 <li<?= $ifActivePage('help')       ? ' class="active"' : '' ?>><a href="/help">Справочник</a></li>
-                <li<?= $ifActivePage('support')    ? ' class="active"' : '' ?>><a href="/support">Тех. поддержка</a></li>
+                <!--li<?= $ifActivePage('support')    ? ' class="active"' : '' ?>><a href="/support">Тех. поддержка</a></li-->
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
