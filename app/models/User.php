@@ -9,6 +9,8 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
     
     const ADMIN_ROLE_NAME = 'admin';
 
+    const MERCHANT_ROLE_NAME = 'merchant';
+
 	use UserTrait, RemindableTrait;
 
 	/**
@@ -87,6 +89,11 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
     public function isAdmin()
     {
         return $this->hasRole(self::ADMIN_ROLE_NAME);
+    }
+
+    public function isMerchant()
+    {
+        return $this->hasRole(self::MERCHANT_ROLE_NAME);
     }
 
     public function sites()
