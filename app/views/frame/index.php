@@ -27,7 +27,7 @@
             margin: 10px 140px;
         }
         .row-ico{
-            margin: 140px auto;
+            margin: 20px 140px;
             text-align: center;
         }
         .col-ico{
