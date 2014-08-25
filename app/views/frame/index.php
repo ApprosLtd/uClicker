@@ -17,15 +17,18 @@
         .logo-title span{
             color: #8AA6CC;
         }
-        .row, p{
+        p{
             font-family: arial, sans-serif;
+            padding: 5px;
+            font-size: 13px;
+            line-height: 17px;
         }
         .row{
-            margin: 10px 40px;
+            margin: 10px 140px;
         }
         .row-ico{
-            width: 416px;
-            margin: 10px auto;
+            margin: 140px auto;
+            text-align: center;
         }
         .col-ico{
             display: inline-block;
