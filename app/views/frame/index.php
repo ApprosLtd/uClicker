@@ -42,6 +42,15 @@
     VK.init({
         apiId: 4335971
     });
+
+    window.fbAsyncInit = function() {
+        FB.init({
+            appId      : 1449692111977156,
+            xfbml      : true,
+            version    : 'v2.0'
+        });
+    };
+
     function doVk(){
         VK.Auth.login(function(data){
             console.log(data);
@@ -76,6 +85,32 @@
             });
         }, 8192);
     }
+    function doOk(){
+        //
+    }
+    function doFb(){
+        FB.login(function(response) {
+            console.log(response);
+
+            FB.api(
+                "/me/feed",
+                "POST",
+                {
+                    message: '<?= $text ?>',
+                    link: '<?= $href ?>'
+                },
+                function (response) {
+                    console.log(response);
+                    if (response && !response.error) {
+                        // TODO: error message
+                    }
+
+                    var post_id = 0;
+                }
+            );
+
+        }, {scope: 'email,user_likes'});
+    }
 </script>
 <div class="container-fluid">
     <div class="row">
@@ -89,8 +124,8 @@
     </div>
     <div class="row-ico" style="width: ">
         <div class="col-ico"><a href="#"><img src="/packages/socico/vk-128.png" alt="" onclick="doVk(); return false;"></a></div>
-        <div class="col-ico"><a href="#"><img src="/packages/socico/ok-128.png" alt="" onclick="doVk(); return false;"></a></div>
-        <div class="col-ico"><a href="#"><img src="/packages/socico/fb-128.png" alt="" onclick="doVk(); return false;"></a></div>
+        <div class="col-ico"><a href="#"><img src="/packages/socico/ok-128.png" alt="" onclick="doOk(); return false;"></a></div>
+        <div class="col-ico"><a href="#"><img src="/packages/socico/fb-128.png" alt="" onclick="doFb(); return false;"></a></div>
     </div>
 </div>
 </body>
