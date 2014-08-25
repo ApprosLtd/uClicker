@@ -17,6 +17,12 @@
         .logo-title span{
             color: #8AA6CC;
         }
+        .row, p{
+            font-family: arial, sans-serif;
+        }
+        .row{
+            margin: 10px 40px;
+        }
         .row-ico{
             width: 416px;
             margin: 10px auto;
