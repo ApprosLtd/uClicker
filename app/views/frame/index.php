@@ -10,10 +10,12 @@
         .logo-title{
             font-family: 'Lobster', cursive;
             text-align: center;
-            color: #2e3947;
+            color: #416086;
+            font-size: 36px;
+            margin: 20px 0;
         }
         .logo-title span{
-            color: #1477ff;
+            color: #8AA6CC;
         }
         .row-ico{
             width: 416px;
