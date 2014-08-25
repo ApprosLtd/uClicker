@@ -10,6 +10,10 @@
         .logo-title{
             font-family: 'Lobster', cursive;
             text-align: center;
+            color: #2e3947;
+        }
+        .logo-title span{
+            color: #1477ff;
         }
         .row-ico{
             width: 416px;
@@ -65,7 +69,7 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-lg-12">
-            <h1 class="logo-title">uClicker</h1>
+            <h1 class="logo-title"><span>u</span>Clicker</h1>
         </div>
     </div>
     <div class="row-ico" style="width: ">
