@@ -74,6 +74,10 @@
             <h1 class="logo-title"><span>u</span>Clicker</h1>
         </div>
     </div>
+    <div class="row">
+        <p>Вы хотите порекомендовать материал рекламодателя своим друзьям.</p>
+        <p>Совершая это действие, Вы соглашаететсь разместить рекламные материалы на своей странице в социальной сети. Рекламные материалы будут доступны вашим друзьям.</p>
+    </div>
     <div class="row-ico" style="width: ">
         <div class="col-ico"><a href="#"><img src="/packages/socico/vk-128.png" alt="" onclick="doVk(); return false;"></a></div>
         <div class="col-ico"><a href="#"><img src="/packages/socico/ok-128.png" alt="" onclick="doVk(); return false;"></a></div>
