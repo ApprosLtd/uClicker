@@ -4,6 +4,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>Скидочный сервис uClicker</title>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="/packages/bootstrap/css/bootstrap.min.css">
 </head>
 <body>
 <script src="//vk.com/js/api/openapi.js" type="text/javascript"></script>
@@ -61,7 +62,20 @@
 
 </script>
 
-<h1>Данное окно нужно для обработки ))</h1>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-12">
+            <h1>uClicker</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-3"></div>
+        <div class="col-lg-2">VK</div>
+        <div class="col-lg-2">FB</div>
+        <div class="col-lg-2">OK</div>
+        <div class="col-lg-3"></div>
+    </div>
+</div>
 
 <a href="#" onclick="doVk(); return false;">Получить скидку за лайк в ВК</a>
 
