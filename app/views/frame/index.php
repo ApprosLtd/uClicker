@@ -105,7 +105,6 @@
                 {
                     message: '<?= $text ?>',
                     link: '<?= $href ?>',
-                    picture: 'http://www.mbm.ru/admin/kcfinder/upload/images/on(1).jpg',
                     name: 'name-3',
                     caption: 'caption-2',
                     description: 'description-1'
