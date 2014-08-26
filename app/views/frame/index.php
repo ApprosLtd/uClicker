@@ -38,11 +38,19 @@
 </head>
 <body>
 <script src="//vk.com/js/api/openapi.js" type="text/javascript"></script>
+<script src="http://api.odnoklassniki.ru/js/fapi5.js" defer="defer"></script>
 <script type="text/javascript">
+
+    /**
+     *
+     */
     VK.init({
         apiId: 4335971
     });
 
+    /**
+     *
+     */
     window.fbAsyncInit = function() {
         FB.init({
             appId      : 1449687905310910,
@@ -57,6 +65,42 @@
         js.src = "//connect.facebook.net/en_US/sdk.js";
         fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'facebook-jssdk'));
+
+    /**
+     *
+     */
+    var rParams = FAPI.Util.getRequestParameters();
+    FAPI.init(rParams["api_server"], rParams["apiconnection"],
+        /*
+         * Первый параметр:
+         * функция, которая будет вызвана после успешной инициализации.
+         */
+        function() {
+            alert("Инициализация прошла успешно");
+            // здесь можно вызывать методы API
+
+            FAPI.UI.postMediatopic({
+                media:[
+                    {
+                        type: 'text',
+                        text: '<?= $text ?>'
+                    },
+                    {
+                        type: 'link',
+                        url: '<?= $href ?>'
+                    }
+                ]
+            }, false);
+
+        },
+        /*
+         * Второй параметр:
+         * функция, которая будет вызвана, если инициализация не удалась.
+         */
+        function(error) {
+            alert("Ошибка инициализации");
+        }
+    );
 
     function doVk(){
         VK.Auth.login(function(data){
