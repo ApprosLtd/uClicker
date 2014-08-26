@@ -66,6 +66,11 @@
         fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'facebook-jssdk'));
 
+
+    function API_callback(method, result, data){
+        console.log(method, result, data);
+    }
+
     /**
      *
      */
