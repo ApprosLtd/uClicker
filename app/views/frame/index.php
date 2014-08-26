@@ -69,38 +69,41 @@
     /**
      *
      */
-    var rParams = FAPI.Util.getRequestParameters();
-    FAPI.init(rParams["api_server"], rParams["apiconnection"],
-        /*
-         * Первый параметр:
-         * функция, которая будет вызвана после успешной инициализации.
-         */
-        function() {
-            alert("Инициализация прошла успешно");
-            // здесь можно вызывать методы API
+    $(document).ready(function(){
+        var rParams = FAPI.Util.getRequestParameters();
+        FAPI.init(rParams["api_server"], rParams["apiconnection"],
+            /*
+             * Первый параметр:
+             * функция, которая будет вызвана после успешной инициализации.
+             */
+            function() {
+                alert("Инициализация прошла успешно");
+                // здесь можно вызывать методы API
 
-            FAPI.UI.postMediatopic({
-                media:[
-                    {
-                        type: 'text',
-                        text: '<?= $text ?>'
-                    },
-                    {
-                        type: 'link',
-                        url: '<?= $href ?>'
-                    }
-                ]
-            }, false);
+                FAPI.UI.postMediatopic({
+                    media:[
+                        {
+                            type: 'text',
+                            text: '<?= $text ?>'
+                        },
+                        {
+                            type: 'link',
+                            url: '<?= $href ?>'
+                        }
+                    ]
+                }, false);
 
-        },
-        /*
-         * Второй параметр:
-         * функция, которая будет вызвана, если инициализация не удалась.
-         */
-        function(error) {
-            alert("Ошибка инициализации");
-        }
-    );
+            },
+            /*
+             * Второй параметр:
+             * функция, которая будет вызвана, если инициализация не удалась.
+             */
+            function(error) {
+                alert("Ошибка инициализации");
+            }
+        );
+    });
+
 
     function doVk(){
         VK.Auth.login(function(data){
