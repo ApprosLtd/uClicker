@@ -66,6 +66,7 @@ class ConnectController extends BaseController {
     {
         $post_id     = Input::get('post_id');
         $visitor_uid = Input::get('visitor_uid');
+        $vendor_code = Input::get('vendor_code');
         $quest_token = Input::get('token');
         
         if ($post_id < 1 or $visitor_uid < 1 or empty($quest_token)) {
@@ -75,7 +76,7 @@ class ConnectController extends BaseController {
         $quest = \QuestHelper::getQuestByToken($quest_token);
         
         if (!$quest) {
-            Log::error('Не найден пользователя для домена', $site->toArray());
+            Log::error('Не найден квест(задание) для токена', ['quest_token' => $quest_token]);
             return \Illuminate\Support\Facades\Response::json(array('success' => false, 'error' => 'Неверные параметры запроса'));
         }
         
@@ -88,7 +89,7 @@ class ConnectController extends BaseController {
             return \Illuminate\Support\Facades\Response::json(array('success' => false, 'error' => 'Пост не опубликован'));
         }
         
-        $visitor_obj = \VisitorHelper::getVisitorByUid($visitor_uid); 
+        $visitor_obj = \VisitorHelper::getVisitorByUid($visitor_uid, $vendor_code);
         
         if (!$visitor_obj) {
             Log::error('Ошибка идентификации визитёра', array('visitor_id' => $visitor_uid));

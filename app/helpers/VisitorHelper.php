@@ -2,7 +2,7 @@
 
 class VisitorHelper
 {
-    public static function getVisitorByUid($visitor_uid, $vendor = 'VK')
+    public static function getVisitorByUid($visitor_uid, $vendor)
     {
         $vendor = trim($vendor);
         $vendor = strtoupper($vendor);

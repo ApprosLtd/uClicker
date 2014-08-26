@@ -99,6 +99,23 @@
         );
     });*/
 
+    function completeQuest(post_id, visitor_uid, vendor_code){
+        $.ajax({
+            url: '/connect/success',
+            dataType: 'json',
+            type: 'get',
+            data: {
+                post_id: post_id,
+                visitor_uid: visitor_uid,
+                vendor_code: vendor_code,
+                token: '<?= $quest_token ?>'
+            },
+            success: function(data){
+                alert('Скидка получена');
+            }
+        });
+    }
+
     function doVk(){
         VK.Auth.login(function(data){
             console.log(data);
@@ -113,19 +130,7 @@
                     post_id = data.response.post_id;
                 }
                 if (post_id > 0) {
-                    $.ajax({
-                        url: '/connect/success',
-                        dataType: 'json',
-                        type: 'get',
-                        data: {
-                            post_id: post_id,
-                            visitor_uid: visitor_uid,
-                            token: '<?= $quest_token ?>'
-                        },
-                        success: function(data){
-                            alert('Скидка получена');
-                        }
-                    });
+                    completeQuest(post_id, visitor_uid, 'VK');
                 } else {
                     // TODO: error message
                 }
@@ -137,9 +142,8 @@
         //
     }
     function doFb(){
-        FB.login(function(response) {
-            console.log(response);
-
+        FB.login(function(auth_response) {
+            console.log(auth_response);
             FB.api(
                 "/me/feed",
                 "POST",
@@ -155,9 +159,9 @@
                     console.log(response);
                     if (response && !response.error) {
                         // TODO: error message
+                        return;
                     }
-
-                    var post_id = 0;
+                    completeQuest(response.id, auth_response.authResponse.userID, 'FB');
                 }
             );
 

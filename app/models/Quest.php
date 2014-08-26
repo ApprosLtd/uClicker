@@ -47,7 +47,7 @@ class Quest extends Eloquent
         $this->post_id    = $post_id;
         
         $this->visitor_id = $visitor_id;
-        
+
         $self = $this;
         
         DB::transaction(function() use ($self){
