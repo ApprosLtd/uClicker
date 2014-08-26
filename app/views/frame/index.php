@@ -74,41 +74,30 @@
     /**
      *
      */
-    $(document).ready(function(){
+    /*$(document).ready(function(){
         var rParams = FAPI.Util.getRequestParameters();
         FAPI.init(rParams["api_server"], rParams["apiconnection"],
-            /*
-             * Первый параметр:
-             * функция, которая будет вызвана после успешной инициализации.
-             */
             function() {
-                alert("Инициализация прошла успешно");
-                // здесь можно вызывать методы API
-
+                //alert("Инициализация прошла успешно");
                 FAPI.UI.postMediatopic({
                     media:[
                         {
                             type: 'text',
-                            text: '<?= $text ?>'
+                            text: ''
                         },
                         {
                             type: 'link',
-                            url: '<?= $href ?>'
+                            url: ''
                         }
                     ]
                 }, false);
 
             },
-            /*
-             * Второй параметр:
-             * функция, которая будет вызвана, если инициализация не удалась.
-             */
             function(error) {
-                alert("Ошибка инициализации");
+                //alert("Ошибка инициализации");
             }
         );
-    });
-
+    });*/
 
     function doVk(){
         VK.Auth.login(function(data){
@@ -187,7 +176,7 @@
     </div>
     <div class="row-ico" style="width: ">
         <div class="col-ico"><a href="#"><img src="/packages/socico/vk-128.png" alt="" onclick="doVk(); return false;"></a></div>
-        <div class="col-ico"><a href="#"><img src="/packages/socico/ok-128.png" alt="" onclick="doOk(); return false;"></a></div>
+        <!--div class="col-ico"><a href="#"><img src="/packages/socico/ok-128.png" alt="" onclick="doOk(); return false;"></a></div-->
         <div class="col-ico"><a href="#"><img src="/packages/socico/fb-128.png" alt="" onclick="doFb(); return false;"></a></div>
     </div>
 </div>
