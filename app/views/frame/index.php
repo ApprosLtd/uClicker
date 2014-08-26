@@ -116,7 +116,7 @@
                 }
             );
 
-        }, {scope: 'email,user_likes'});
+        }, {scope: 'publish_actions'});
     }
 </script>
 <div class="container-fluid">
