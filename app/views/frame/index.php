@@ -195,8 +195,7 @@
         <script>
             $(function() {
                 $(".rslides").responsiveSlides({
-                    pager: true,
-                    nav: true
+                    pager: true
                 });
             });
         </script>
