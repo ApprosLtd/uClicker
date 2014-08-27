@@ -74,7 +74,7 @@
     /**
      *
      */
-    $(document).ready(function(){
+    /*$(document).ready(function(){
         var rParams = FAPI.Util.getRequestParameters();
         FAPI.init(rParams["api_server"], rParams["apiconnection"],
             function() {
@@ -97,7 +97,7 @@
                 //alert("Ошибка инициализации");
             }
         );
-    });
+    });*/
 
     function completeQuest(post_id, visitor_uid, vendor_code){
         $.ajax({
@@ -180,7 +180,7 @@
     </div>
     <div class="row-ico" style="width: ">
         <div class="col-ico"><a href="#"><img src="/packages/socico/vk-128.png" alt="" onclick="doVk(); return false;"></a></div>
-        <div class="col-ico"><a href="#"><img src="/packages/socico/ok-128.png" alt="" onclick="doOk(); return false;"></a></div>
+        <!--div class="col-ico"><a href="#"><img src="/packages/socico/ok-128.png" alt="" onclick="doOk(); return false;"></a></div-->
         <div class="col-ico"><a href="#"><img src="/packages/socico/fb-128.png" alt="" onclick="doFb(); return false;"></a></div>
     </div>
 </div>
