@@ -186,13 +186,18 @@
     <div class="row">
 
         <ul class="rslides">
-            <li>первый слайд</li>
-            <li>второй слайд</li>
-            <li>третий слайд</li>
+            <li><img src="/i/vk-1.jpg" alt=""></li>
+            <li><img src="/i/vk-2.jpg" alt=""></li>
+            <li><img src="/i/vk-3.jpg" alt=""></li>
+            <li><img src="/i/fb-1.jpg" alt=""></li>
+            <li><img src="/i/fb-2.jpg" alt=""></li>
         </ul>
         <script>
             $(function() {
-                $(".rslides").responsiveSlides();
+                $(".rslides").responsiveSlides({
+                    pager: true,
+                    nav: true
+                });
             });
         </script>
 
