@@ -154,10 +154,10 @@
                 {
                     message: '<?= $text ?>',
                     link: '<?= $href ?>',
-                    picture: 'http://www.mbm.ru/admin/kcfinder/upload/images/on(1).jpg',
-                    name: 'name-3',
-                    caption: 'caption-2',
-                    description: 'description-1'
+                    picture: 'http://www.ferra.ru/580x600/images/331/331936.jpg',
+                    name: 'Заголовок сообщения',
+                    caption: 'дополнительный текст',
+                    description: '<?= $text ?>'
                 },
                 function (response) {
                     console.log(response);
