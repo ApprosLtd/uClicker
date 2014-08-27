@@ -1,4 +1,9 @@
-<!DOCTYPE html>
+<?
+
+$text = '';
+$href = '';
+
+?><!DOCTYPE html>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -6,6 +11,10 @@
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <link href="http://reset5.googlecode.com/hg/reset.min.css" rel="stylesheet" type="text/css">
     <link href="http://fonts.googleapis.com/css?family=Lobster&subset=latin,cyrillic,latin-ext" rel="stylesheet" type="text/css">
+
+    <link href="/packages/responsivslides/responsiveslides.css" rel="stylesheet" type="text/css">
+    <script src="/packages/responsivslides/responsiveslides.min.js"></script>
+
     <style>
         .logo-title{
             font-family: 'Lobster', cursive;
@@ -178,6 +187,22 @@
         <p>Вы хотите порекомендовать материал рекламодателя своим друзьям.</p>
         <p>Совершая это действие, Вы соглашаететсь разместить рекламные материалы на своей странице в социальной сети. Рекламные материалы будут доступны вашим друзьям.</p>
     </div>
+
+    <div>
+
+        <ul class="rslides">
+            <li>первый слайд</li>
+            <li>второй слайд</li>
+            <li>третий слайд</li>
+        </ul>
+        <script>
+            $(function() {
+                $(".rslides").responsiveSlides();
+            });
+        </script>
+
+    </div>
+
     <div class="row-ico" style="width: ">
         <div class="col-ico"><a href="#"><img src="/packages/socico/vk-128.png" alt="" onclick="doVk(); return false;"></a></div>
         <!--div class="col-ico"><a href="#"><img src="/packages/socico/ok-128.png" alt="" onclick="doOk(); return false;"></a></div-->
