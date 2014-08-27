@@ -49,14 +49,17 @@
         }
         .rslides_tabs li a{
             display: inline-block;
-            margin: 0 3px;
+            margin: 5px 3px;
             font-size: 0;
             color: #fff;
             border: 1px solid #808080;
-            border-radius: 5px;
+            border-radius: 10px;
+            height: 10px;
+            width: 10px;
         }
         .rslides_tabs li.rslides_here a{
-
+            background: #808080;
+            border-color: #373737;
         }
     </style>
 </head>
