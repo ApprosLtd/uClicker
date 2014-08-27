@@ -48,6 +48,14 @@
             display: inline;
         }
         .rslides_tabs li a{
+            display: inline-block;
+            margin: 0 3px;
+            font-size: 0;
+            color: #fff;
+            border: 1px solid #808080;
+            border-radius: 5px;
+        }
+        .rslides_tabs li.rslides_here a{
 
         }
     </style>
