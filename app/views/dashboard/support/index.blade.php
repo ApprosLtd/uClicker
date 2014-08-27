@@ -18,10 +18,10 @@
 <div class="row" style="border-bottom: 1px solid #DFDFDF; margin-bottom: 20px; padding: 20px 0; background: #F5F5F5">
     <div class="col-md-12">
 <?
-echo \Widget\Grid::controls(array(
+echo \Widget\Grid::controls([
     'target'    => 'tickets',
     'container' => "#tickets-list-container"
-));
+]);
 ?>
     </div>
 </div>
@@ -151,7 +151,7 @@ function ticketSave(){
             title:    title,
             priority: priority,
             category: category,
-            content:  content,
+            content:  content
         },
         success: function(data) {
             window.location = window.location;

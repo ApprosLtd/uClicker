@@ -6,6 +6,6 @@ class TicketPriority extends Eloquent {
 
     public $timestamps = false;
 
-    protected $fillable = array('title', 'color');
+    protected $fillable = ['title', 'color'];
 
 } 

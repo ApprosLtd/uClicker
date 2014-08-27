@@ -4,7 +4,7 @@ class Merchant extends Eloquent {
 
     protected $table = 'users';
 
-    protected $hidden = array('password', 'remember_token', 'roles');
+    protected $hidden = ['password', 'remember_token', 'roles'];
 
     public static function get()
     {

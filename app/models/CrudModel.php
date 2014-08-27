@@ -8,10 +8,10 @@ class CrudModel extends Eloquent
     */
     protected static function prepareParams(array $params)
     {
-        return array_merge(array(
+        return array_merge([
             'wrapper_view_path' => 'widgets.grid.wrapper',
             'item_view_path'    => 'widgets.grid.item',
-        ), $params);
+        ], $params);
     }
     
     
@@ -19,7 +19,7 @@ class CrudModel extends Eloquent
     * Выводит таблицу 
     * @param mixed $params
     */
-    public static function renderGrid(array $params = array())
+    public static function renderGrid(array $params = [])
     {
         $params = self::prepareParams($params);
         

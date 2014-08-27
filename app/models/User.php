@@ -25,7 +25,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	 *
 	 * @var array
 	 */
-	protected $hidden = array('password', 'remember_token');
+	protected $hidden = ['password', 'remember_token'];
 
     public function roles()
     {
@@ -69,7 +69,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
      */
     public function makeEmployee($name)
     {
-        $assigned_roles = array();
+        $assigned_roles = [];
  
         $roles = array_fetch(Role::all()->toArray(), 'name');
  
@@ -118,7 +118,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
     {        
         $sql = "select v.*, count(q.id) as quests  from visitors as v join quests as q  on q.visitor_id = v.id where q.user_id = ? group by q.visitor_id";
         
-        $visitors_obj_arr = DB::select($sql, array($this->id));
+        $visitors_obj_arr = DB::select($sql, [$this->id]);
         
         return $visitors_obj_arr;
     }

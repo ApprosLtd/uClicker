@@ -12,17 +12,17 @@
 <div style="height: 20px;"></div>
 
 <?
-echo \Widget\Grid::render(array(
+echo \Widget\Grid::render([
     'title'   => 'Пополнение счета',
     'target'  => 'balance_sheet',
     //'rows'    => $balance_sheet,
-    'columns' => array(
+    'columns' => [
         'id'         => '#',
         'comment'    => 'Описание',
         'debit'      => 'Сумма, руб.',
         'created_at' => 'Дата/Время',
-    )
-));
+    ]
+]);
 ?>
 <script>
     loadGridData({
@@ -37,17 +37,17 @@ echo \Widget\Grid::render(array(
 <div style="height: 50px;"></div>
 
 <?
-echo \Widget\Grid::render(array(
+echo \Widget\Grid::render([
     'title'   => 'Расход средств',
     'target'  => 'balance_sheet_credit',
     'group_box' => true,
     //'rows'    => $balance_sheet_credit,
-    'columns' => array(
+    'columns' => [
         'domain' => 'Сайт',
         'posts'  => 'Постов',
         'summa'  => 'Сумма, руб.',
-    )
-));
+    ]
+]);
 ?>
 <script>
     loadGridData({

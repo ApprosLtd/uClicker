@@ -7,10 +7,10 @@
     <div class="col-md-9">
 
     <?
-    echo \Widget\Grid::controls(array(
+    echo \Widget\Grid::controls([
         'group_box' => isset($group_box) ? $group_box : false,
         'target'    => $target
-    ));
+    ]);
     ?>
 
     </div>

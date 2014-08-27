@@ -27,7 +27,7 @@ class Quest extends Eloquent
         $user_obj = \User::find($params['user_id']);
         
         if (!$user_obj) {
-            Log::error('Не найден пользователя для домена', array('user_id' => $params['user_id'], 'site_id' => $params['site_id']));
+            Log::error('Не найден пользователя для домена', ['user_id' => $params['user_id'], 'site_id' => $params['site_id']]);
             return false;
         }
         
