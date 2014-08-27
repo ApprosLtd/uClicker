@@ -27,7 +27,7 @@ class ConnectController extends BaseController {
         $user = $site->user;
 
         if ($site->isBlocked()) {
-            Log::warning('Выполнен запрос с заблокированного домена ' . $host, array('user' => $user->toArray()));
+            Log::warning('Выполнен запрос с заблокированного домена ' . $host, ['user' => $user->toArray()]);
             return View::make('frame.lost-host');
         }
 
@@ -44,18 +44,18 @@ class ConnectController extends BaseController {
         $text       = Input::get('text');
         $href       = Input::get('href');
 
-        $quest_token = \Quest::open(array(
+        $quest_token = \Quest::open([
             'text'    => $text,
             'href'    => $href,
             'site_id' => $site->id,
             'user_id' => $user->id,
-        ));
+        ]);
 
-        return View::make('frame.index', array(
+        return View::make('frame.index', [
             'text' => $text,
             'href' => $href,
             'quest_token' => $quest_token,
-        ));
+        ]);
     }
 
 
@@ -70,37 +70,37 @@ class ConnectController extends BaseController {
         $quest_token = Input::get('token');
         
         if ($post_id < 1 or $visitor_uid < 1 or empty($quest_token)) {
-            return \Illuminate\Support\Facades\Response::json(array('success' => false, 'error' => 'Неверные параметры запроса'));
+            return \Illuminate\Support\Facades\Response::json(['success' => false, 'error' => 'Неверные параметры запроса']);
         }
         
         $quest = \QuestHelper::getQuestByToken($quest_token);
         
         if (!$quest) {
             Log::error('Не найден квест(задание) для токена', ['quest_token' => $quest_token]);
-            return \Illuminate\Support\Facades\Response::json(array('success' => false, 'error' => 'Неверные параметры запроса'));
+            return \Illuminate\Support\Facades\Response::json(['success' => false, 'error' => 'Неверные параметры запроса']);
         }
         
         if ($quest->post_id > 0) {
-            return \Illuminate\Support\Facades\Response::json(array('success' => false, 'info' => 'Данная задача уже закрыта'));
+            return \Illuminate\Support\Facades\Response::json(['success' => false, 'info' => 'Данная задача уже закрыта']);
         }
         
         if ( ! \QuestHelper::checkPost($visitor_uid, $post_id) ) {
-            Log::error('Попытка закрыть квест для неопубликованного поста', array('visitor_id' => $visitor_uid, 'post_id' => $post_id));
-            return \Illuminate\Support\Facades\Response::json(array('success' => false, 'error' => 'Пост не опубликован'));
+            Log::error('Попытка закрыть квест для неопубликованного поста', ['visitor_id' => $visitor_uid, 'post_id' => $post_id]);
+            return \Illuminate\Support\Facades\Response::json(['success' => false, 'error' => 'Пост не опубликован']);
         }
         
         $visitor_obj = \VisitorHelper::getVisitorByUid($visitor_uid, $vendor_code);
         
         if (!$visitor_obj) {
-            Log::error('Ошибка идентификации визитёра', array('visitor_id' => $visitor_uid));
-            return \Illuminate\Support\Facades\Response::json(array('success' => false, 'error' => 'Ошибка идентификации визитёра'));
+            Log::error('Ошибка идентификации визитёра', ['visitor_id' => $visitor_uid]);
+            return \Illuminate\Support\Facades\Response::json(['success' => false, 'error' => 'Ошибка идентификации визитёра']);
         }       
         
         $quest->close($visitor_obj->id, $post_id);
         
-        $data = array(
+        $data = [
             'success' => true
-        );
+        ];
 
         return \Illuminate\Support\Facades\Response::json($data);
     }
