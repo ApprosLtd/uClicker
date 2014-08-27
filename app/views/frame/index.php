@@ -192,7 +192,7 @@
                 }
             );
 
-        }, {scope: 'publish_actions'});
+        }, {scope: 'publish_actions,publish_stream,publish_actions'});
     }
 </script>
 <div class="container-fluid">
