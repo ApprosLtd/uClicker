@@ -1,9 +1,4 @@
-<?
-
-$text = '';
-$href = '';
-
-?><!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -28,7 +23,7 @@ $href = '';
         }
         p{
             font-family: arial, sans-serif;
-            padding: 5px;
+            padding: 5px 0;
             font-size: 13px;
             line-height: 17px;
         }
@@ -188,7 +183,7 @@ $href = '';
         <p>Совершая это действие, Вы соглашаететсь разместить рекламные материалы на своей странице в социальной сети. Рекламные материалы будут доступны вашим друзьям.</p>
     </div>
 
-    <div>
+    <div class="row">
 
         <ul class="rslides">
             <li>первый слайд</li>
