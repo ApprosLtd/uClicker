@@ -38,6 +38,18 @@
             display: inline-block;
             margin: 5px;
         }
+        .rslides_tabs{
+            text-align: center;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        .rslides_tabs li{
+            display: inline;
+        }
+        .rslides_tabs li a{
+
+        }
     </style>
 </head>
 <body>
