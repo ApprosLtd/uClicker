@@ -206,7 +206,7 @@
         <p>Совершая это действие, Вы соглашаететсь разместить рекламные материалы на своей странице в социальной сети. Рекламные материалы будут доступны вашим друзьям.</p>
     </div>
 
-    <div class="row" style="border: 1px solid #D1D1D1; border-radius: 3px;">
+    <div class="row" style="border: 1px solid #F1F1F1; border-radius: 3px;">
         <ul class="rslides">
             <li><img src="/i/vk-1.jpg" alt=""></li>
             <li><img src="/i/vk-2.jpg" alt=""></li>
