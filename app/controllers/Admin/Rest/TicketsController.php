@@ -13,10 +13,10 @@ class TicketsController extends \Admin\BaseRestController {
 	{
         $rows_arr = \Ticket::limit(20)->orderBy('created_at', 'DESC')->get();
         
-        $output_arr = array();
+        $output_arr = [];
         if ($rows_arr) {
             foreach ($rows_arr as $row_obj) {
-                $row_mix = array(
+                $row_mix = [
                     'id'    => $row_obj->id,
                     'title' => $row_obj->title,
                     'created_at' => date('d.m.Y в H:i', strtotime($row_obj->created_at)),
@@ -24,7 +24,7 @@ class TicketsController extends \Admin\BaseRestController {
                     'priority_title' => '',
                     'priority_color' => '',
                     'status'   => 'Принято',
-                );
+                ];
                 
                 $category = $row_obj->category;
                 if ($category) {
@@ -40,7 +40,7 @@ class TicketsController extends \Admin\BaseRestController {
             }
         }
         
-		return array('data' => $output_arr);
+		return ['data' => $output_arr];
 	}
 
 

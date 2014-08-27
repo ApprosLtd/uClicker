@@ -21,18 +21,18 @@ class DashboardController extends BaseController {
     {
         $this->layout->title = 'Сайты';
 
-        $this->layout->content = View::make('dashboard.sites.index', array(
+        $this->layout->content = View::make('dashboard.sites.index', [
             'sites' => $this->user()->sites
-        ));
+        ]);
     }
 
     public function getVisitors()
     {
         $this->layout->title = 'Посетители';
 
-        $this->layout->content = View::make('dashboard.visitors.index', array(
+        $this->layout->content = View::make('dashboard.visitors.index', [
             'visitors' => $this->user()->visitors()
-        ));
+        ]);
     }
 
     public function getStatistics()
@@ -48,18 +48,18 @@ class DashboardController extends BaseController {
         
         $markdown = Markdown::make('hello');
         
-        $menu = array(
-            array('text' => 'Введение', 'href' => 'intro'),
-            array('text' => 'Принцип работы', 'href' => ''),
-            array('text' => 'Подключение скриптов', 'href' => ''),
-            array('text' => 'Контроль объявлений', 'href' => ''),
-        );
+        $menu = [
+            ['text' => 'Введение', 'href' => 'intro'],
+            ['text' => 'Принцип работы', 'href' => ''],
+            ['text' => 'Подключение скриптов', 'href' => ''],
+            ['text' => 'Контроль объявлений', 'href' => ''],
+        ];
 
-        $this->layout->content = View::make('dashboard.help.index', array(
+        $this->layout->content = View::make('dashboard.help.index', [
             'markdown' => $markdown,
             'menu'     => $menu,
             'current'  => 'intro'
-        ));
+        ]);
     }
 
     public function getSupport()
@@ -94,14 +94,14 @@ class DashboardController extends BaseController {
         $limit  = 20;
         $offset = ($page - 1) * $limit;
 
-        $output = array(
+        $output = [
             'total'  => 0,
             'page'   => $page,
             'limit'  => $limit,
             'offset' => $offset,
             'pagination_html' => '',
-            'rows'   => array()
-        );
+            'rows'   => []
+        ];
 
         switch ($target) {
             case 'balance_sheet':
@@ -128,7 +128,7 @@ class DashboardController extends BaseController {
             case 'balance_sheet_credit':
                 $sql = "SELECT q.site_id, s.domain, SUM(b.credit) AS summa, COUNT(q.id) AS posts FROM quests AS q JOIN balance_sheet AS b JOIN sites AS s ON q.token = b.quest_token WHERE s.id = q.site_id AND q.user_id = b.user_id AND q.user_id = ? GROUP BY q.site_id";
 
-                $output['rows'] = \DB::select($sql, array($this->user()->id));
+                $output['rows'] = \DB::select($sql, [$this->user()->id]);
 
                 break;
                 
@@ -148,12 +148,12 @@ class DashboardController extends BaseController {
                 $output['total'] = $total_items;
 
                 $rows_obj_arr = $rows_obj->offset($offset)->limit($limit)->orderBy('created_at', 'DESC')->get();
-                $rows = array();
+                $rows = [];
                 foreach ($rows_obj_arr as $row_obj) {
 
                     $created_at = date('d.m.Y в H:i', strtotime($row_obj->created_at));
 
-                    $current_mix = array(
+                    $current_mix = [
                         'id'             => $row_obj->id,
                         'title'          => $row_obj->title,
                         'created_at'     => $created_at,
@@ -162,7 +162,7 @@ class DashboardController extends BaseController {
                         'priority_title' => '',
                         'priority_color' => '',
                         'status'         => 'В работе',
-                    );
+                    ];
 
                     $category = $row_obj->category;
                     if ($category) {

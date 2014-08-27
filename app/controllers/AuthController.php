@@ -13,7 +13,7 @@ class AuthController extends BaseController {
 
             if ($user) { // Если пользователь есть, то пытаемся авторизоваться
 
-                if (Auth::attempt(array('email' => $email, 'password' => $password))) {
+                if (Auth::attempt(['email' => $email, 'password' => $password])) {
                     return Redirect::to('/');
                 } else {
                     echo 'Неверный логин или пароль - ' . Crypt::decrypt($user->password);

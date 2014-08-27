@@ -12,9 +12,9 @@ class SupportController extends \BaseController
         
         $tickets_count = $this->user()->tickets()->count();
         
-        $this->layout->content = \View::make('dashboard.support.index', array(
+        $this->layout->content = \View::make('dashboard.support.index', [
             'is_empty' => ($tickets_count > 0) ? true : false
-        ));
+        ]);
     }
     
     
@@ -34,6 +34,6 @@ class SupportController extends \BaseController
         
         $this->user()->tickets()->save($ticket_obj);
         
-        return \Response::json(array());
+        return \Response::json([]);
     }
 } 

@@ -14,27 +14,27 @@ class IndexController extends BaseController
     {
         $this->layout->title = 'Партнеры';
 
-        $this->layout->content = \View::make('admin.merchants.index', array(
+        $this->layout->content = \View::make('admin.merchants.index', [
             'title' => $this->layout->title
-        ));
+        ]);
     }
     
     public function getSites()
     {
         $this->layout->title = 'Сайты';
 
-        $this->layout->content = \View::make('admin.sites.index', array(
+        $this->layout->content = \View::make('admin.sites.index', [
             'title' => $this->layout->title
-        ));
+        ]);
     }
     
     public function getVisitors()
     {
         $this->layout->title = 'Посетители';
 
-        $this->layout->content = \View::make('admin.visitors.index', array(
+        $this->layout->content = \View::make('admin.visitors.index', [
             'title' => $this->layout->title
-        ));
+        ]);
     }
     
     public function getBalance()

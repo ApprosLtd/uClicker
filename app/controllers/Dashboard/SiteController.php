@@ -14,11 +14,11 @@ class SiteController extends \BaseController {
 
         $site = $this->user()->sites()->find($site_id);
 
-        return Response::json(array(
+        return Response::json([
             'site_id' => $site->id,
             'domain'  => $site->domain,
             'comment' => $site->comment,
-        ));
+        ]);
     }
 
     /**
@@ -47,9 +47,9 @@ class SiteController extends \BaseController {
             $this->user()->sites()->save($site);
         }
 
-        return Response::json(array(
+        return Response::json([
             'site_id' => $site->id
-        ));
+        ]);
     }
 
 

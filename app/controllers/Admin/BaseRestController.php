@@ -8,7 +8,7 @@ class BaseRestController extends \BaseController {
     {
         $this->beforeFilter(function(){
             if ( \Auth::guest() or ! \Auth::user()->hasRole(\User::ADMIN_ROLE_NAME) ) {
-                return array('error' => 'Access denied');
+                return ['error' => 'Access denied'];
             }
         });
     }

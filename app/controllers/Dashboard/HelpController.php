@@ -12,9 +12,9 @@ class HelpController extends \BaseController {
 
         $this->layout->current_page = 'help';
 
-        $this->layout->content = \View::make('dashboard.help.index', array(
+        $this->layout->content = \View::make('dashboard.help.index', [
             'markdown' => \Markdown::make($markdown)
-        ));
+        ]);
 	}
 
 }
