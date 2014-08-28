@@ -7,7 +7,7 @@ UCL.prototype.linck = function(text, href){
     var url = 'http://appros.jelastic.regruhosting.ru/connect/frame?text='+text+'&href='+href;
 
     var w = 800;
-    var h = 500;
+    var h = 600;
     var left = (screen.width/2)-(w/2);
     var top = (screen.height/2)-(h/2);
 

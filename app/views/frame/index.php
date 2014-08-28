@@ -16,7 +16,7 @@
             text-align: center;
             color: #416086;
             font-size: 36px;
-            margin: 20px 0;
+            margin: 12px 0;
         }
         .logo-title span{
             color: #8AA6CC;
