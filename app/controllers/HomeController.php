@@ -9,6 +9,11 @@ class HomeController extends BaseController {
         //
 	}
 
+    public function getInfo()
+    {
+        return View::make('home.info');
+    }
+
     public function getSites()
     {
         return Redirect::to('/');
