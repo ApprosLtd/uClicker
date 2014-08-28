@@ -4,7 +4,7 @@ function UCL(){
     this.winName = 'WinUCL';
 }
 UCL.prototype.linck = function(text, href){
-    var url = 'http://appros.jelastic.regruhosting.ru/connect/frame?text='+text+'&href='+href;
+    var url = 'http://uclicker.ru/connect/frame?text='+text+'&href='+href;
 
     var w = 800;
     var h = 600;
