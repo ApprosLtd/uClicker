@@ -34,7 +34,11 @@
             margin: 20px 140px;
             text-align: center;
         }
-        .col-ico{
+        .col-ico img{
+            width: 100px;
+            height: 100px;
+        }
+        .col-ico img{
             display: inline-block;
             margin: 5px;
         }
