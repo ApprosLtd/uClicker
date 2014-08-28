@@ -67,6 +67,10 @@
             width: 600px;
             margin: 10px auto;
         }
+        .row-slides img{
+            height: 200px;
+            width: 100%;
+        }
     </style>
 </head>
 <body>
