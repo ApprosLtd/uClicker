@@ -18,6 +18,9 @@
         .logo-title span{
             color: #8AA6CC;
         }
+        div{
+            font-family: arial, sans-serif;
+        }
         p{
             font-family: arial, sans-serif;
             padding: 5px 0;
