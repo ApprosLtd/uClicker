@@ -7,9 +7,6 @@
     <link href="http://reset5.googlecode.com/hg/reset.min.css" rel="stylesheet" type="text/css">
     <link href="http://fonts.googleapis.com/css?family=Lobster&subset=latin,cyrillic,latin-ext" rel="stylesheet" type="text/css">
 
-    <link href="/packages/responsivslides/responsiveslides.css" rel="stylesheet" type="text/css">
-    <script src="/packages/responsivslides/responsiveslides.min.js"></script>
-
     <style>
         .logo-title{
             font-family: 'Lobster', cursive;
@@ -220,24 +217,23 @@
         <p>Совершая это действие, Вы соглашаететсь разместить рекламные материалы на своей странице в социальной сети. Рекламные материалы будут доступны вашим друзьям.</p>
     </div>
 
-    <div class="row-slides">
-        <ul class="rslides">
-            <li><img src="/i/vk-1.jpg" alt=""></li>
-            <li><img src="/i/vk-2.jpg" alt=""></li>
-            <li><img src="/i/vk-3.jpg" alt=""></li>
-            <li><img src="/i/fb-1.jpg" alt=""></li>
-            <li><img src="/i/fb-2.jpg" alt=""></li>
-        </ul>
-        <script>
-            $(function() {
-                $(".rslides").responsiveSlides({
-                    pager: true
-                });
-            });
-        </script>
+    <div class="row">
+        <div style="border: 1px solid gray;">
+            @if(isset($image))
+            <div style="display: inline-block; width: 120px; border-right: 1px solid gray;">
+                <img style="width: 100%;" alt="" src="{{$image}}">
+            </div>
+            @endif
+            <div style="display: inline-block; padding: 5px;">
+                <div style="font-weight: bold; color: #3B5998; cursor: pointer; padding: 0 0 5px;">Заголовок сообщения</div>
+                <div style="color: #9197A3; text-transform: uppercase;">Дополнительный текст</div>
+                <div style="color: #9197A3; padding: 5px 0;"><?= $text ?></div>
+                <div style="color: #3B5998; cursor: pointer;"><?= $href ?></div>
+            </div>
+        </div>
     </div>
 
-    <div class="row-ico" style="width: ">
+    <div class="row-ico">
         <div class="col-ico"><a href="#"><img src="/packages/socico/vk-128.png" alt="" onclick="doVk(); return false;"></a></div>
         <!--div class="col-ico"><a href="#"><img src="/packages/socico/ok-128.png" alt="" onclick="doOk(); return false;"></a></div-->
         <div class="col-ico"><a href="#"><img src="/packages/socico/fb-128.png" alt="" onclick="doFb(); return false;"></a></div>
