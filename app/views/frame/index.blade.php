@@ -223,7 +223,7 @@
 
     <div class="row">
         <div style="border: 1px solid #D8D8D8;">
-            @if(isset($image))
+            @if(isset($image) and !empty($image))
             <div style="display: inline-block; width: 120px; border-right: 1px solid #D8D8D8;">
                 <img style="width: 100%;" alt="" src="{{$image}}">
             </div>

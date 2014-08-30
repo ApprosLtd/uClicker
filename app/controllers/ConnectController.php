@@ -41,8 +41,9 @@ class ConnectController extends BaseController {
             return View::make('frame.low-balance');
         }
 
-        $text       = Input::get('text');
-        $href       = Input::get('href');
+        $text  = Input::get('text');
+        $href  = Input::get('href');
+        $image = Input::get('image');
 
         $quest_token = \Quest::open([
             'text'    => $text,
@@ -52,8 +53,9 @@ class ConnectController extends BaseController {
         ]);
 
         return View::make('frame.index', [
-            'text' => $text,
-            'href' => $href,
+            'text'  => $text,
+            'href'  => $href,
+            'image' => $image,
             'quest_token' => $quest_token,
         ]);
     }
