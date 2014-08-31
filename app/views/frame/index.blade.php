@@ -242,6 +242,10 @@
         <!--div class="col-ico"><a href="#"><img src="/packages/socico/ok-128.png" alt="" onclick="doOk(); return false;"></a></div-->
         <div class="col-ico"><a href="#"><img src="/packages/socico/fb-128.png" alt="" onclick="doFb(); return false;"></a></div>
     </div>
+
+    <div class="row">
+        <p>Подробнее о сервисе, можно узнсть на сайте <a href="http://www.uclicker.ru/info">www.uclicker.ru</a></p>
+    </div>
 </div>
 </body>
 </html>
