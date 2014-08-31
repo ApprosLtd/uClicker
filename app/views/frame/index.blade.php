@@ -244,7 +244,7 @@
     </div>
 
     <div class="row">
-        <p>Подробнее о сервисе, можно узнсть на сайте <a href="http://www.uclicker.ru/info">www.uclicker.ru</a></p>
+        <p style="text-align: center; color: #969696;">Подробнее о сервисе, можно узнсть на сайте <a style="color: #808080;" target="_blanck" href="http://www.uclicker.ru/info">www.uclicker.ru</a></p>
     </div>
 </div>
 </body>
