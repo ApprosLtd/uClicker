@@ -193,7 +193,7 @@
                     message: '<?= $text ?>',
                     link: '<?= $href ?>',
                     picture: '<?= $image ?>',
-                    name: 'Заголовок сообщения',
+                    name: '<?= $title ?>',
                     caption: 'дополнительный текст',
                     description: '<?= $text ?>'
                 },

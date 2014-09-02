@@ -41,6 +41,7 @@ class ConnectController extends BaseController {
             return View::make('frame.low-balance');
         }
 
+        $title = Input::get('title');
         $text  = Input::get('text');
         $href  = Input::get('href');
         $image = Input::get('image');
@@ -53,6 +54,7 @@ class ConnectController extends BaseController {
         ]);
 
         return View::make('frame.index', [
+            'title' => $title,
             'text'  => $text,
             'href'  => $href,
             'image' => $image,
