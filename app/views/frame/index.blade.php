@@ -222,19 +222,21 @@
     </div>
 
     <div class="row">
-        <div style="border: 1px solid #D8D8D8;">
+        <table style="border: 1px solid #D8D8D8;">
+          <tr>
             @if(isset($image) and !empty($image))
-            <div style="display: inline-block; width: 120px; border-right: 1px solid #D8D8D8;">
+            <td style="display: inline-block; width: 120px; border-right: 1px solid #D8D8D8;">
                 <img style="width: 100%;" alt="" src="{{$image}}">
-            </div>
+            </td>
             @endif
-            <div style="display: inline-block; padding: 10px;">
+            <td style="display: inline-block; padding: 10px;">
                 <div style="font-weight: bold; color: #3B5998; cursor: pointer; padding: 0 0 5px;"><?= $title ?></div>
                 <div style="color: #9197A3; text-transform: uppercase; font-size: 11px;">Дополнительный текст</div>
                 <div style="color: #838383; padding: 5px 0;"><?= $text ?></div>
                 <div style="color: #3B5998; cursor: pointer;"><?= $href ?></div>
-            </div>
-        </div>
+            </td>
+          </tr>
+        </table>
     </div>
 
     <div class="row-ico">
