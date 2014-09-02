@@ -4,7 +4,7 @@ function UCL(){
     this.winName = 'WinUCL';
 }
 UCL.prototype.linck = function(title, text, href, image){
-    var url = 'http://uclicker.ru/connect/frame?title='+title+'&text='+text+'&href='+href+'&image'+image;
+    var url = 'http://uclicker.ru/connect/frame?title='+title+'&text='+text+'&href='+href+'&image='+image;
 
     var w = 800;
     var h = 600;

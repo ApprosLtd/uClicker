@@ -229,7 +229,7 @@
             </div>
             @endif
             <div style="display: inline-block; padding: 10px;">
-                <div style="font-weight: bold; color: #3B5998; cursor: pointer; padding: 0 0 5px;">Заголовок сообщения</div>
+                <div style="font-weight: bold; color: #3B5998; cursor: pointer; padding: 0 0 5px;"><?= $title ?></div>
                 <div style="color: #9197A3; text-transform: uppercase; font-size: 11px;">Дополнительный текст</div>
                 <div style="color: #838383; padding: 5px 0;"><?= $text ?></div>
                 <div style="color: #3B5998; cursor: pointer;"><?= $href ?></div>
