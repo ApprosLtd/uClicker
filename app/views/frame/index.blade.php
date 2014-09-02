@@ -192,7 +192,7 @@
                 {
                     message: '<?= $text ?>',
                     link: '<?= $href ?>',
-                    picture: 'http://www.ferra.ru/580x600/images/331/331936.jpg',
+                    picture: '<?= $image ?>',
                     name: 'Заголовок сообщения',
                     caption: 'дополнительный текст',
                     description: '<?= $text ?>'
