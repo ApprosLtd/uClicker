@@ -162,6 +162,9 @@
         VK.Api.call('photos.getWallUploadServer', {
             user_id: user_id
         }, function(data){
+
+            console.log('UPLOAD_PHOTO', data);
+
             if (!data.response || !data.response.upload_url) {
                 return false;
             }
@@ -169,7 +172,7 @@
             $.post({
                 url: data.response.upload_url,
                 data: {
-                    photo: ''
+                    photo: image
                 },
                 success: function(res){
                     VK.Api.call('photos.saveWallPhoto', {
@@ -186,7 +189,7 @@
     }
     function doVk(){
         VK.Auth.login(function(data){
-            console.log(data);
+            //console.log(data);
             var visitor_uid = 0;
             if (data.session && data.session.user && data.session.user.id) visitor_uid = data.session.user.id;
             if (visitor_uid < 1) {
@@ -223,7 +226,7 @@
     }
     function doFb(){
         FB.login(function(auth_response) {
-            console.log(auth_response);
+            //console.log(auth_response);
             FB.api(
                 "/me/feed",
                 "POST",
