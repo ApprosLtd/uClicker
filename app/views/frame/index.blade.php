@@ -158,7 +158,24 @@
         });
     }
 
-    function uploadPhotoToVkWall(user_id, image, callback){
+    function uploadPhotoToVkWall(user_id, image_url, callback){
+
+        $.ajax({
+            url: '/connect/upload-photo',
+            dataType: 'json',
+            type: 'post',
+            data:{
+                user_id: user_id,
+                image_url: image_url
+            },
+            success: function(data){
+                callback(data);
+            }
+        });
+
+        return;
+
+
         VK.Api.call('photos.getWallUploadServer', {
             user_id: user_id
         }, function(data){
@@ -206,6 +223,8 @@
             var attachments = '<?= $href ?>';
 
             uploadPhotoToVkWall(visitor_uid, '<?= $image ?>', function(photo_data){
+
+                console.log(photo_data); return;
 
                 //attachments += ',photo'+visitor_uid+'_166443618';
 

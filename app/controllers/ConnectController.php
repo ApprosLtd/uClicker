@@ -109,4 +109,20 @@ class ConnectController extends BaseController {
         return \Illuminate\Support\Facades\Response::json($data);
     }
 
+    public function anyUploadPhoto()
+    {
+        $user_id   = Input::get('user_id');
+        $image_url = Input::get('image_url');
+
+        $query_params = [
+            'v' => '3.0',
+            'api_id' => '',
+            'method' => '',
+            'format' => 'json',
+            'sig' => ''
+        ];
+
+        $query_url = "http://api.vk.com/api.php?" . implode('&', $query_params);
+    }
+
 } 
