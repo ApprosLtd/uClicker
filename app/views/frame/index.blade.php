@@ -174,6 +174,9 @@
                 dataType: 'json',
                 type: 'POST',
                 crossDomain: true,
+                xhrFields: {
+                    withCredentials: true
+                },
                 data: {
                     photo: image
                 },
