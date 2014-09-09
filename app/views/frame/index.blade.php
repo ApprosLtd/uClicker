@@ -169,21 +169,17 @@
                 return false;
             }
 
-            $.post({
-                url: data.response.upload_url,
-                data: {
-                    photo: image
-                },
-                success: function(res){
-                    VK.Api.call('photos.saveWallPhoto', {
-                        user_id: user_id,
-                        photo: res.photo,
-                        server: res.server,
-                        hash: res.hash
-                    }, function(photo_data){
-                        callback(photo_data);
-                    });
-                }
+            $.post(data.response.upload_url, {
+                photo: image
+            }, function(res){
+                VK.Api.call('photos.saveWallPhoto', {
+                    user_id: user_id,
+                    photo: res.photo,
+                    server: res.server,
+                    hash: res.hash
+                }, function(photo_data){
+                    callback(photo_data);
+                });
             });
         });
     }
