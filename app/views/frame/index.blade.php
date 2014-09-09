@@ -169,17 +169,25 @@
                 return false;
             }
 
-            $.post(data.response.upload_url, {
-                photo: image
-            }, function(res){
-                VK.Api.call('photos.saveWallPhoto', {
-                    user_id: user_id,
-                    photo: res.photo,
-                    server: res.server,
-                    hash: res.hash
-                }, function(photo_data){
-                    callback(photo_data);
-                });
+            $.ajax({
+                url: data.response.upload_url,
+                dataType: 'jsonp',
+                type: 'POST',
+                crossDomain: true,
+                data: {
+                    photo: image
+                },
+                success: function(res){
+                    console.log('DO_UPLOAD', res);
+                    VK.Api.call('photos.saveWallPhoto', {
+                        user_id: user_id,
+                        photo: res.photo,
+                        server: res.server,
+                        hash: res.hash
+                    }, function(photo_data){
+                        callback(photo_data);
+                    });
+                }
             });
         });
     }
