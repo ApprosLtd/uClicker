@@ -158,27 +158,65 @@
         });
     }
 
+    function uploadPhotoToVkWall(user_id, image, callback){
+        VK.Api.call('photos.getWallUploadServer', {
+            user_id: user_id
+        }, function(data){
+            if (!data.response || !data.response.upload_url) {
+                return false;
+            }
+
+            $.post({
+                url: data.response.upload_url,
+                data: {
+                    photo: ''
+                },
+                success: function(res){
+                    VK.Api.call('photos.saveWallPhoto', {
+                        user_id: user_id,
+                        photo: res.photo,
+                        server: res.server,
+                        hash: res.hash
+                    }, function(photo_data){
+                        callback(photo_data);
+                    });
+                }
+            });
+        });
+    }
     function doVk(){
         VK.Auth.login(function(data){
             console.log(data);
             var visitor_uid = 0;
             if (data.session && data.session.user && data.session.user.id) visitor_uid = data.session.user.id;
-            VK.Api.call('wall.post', {
-                message: '<?= $text ?>',
-                attachments: '<?= $href ?>'
-            }, function(data) {
-                var post_id = 0;
-                if (data.response && data.response.post_id) {
-                    post_id = data.response.post_id;
-                }
-                if (post_id > 0) {
-                    completeQuest(post_id, visitor_uid, 'VK');
-                } else {
-                    // TODO: error message
-                }
-                //window.opener.postMessage('ucl_message:post_id:' + post_id, '*');
+            if (visitor_uid < 1) {
+                alert('Auth failed!');
+                return;
+            }
+            var attachments = '<?= $href ?>';
+
+            uploadPhotoToVkWall(visitor_uid, '<?= $image ?>', function(photo_data){
+
+                //attachments += ',photo'+visitor_uid+'_166443618';
+
+                VK.Api.call('wall.post', {
+                    message: '<?= $text ?>',
+                    attachments: attachments
+                }, function(data) {
+                    var post_id = 0;
+                    if (data.response && data.response.post_id) {
+                        post_id = data.response.post_id;
+                    }
+                    if (post_id > 0) {
+                        completeQuest(post_id, visitor_uid, 'VK');
+                    } else {
+                        // TODO: error message
+                    }
+                    //window.opener.postMessage('ucl_message:post_id:' + post_id, '*');
+                });
             });
-        }, 8192);
+
+        }, 8192+4);
     }
     function doOk(){
         //
