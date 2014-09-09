@@ -171,7 +171,7 @@
 
             $.ajax({
                 url: data.response.upload_url,
-                //dataType: 'jsonp',
+                dataType: 'json',
                 type: 'POST',
                 crossDomain: true,
                 data: {
