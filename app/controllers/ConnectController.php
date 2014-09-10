@@ -116,7 +116,7 @@ class ConnectController extends BaseController {
 
         $query_params = [
             'v' => '3.0',
-            'api_id' => 4335971,
+            'api_id' => '4335971',
             'format' => 'json',
         ];
 
