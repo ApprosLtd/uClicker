@@ -160,21 +160,6 @@
 
     function uploadPhotoToVkWall(user_id, image_url, callback){
 
-        $.ajax({
-            url: '/connect/upload-photo',
-            dataType: 'json',
-            type: 'post',
-            data:{
-                user_id: user_id,
-                image_url: image_url
-            },
-            success: function(data){
-                callback(data);
-            }
-        });
-
-        return;
-
 
         VK.Api.call('photos.getWallUploadServer', {
             user_id: user_id
@@ -185,6 +170,21 @@
             if (!data.response || !data.response.upload_url) {
                 return false;
             }
+
+            $.ajax({
+                url: '/connect/upload-photo',
+                dataType: 'json',
+                type: 'post',
+                data:{
+                    image_url: image_url,
+                    upload_url: data.response.upload_url
+                },
+                success: function(data){
+                    callback(data);
+                }
+            });
+
+            return;
 
             $.ajax({
                 url: data.response.upload_url,

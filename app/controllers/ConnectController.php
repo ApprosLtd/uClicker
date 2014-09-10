@@ -111,27 +111,16 @@ class ConnectController extends BaseController {
 
     public function anyUploadPhoto()
     {
-        $user_id   = Input::get('user_id');
-        $image_url = Input::get('image_url');
+        $image_url  = Input::get('image_url');
+        $upload_url = Input::get('upload_url');
 
-        $query_params = [
-            'v' => '3.0',
-            'api_id' => '4335971',
-            'format' => 'json',
-        ];
-
-        $query_params['method']  = 'photos.getWallUploadServer';
-        $query_params['user_id'] = $user_id;
-
-        array_walk($query_params, function(&$item, $key){
-            $item = $key . '=' . $item;
-        });
-
-        $query_params['sig'] = 'sig=' . md5( $user_id . implode('', $query_params) . 'NpeRSX0f5Lj3DzGR2j0z');
-
-        $query_url = "http://api.vk.com/api.php?" . implode('&', $query_params);
-        
-        $response = file_get_contents($query_url);
+        $response = file_get_contents($upload_url, false, stream_context_create(array(
+            'http' => array(
+                'method' => 'POST',
+                'header' => 'Content-Type: application/x-www-form-urlencoded' . PHP_EOL,
+                'content' => 'photo=' . $image_url,
+            ),
+        )));
 
         return $response;
     }
