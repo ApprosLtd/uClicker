@@ -118,8 +118,12 @@ class ConnectController extends BaseController {
             'http' => array(
                 'method' => 'POST',
                 'header' => 'Content-Type: application/x-www-form-urlencoded' . PHP_EOL,
-                'content' => 'photo=' . $image_url,
-            ),
+                'content' => http_build_query(
+                    array(
+                        'photo' => $image_url
+                    )
+                )
+            )
         )));
 
         return $response;

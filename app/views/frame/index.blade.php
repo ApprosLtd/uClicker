@@ -95,9 +95,9 @@
      */
     window.fbAsyncInit = function() {
         FB.init({
-            appId      : 1449687905310910,
-            xfbml      : true,
-            version    : 'v2.0'
+            appId   : 1449687905310910,
+            xfbml   : true,
+            version : 'v2.0'
         });
     };
     (function(d, s, id){
