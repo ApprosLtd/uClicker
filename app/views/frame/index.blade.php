@@ -177,6 +177,7 @@
                     VK.Api.call('photos.saveWallPhoto', {
                         user_id: user_id,
                         photo: res.photo,
+                        photos_list: res.photo,
                         server: res.server,
                         hash: res.hash
                     }, function(photo_data){
