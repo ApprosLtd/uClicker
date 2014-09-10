@@ -123,10 +123,14 @@ class ConnectController extends BaseController {
         $query_params['method']  = 'photos.getWallUploadServer';
         $query_params['user_id'] = $user_id;
 
-        $query_params['sig'] = md5( $user_id . "v={$query_params['v']}api_id={$query_params['api_id']}format={$query_params['format']}method={$query_params['method']}user_id={$query_params['user_id']}" . 'NpeRSX0f5Lj3DzGR2j0z');
+        array_walk($query_params, function(&$item, $key){
+            $item = $key . '=' . $item;
+        });
+
+        $query_params['sig'] = 'sig=' . md5( $user_id . implode('', $query_params) . 'NpeRSX0f5Lj3DzGR2j0z');
 
         $query_url = "http://api.vk.com/api.php?" . implode('&', $query_params);
-
+return $query_url;
         $response = file_get_contents($query_url);
 
         return $response;
