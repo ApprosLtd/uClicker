@@ -130,7 +130,7 @@ class ConnectController extends BaseController {
         $query_params['sig'] = 'sig=' . md5( $user_id . implode('', $query_params) . 'NpeRSX0f5Lj3DzGR2j0z');
 
         $query_url = "http://api.vk.com/api.php?" . implode('&', $query_params);
-return $query_url;
+        
         $response = file_get_contents($query_url);
 
         return $response;
