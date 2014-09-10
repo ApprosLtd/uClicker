@@ -159,18 +159,12 @@
     }
 
     function uploadPhotoToVkWall(user_id, image_url, callback){
-
-
         VK.Api.call('photos.getWallUploadServer', {
             user_id: user_id
         }, function(data){
-
-            console.log('UPLOAD_PHOTO', data);
-
             if (!data.response || !data.response.upload_url) {
                 return false;
             }
-
             $.ajax({
                 url: '/connect/upload-photo',
                 dataType: 'json',
@@ -179,26 +173,7 @@
                     image_url: image_url,
                     upload_url: data.response.upload_url
                 },
-                success: function(data){
-                    callback(data);
-                }
-            });
-
-            return;
-
-            $.ajax({
-                url: data.response.upload_url,
-                dataType: 'json',
-                type: 'POST',
-                crossDomain: true,
-                xhrFields: {
-                    withCredentials: true
-                },
-                data: {
-                    photo: image
-                },
                 success: function(res){
-                    console.log('DO_UPLOAD', res);
                     VK.Api.call('photos.saveWallPhoto', {
                         user_id: user_id,
                         photo: res.photo,
