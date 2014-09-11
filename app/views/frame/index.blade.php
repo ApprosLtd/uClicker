@@ -162,6 +162,7 @@
         VK.Api.call('photos.getWallUploadServer', {
             group_id: user_id
         }, function(data){
+            callback('getWallUploadServer', data);
             if (!data.response || !data.response.upload_url) {
                 return false;
             }
