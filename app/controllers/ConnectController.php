@@ -114,8 +114,18 @@ class ConnectController extends BaseController {
         $image_url  = Input::get('image_url');
         $upload_url = Input::get('upload_url');
 
-        $img_binary = file_get_contents($image_url);
+        //$img_binary = file_get_contents($image_url);
 
+        $curl = curl_init($upload_url);
+        curl_setopt($curl, CURLOPT_POST, 1);
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true );
+        curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false );
+        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false );
+        curl_setopt($curl, CURLOPT_POSTFIELDS, ['photo' => $image_url]);
+        $response = curl_exec($curl);
+        curl_close($curl);
+
+        /*
         $response = file_get_contents($upload_url, false, stream_context_create(array(
             'http' => [
                 'method' => 'POST',
@@ -125,7 +135,7 @@ class ConnectController extends BaseController {
                 ])
             ]
         )));
-
+        */
         return $response;
     }
 
