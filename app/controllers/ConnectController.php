@@ -117,15 +117,13 @@ class ConnectController extends BaseController {
         $img_binary = file_get_contents($image_url);
 
         $response = file_get_contents($upload_url, false, stream_context_create(array(
-            'http' => array(
+            'http' => [
                 'method' => 'POST',
                 'header' => 'Content-Type: application/x-www-form-urlencoded' . PHP_EOL,
-                'content' => http_build_query(
-                    array(
-                        'photo' => base64_encode($img_binary)
-                    )
-                )
-            )
+                'content' => http_build_query([
+                    'photo' => '@'.$image_url
+                ])
+            ]
         )));
 
         return $response;

@@ -233,11 +233,11 @@
                 "/me/feed",
                 "POST",
                 {
-                    message: '<?= $text ?>',
+                    //message: '<?= $text ?>',
                     link: '<?= $href ?>',
                     picture: '<?= $image ?>',
                     name: '<?= $title ?>',
-                    caption: 'дополнительный текст',
+                    //caption: 'дополнительный текст',
                     description: '<?= $text ?>'
                 },
                 function (response) {
