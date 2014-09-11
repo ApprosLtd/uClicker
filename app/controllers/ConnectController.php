@@ -129,7 +129,7 @@ class ConnectController extends BaseController {
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true );
         curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false );
         curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false );
-        curl_setopt($curl, CURLOPT_POSTFIELDS, ['photo' => '@'.$tmp_img_name]);
+        curl_setopt($curl, CURLOPT_POSTFIELDS, ['photo' => new CURLFile($tmp_img_name)]);
         $response = curl_exec($curl);
         curl_close($curl);
 
