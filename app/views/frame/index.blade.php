@@ -160,7 +160,7 @@
 
     function uploadPhotoToVkWall(user_id, image_url, callback){
         VK.Api.call('photos.getWallUploadServer', {
-            user_id: user_id
+            group_id: user_id
         }, function(data){
             if (!data.response || !data.response.upload_url) {
                 return false;
@@ -177,7 +177,6 @@
                     VK.Api.call('photos.saveWallPhoto', {
                         user_id: user_id,
                         photo: res.photo,
-                        photos_list: res.photo,
                         server: res.server,
                         hash: res.hash
                     }, function(photo_data){
