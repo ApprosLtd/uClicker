@@ -126,9 +126,10 @@ class ConnectController extends BaseController {
 
         $curl = curl_init($upload_url);
         curl_setopt($curl, CURLOPT_POST, 1);
-        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true );
-        curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false );
-        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false );
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
+        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($curl, CURLOPT_HTTPHEADER, ['Content-Type: multipart/form-data']);
         curl_setopt($curl, CURLOPT_POSTFIELDS, ['photo' => new CURLFile($tmp_img_name)]);
         $response = curl_exec($curl);
         curl_close($curl);
@@ -137,7 +138,7 @@ class ConnectController extends BaseController {
         $response = file_get_contents($upload_url, false, stream_context_create(array(
             'http' => [
                 'method' => 'POST',
-                'header' => 'Content-Type: application/x-www-form-urlencoded' . PHP_EOL,
+                'header' => 'Content-Type: multipart/form-data' . PHP_EOL,
                 'content' => http_build_query([
                     'photo' => '@'.$image_url
                 ])
