@@ -116,12 +116,20 @@ class ConnectController extends BaseController {
 
         //$img_binary = file_get_contents($image_url);
 
+        $tmp_img_name = tempnam(sys_get_temp_dir(), "_img");
+
+        if (!$tmp_img_name) {
+            return ['error' => 'Невозможно создать временный файл'];
+        }
+
+        file_put_contents($tmp_img_name, base64_encode(file_get_contents($image_url)));
+
         $curl = curl_init($upload_url);
         curl_setopt($curl, CURLOPT_POST, 1);
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true );
         curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false );
         curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false );
-        curl_setopt($curl, CURLOPT_POSTFIELDS, ['photo' => new CURLFile($image_url)]);
+        curl_setopt($curl, CURLOPT_POSTFIELDS, ['photo' => new CURLFile($tmp_img_name)]);
         $response = curl_exec($curl);
         curl_close($curl);
 
@@ -136,7 +144,7 @@ class ConnectController extends BaseController {
             ]
         )));
         */
-        return ['resp' => $response];
+        return $response;
     }
 
 } 
