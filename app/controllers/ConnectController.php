@@ -120,8 +120,8 @@ class ConnectController extends BaseController {
 
         $json_data = json_decode($response);
 
-        if (array_key_exists('access_token', $json_data) and !empty($json_data['access_token'])) {
-            return $json_data['access_token'];
+        if (isset($json_data->access_token) and !empty($json_data->access_token)) {
+            return $json_data->access_token;
         }
 
         return null;
