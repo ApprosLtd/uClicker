@@ -134,7 +134,7 @@ class ConnectController extends BaseController {
         $params = [
             'user_id' => $user_id,
             'access_token' => $this->getVkAccessToken(),
-            'v' => '5.24'
+            //'v' => '5.24'
         ];
 
         $curl = curl_init($api_url);
@@ -152,18 +152,18 @@ class ConnectController extends BaseController {
     {
         $image_url = Input::get('image_url');
         $user_id   = Input::get('user_id');
+        $upload_url = Input::get('upload_url');
 
-        $upload_url = $this->getVkUploadUrl($user_id);
+        //$upload_url = $this->getVkUploadUrl($user_id);
+        //return $upload_url;
 
-        return $upload_url;
+        //$tmp_img_name = tempnam(sys_get_temp_dir(), "_img");
 
-        $tmp_img_name = tempnam(sys_get_temp_dir(), "_img");
+        //if (!$tmp_img_name) {
+        //    return ['error' => 'Невозможно создать временный файл'];
+        //}
 
-        if (!$tmp_img_name) {
-            return ['error' => 'Невозможно создать временный файл'];
-        }
-
-        file_put_contents($tmp_img_name, base64_encode(file_get_contents($image_url)));
+        //file_put_contents($tmp_img_name, base64_encode(file_get_contents($image_url)));
 
         $curl = curl_init($upload_url);
         curl_setopt($curl, CURLOPT_POST, 1);
@@ -171,7 +171,7 @@ class ConnectController extends BaseController {
         curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
         curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
         curl_setopt($curl, CURLOPT_HTTPHEADER, ['Content-Type: multipart/form-data']);
-        curl_setopt($curl, CURLOPT_POSTFIELDS, ['photo' => base64_encode(file_get_contents($image_url))]);
+        curl_setopt($curl, CURLOPT_POSTFIELDS, ['photo' => file_get_contents($image_url)]);
         $response = curl_exec($curl);
         curl_close($curl);
 
