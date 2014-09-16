@@ -172,6 +172,7 @@
                 type: 'post',
                 data:{
                     image_url: image_url,
+                    user_id: user_id,
                     upload_url: data.response.upload_url
                 },
                 success: function(res){

@@ -109,12 +109,49 @@ class ConnectController extends BaseController {
         return \Illuminate\Support\Facades\Response::json($data);
     }
 
+    protected function getVkAccessToken()
+    {
+        $client_id = '4335971';
+        $client_secret = 'NpeRSX0f5Lj3DzGR2j0z';
+
+        $url = 'https://oauth.vk.com/access_token?client_id=' + $client_id + '&client_secret=' + $client_secret + '&v=5.24&grant_type=client_credentials';
+
+        return file_get_contents($url);
+    }
+
+    protected function getVkUploadUrl($user_id)
+    {
+        $api_url = 'https://api.vk.com/method/photos.getWallUploadServer';
+
+        $access_token = $this->getVkAccessToken();
+
+        return $access_token;
+
+        $params = [
+            'user_id' => $user_id,
+            'access_token' => $this->getVkAccessToken(),
+            'v' => '5.24'
+        ];
+
+        $curl = curl_init($api_url);
+        curl_setopt ($curl, CURLOPT_POST, 1);
+        curl_setopt ($curl, CURLOPT_POSTFIELDS, $params);
+        curl_setopt ($curl, CURLOPT_SSL_VERIFYPEER, FALSE);
+        curl_setopt ($curl, CURLOPT_RETURNTRANSFER, 1);
+        $result = curl_exec($curl);
+        curl_close($curl);
+
+        return $result;
+    }
+
     public function anyUploadPhoto()
     {
-        $image_url  = Input::get('image_url');
-        $upload_url = Input::get('upload_url');
+        $image_url = Input::get('image_url');
+        $user_id   = Input::get('user_id');
 
-        //$img_binary = file_get_contents($image_url);
+        $upload_url = $this->getVkUploadUrl($user_id);
+
+        return $upload_url;
 
         $tmp_img_name = tempnam(sys_get_temp_dir(), "_img");
 
