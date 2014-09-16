@@ -116,16 +116,20 @@ class ConnectController extends BaseController {
 
         $url = 'https://oauth.vk.com/access_token?client_id=' . $client_id . '&client_secret=' . $client_secret . '&v=5.24&grant_type=client_credentials';
 
-        return file_get_contents($url);
+        $response = file_get_contents($url);
+
+        $json_data = json_decode($response);
+
+        if (array_key_exists('access_token', $json_data) and !empty($json_data['access_token'])) {
+            return $json_data['access_token'];
+        }
+
+        return null;
     }
 
     protected function getVkUploadUrl($user_id)
     {
         $api_url = 'https://api.vk.com/method/photos.getWallUploadServer';
-
-        $access_token = $this->getVkAccessToken();
-
-        return $access_token;
 
         $params = [
             'user_id' => $user_id,
