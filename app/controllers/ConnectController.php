@@ -114,7 +114,7 @@ class ConnectController extends BaseController {
         $client_id = '4335971';
         $client_secret = 'NpeRSX0f5Lj3DzGR2j0z';
 
-        $url = 'https://oauth.vk.com/access_token?client_id=' + $client_id + '&client_secret=' + $client_secret + '&v=5.24&grant_type=client_credentials';
+        $url = 'https://oauth.vk.com/access_token?client_id=' . $client_id . '&client_secret=' . $client_secret . '&v=5.24&grant_type=client_credentials';
 
         return $url;
         return file_get_contents($url);
