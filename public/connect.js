@@ -11,7 +11,11 @@ UCL.prototype.linck = function(title, text, href, image){
     var left = (screen.width/2)-(w/2);
     var top = (screen.height/2)-(h/2);
 
-    this.winObj = window.open(url, this.winName, 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no, width='+w+', height='+h+', top='+top+', left='+left);
+    if (!this.winObj || this.winObj.closed) {
+        this.winObj = window.open(url, this.winName, 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no, width='+w+', height='+h+', top='+top+', left='+left);
+    }
+
+    this.winObj.focus();
 
     window.addEventListener('message', function(event) {
         console.log(event);

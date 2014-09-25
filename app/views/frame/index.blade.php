@@ -160,7 +160,7 @@
 
     function uploadPhotoToVkWall(user_id, image_url, callback){
         VK.Api.call('photos.getWallUploadServer', {
-            user_id: user_id
+            uid: user_id
         }, function(data){
             console.log('getWallUploadServer', data);
             if (!data.response || !data.response.upload_url) {
@@ -197,17 +197,16 @@
                 alert('Auth failed!');
                 return;
             }
-            var attachments = '<?= $href ?>';
+            //var attachments = '<?= $href ?>';
+            //var attachments = 'photo'+visitor_uid+'_265827614';
 
             uploadPhotoToVkWall(visitor_uid, '<?= $image ?>', function(photo_data){
 
-                console.log(photo_data); return;
-
-                //attachments += ',photo'+visitor_uid+'_166443618';
-
+                console.log(photo_data);
+                // TODO: сделать нармально attachments
                 VK.Api.call('wall.post', {
                     message: '<?= $text ?>',
-                    attachments: attachments
+                    attachments: '<?= $href ?>,' + photo_data.response[0].id
                 }, function(data) {
                     var post_id = 0;
                     if (data.response && data.response.post_id) {
