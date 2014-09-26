@@ -83,6 +83,8 @@
 <script src="http://api.odnoklassniki.ru/js/fapi5.js" defer="defer"></script>
 <script type="text/javascript">
 
+    var QUEST_TOKEN = '<?= $quest_token ?>';
+
     /**
      *
      */
@@ -150,7 +152,7 @@
                 post_id: post_id,
                 visitor_uid: visitor_uid,
                 vendor_code: vendor_code,
-                token: '<?= $quest_token ?>'
+                quest_token: QUEST_TOKEN
             },
             success: function(data){
                 alert('Скидка получена');
@@ -171,6 +173,7 @@
                 dataType: 'json',
                 type: 'post',
                 data:{
+                    //quest_token: QUEST_TOKEN,
                     image_url: image_url,
                     user_id: user_id,
                     upload_url: data.response.upload_url

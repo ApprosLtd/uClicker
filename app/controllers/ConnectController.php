@@ -3,7 +3,7 @@
 class ConnectController extends BaseController {
 
     /**
-    * Начало процесса размещения поста
+    * Выовдит содержимое основного фрейма
     */
     public function getFrame()
     {
@@ -75,81 +75,50 @@ class ConnectController extends BaseController {
         $post_id     = Input::get('post_id');
         $visitor_uid = Input::get('visitor_uid');
         $vendor_code = Input::get('vendor_code');
-        $quest_token = Input::get('token');
-        
-        if ($post_id < 1 or $visitor_uid < 1 or empty($quest_token)) {
-            return \Illuminate\Support\Facades\Response::json(['success' => false, 'error' => 'Неверные параметры запроса']);
-        }
+        $quest_token = Input::get('quest_token');
+
+        \CommonHelper::json_assert(
+            ($post_id > 0) and ($visitor_uid > 0) and !empty($quest_token),
+            'Неверные параметры запроса',
+            'Неверные параметры запроса',
+            Input::all()
+        );
         
         $quest = \QuestHelper::getQuestByToken($quest_token);
-        
-        if (!$quest) {
-            Log::error('Не найден квест(задание) для токена', ['quest_token' => $quest_token]);
-            return \Illuminate\Support\Facades\Response::json(['success' => false, 'error' => 'Неверные параметры запроса']);
-        }
-        
-        if ($quest->post_id > 0) {
-            return \Illuminate\Support\Facades\Response::json(['success' => false, 'info' => 'Данная задача уже закрыта']);
-        }
-        
-        if ( ! \QuestHelper::checkPost($visitor_uid, $post_id) ) {
-            Log::error('Попытка закрыть квест для неопубликованного поста', ['visitor_id' => $visitor_uid, 'post_id' => $post_id]);
-            return \Illuminate\Support\Facades\Response::json(['success' => false, 'error' => 'Пост не опубликован']);
-        }
+        \CommonHelper::json_assert(
+            $quest,
+            'Неверно указан токен',
+            'Не найден квест(задание) для токена',
+            Input::all()
+        );
+
+        // Проверяем, не закрыта ли уже задача
+        \CommonHelper::json_assert(
+            !($quest->post_id > 0),
+            'Данная задача уже закрыта',
+            'Попытка закрыть уже закрытый квест(задачу)',
+            Input::all()
+        );
+
+        // Проверяем, опубликован ли пост
+        \CommonHelper::json_assert(
+            \QuestHelper::checkPost($visitor_uid, $post_id),
+            'Пост не опубликован',
+            'Попытка закрыть квест для неопубликованного поста',
+            Input::all()
+        );
         
         $visitor_obj = \VisitorHelper::getVisitorByUid($visitor_uid, $vendor_code);
-        
-        if (!$visitor_obj) {
-            Log::error('Ошибка идентификации визитёра', ['visitor_id' => $visitor_uid]);
-            return \Illuminate\Support\Facades\Response::json(['success' => false, 'error' => 'Ошибка идентификации визитёра']);
-        }       
+        \CommonHelper::json_assert(
+            $visitor_obj,
+            'Ошибка идентификации',
+            'Ошибка идентификации визитёра',
+            Input::all()
+        );
         
         $quest->close($visitor_obj->id, $post_id);
-        
-        $data = [
-            'success' => true
-        ];
 
-        return \Illuminate\Support\Facades\Response::json($data);
-    }
-
-    protected function getVkAccessToken()
-    {
-        $client_id = '4335971';
-        $client_secret = 'NpeRSX0f5Lj3DzGR2j0z';
-
-        $url = 'https://oauth.vk.com/access_token?client_id=' . $client_id . '&client_secret=' . $client_secret . '&v=5.24&grant_type=client_credentials';
-
-        $response = file_get_contents($url);
-
-        $json_data = json_decode($response);
-
-        if (isset($json_data->access_token) and !empty($json_data->access_token)) {
-            return $json_data->access_token;
-        }
-
-        return null;
-    }
-
-    protected function getVkUploadUrl($user_id)
-    {
-        $api_url = 'https://api.vk.com/method/photos.getWallUploadServer';
-
-        $params = [
-            'user_id' => $user_id,
-            'access_token' => $this->getVkAccessToken(),
-            //'v' => '5.24'
-        ];
-
-        $curl = curl_init($api_url);
-        curl_setopt ($curl, CURLOPT_POST, 1);
-        curl_setopt ($curl, CURLOPT_POSTFIELDS, $params);
-        curl_setopt ($curl, CURLOPT_SSL_VERIFYPEER, FALSE);
-        curl_setopt ($curl, CURLOPT_RETURNTRANSFER, 1);
-        $result = curl_exec($curl);
-        curl_close($curl);
-
-        return $result;
+        return \Illuminate\Support\Facades\Response::json(['success' => true]);
     }
 
 
@@ -159,36 +128,62 @@ class ConnectController extends BaseController {
      */
     public function anyUploadPhoto()
     {
-        $image_url = Input::get('image_url');
-        $user_id   = Input::get('user_id');
-        $upload_url = Input::get('upload_url');
+        $image_url   = Input::get('image_url');
+        $user_id     = Input::get('user_id');
+        $upload_url  = Input::get('upload_url');
+        $quest_token = Input::get('quest_token');
 
-        $resources_directory = $_SERVER['DOCUMENT_ROOT'] . '/res/';
+        $quest = \QuestHelper::getQuestByToken($quest_token);
+        \CommonHelper::json_assert($quest, 'Неверные параметры запроса', 'Не найден квест(задание) для токена', ['quest_token' => $quest_token]);
 
-        $tmp_img_name = md5($user_id . microtime()) . '.jpg';
 
-        file_put_contents($resources_directory . $tmp_img_name, file_get_contents($image_url));
 
-        $curl_file = new CURLFile($resources_directory . $tmp_img_name,'image/jpeg');
+        $image_cache_file = $this->pullUploadPhotoCacheFile($image_url);
+
+        $curl_file = new \CURLFile($image_cache_file,'image/jpeg');
 
         $curl = curl_init($upload_url);
+
         curl_setopt($curl, CURLOPT_POST, 1);
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
         curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
         curl_setopt($curl, CURLOPT_HTTPHEADER, ['Content-Type: multipart/form-data']);
         curl_setopt($curl, CURLOPT_POSTFIELDS, ['photo' => $curl_file]);
+
         $response = curl_exec($curl);
 
-        if (!$response) {
-            $response = [
-                'error' => curl_error($curl) . ' (' . curl_errno($curl) . ')'
-            ];
-        }
+        \CommonHelper::json_assert($response, 'Ошибка загрузки файла на VK: ' . curl_error($curl) . ' (' . curl_errno($curl) . ')', null, ['user_id' => $user_id, 'image_url' => $image_url]);
 
         curl_close($curl);
 
         return $response;
+    }
+
+
+    /**
+     * Возвращает путь к закешированному файлу картинки, если файла нет в кэше, то создает его кэш.
+     * @param $image_url
+     * @return string
+     */
+    protected function pullUploadPhotoCacheFile($image_url)
+    {
+        $image_url = trim($image_url);
+
+        if (empty($image_url)) {
+            return false;
+        }
+
+        $resources_directory = $_SERVER['DOCUMENT_ROOT'] . '/res/';
+
+        // TODO: сделать определение MIME TYPE для картинки
+        $tmp_img_name = md5($image_url) . '.jpg';
+
+        if (!file_exists($resources_directory . $tmp_img_name)) {
+            file_put_contents($resources_directory . $tmp_img_name, file_get_contents($image_url));
+        }
+
+        return $resources_directory . $tmp_img_name;
     }
 
 } 
