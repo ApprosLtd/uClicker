@@ -173,7 +173,7 @@
                 dataType: 'json',
                 type: 'post',
                 data:{
-                    //quest_token: QUEST_TOKEN,
+                    quest_token: QUEST_TOKEN,
                     image_url: image_url,
                     user_id: user_id,
                     upload_url: data.response.upload_url

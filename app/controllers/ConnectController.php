@@ -22,28 +22,35 @@ class ConnectController extends BaseController {
         }
 
         $site = Site::getSiteByHostName($host);
-
-        if (!$site) {
-            Log::error('Выполнен запрос с незарегистрированного домена ' . $host);
-            return View::make('frame.lost-host');
-        }
+        \CommonHelper::assert(
+            $site,
+            View::make('frame.lost-host'),
+            'Выполнен запрос с незарегистрированного домена',
+            ['host' => $host]
+        );
 
         $user = $site->user;
+        \CommonHelper::assert(
+            $user,
+            View::make('frame.lost-user'),
+            'Не найден пользователь для домена',
+            $site->toArray()
+        );
 
-        if ($site->isBlocked()) {
-            Log::warning('Выполнен запрос с заблокированного домена ' . $host, ['user' => $user->toArray()]);
-            return View::make('frame.lost-host');
-        }
+        // Проверяем, заблокирован ли домен
+        \CommonHelper::assert(
+            ! $site->isBlocked(),
+            View::make('frame.lost-host'),
+            'Выполнен запрос с заблокированного домена',
+            ['host' => $host, 'user' => $user->toArray()]
+        );
 
-        if (!$user) {
-            Log::error('Не найден пользователя для домена', $site->toArray());
-            return View::make('frame.error');
-        }
-
-        if (!$user->checkBalance()) {
-            Log::info('Баланс партнера на нуле', $user->toArray());
-            return View::make('frame.low-balance');
-        }
+        \CommonHelper::assert(
+            $user->checkBalance(),
+            View::make('frame.low-balance'),
+            'Баланс партнера на нуле',
+            ['user' => $user->toArray()]
+        );
 
         $title = Input::get('title');
         $text  = Input::get('text');
@@ -134,9 +141,12 @@ class ConnectController extends BaseController {
         $quest_token = Input::get('quest_token');
 
         $quest = \QuestHelper::getQuestByToken($quest_token);
-        \CommonHelper::json_assert($quest, 'Неверные параметры запроса', 'Не найден квест(задание) для токена', ['quest_token' => $quest_token]);
-
-
+        \CommonHelper::json_assert(
+            $quest,
+            'Неверные параметры запроса',
+            'Не найден квест(задание) для токена',
+            Input::all()
+        );
 
         $image_cache_file = $this->pullUploadPhotoCacheFile($image_url);
 
@@ -152,8 +162,12 @@ class ConnectController extends BaseController {
         curl_setopt($curl, CURLOPT_POSTFIELDS, ['photo' => $curl_file]);
 
         $response = curl_exec($curl);
-
-        \CommonHelper::json_assert($response, 'Ошибка загрузки файла на VK: ' . curl_error($curl) . ' (' . curl_errno($curl) . ')', null, ['user_id' => $user_id, 'image_url' => $image_url]);
+        \CommonHelper::json_assert(
+            $response,
+            'Ошибка загрузки файла на сервер Вконтакте',
+            'Ошибка загрузки файла на VK: ' . curl_error($curl) . ' (' . curl_errno($curl) . ')',
+            Input::all()
+        );
 
         curl_close($curl);
 
