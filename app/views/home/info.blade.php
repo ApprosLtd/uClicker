@@ -40,18 +40,17 @@
             text-decoration: none;
         }
         h2{
-            font-family: 'Lobster', cursive;
+           /* font-family: 'Lobster', cursive;*/
             text-transform: none !important;
             font-weight: normal;
-            text-shadow: 1px 2px 0px rgba(0, 0, 0, 0.3);
-            color: #006CA8 !important;
+            /*text-shadow: 1px 2px 0px rgba(0, 0, 0, 0.3);
+            color: #006CA8 !important;*/
         }
         h2{
             font-size: 32px;
         }
     </style>
 </head>
-
 
 <body id="top" class="home page page-id-734 page-parent page-template-default stretched open_sans">
 
@@ -92,7 +91,7 @@
                     <div class="flex_column av_one_third first  avia-builder-el-10  el_after_av_hr  el_before_av_one_third">
                         <section class="av_textblock_section">
                             <div class="avia_textblock">
-                                <h2>Удобно</h2>
+                                <h3>Удобно</h3>
                                 <p style="font-weight: bold;">За пару кликов, Вы получите скидку на товар или доступ к платному ресурсу.</p>
                                 <p>Нужно, всего лишь, нажать соответствующую кнопку (например "Получить скидку") на сайте нашего партнера, и через удобную форму разместить рекламное сообщение на своей странице в социальной сети.
                                 Все действия займут не более минуты, и вы получите приятный бонус.</p>
@@ -102,7 +101,7 @@
                     <div class="flex_column av_one_third   avia-builder-el-12  el_after_av_one_third  el_before_av_one_third">
                         <section class="av_textblock_section">
                             <div class="avia_textblock">
-                                <h2>Безопасно</h2>
+                                <h3>Безопасно</h3>
                                 <p style="font-weight: bold;">В первую очередь, мы заботимся о Вашей безопасности.</p>
                                 <p>Поэтому, регистрируясь в нашем сервисе, Вы можете быть уверены в отсутствии спама на своей странице в социальной сети.</p>
                                 <p>Все сообщения проходят, исключительно, через наш сервис и тщательно проверяются перед публикацией на Вашей странице.</p>
@@ -112,7 +111,7 @@
                     <div class="flex_column av_one_third avia-builder-el-14 el_after_av_one_third avia-builder-el-last">
                         <section class="av_textblock_section">
                             <div class="avia_textblock">
-                                <h2>Выгодно</h2>
+                                <h3>Выгодно</h3>
                                 <p>Consectetuer adipiscing elit. Aenean <strong>commodo</strong> ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.Donec quam felis, ultricies nec, pellentesque eu, <strong>pretium</strong> quis, sem.</p>
                             </div>
                         </section>
